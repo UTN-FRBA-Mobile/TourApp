@@ -3,26 +3,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/MyTripsFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.unnamedgroup.tourapp.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:id="@+id/MyTripsFragment"
+        android:name="com.unnamedgroup.tourapp.view.fragment.MyTripsFragment"
+        android:label="@string/my_trips_fragment_label"
+        tools:layout="@layout/fragment_my_trips">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_MyTripsFragment_to_FragmentNewTrip"
+            app:destination="@id/NewTripFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.unnamedgroup.tourapp.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        android:id="@+id/NewTripFragment"
+        android:name="com.unnamedgroup.tourapp.view.fragment.NewTripFragment"
+        android:label="@string/new_trip_fragment_label"
+        tools:layout="@layout/fragment_new_trip">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_FragmentNewTrip_to_MyTripsFragment"
+            app:destination="@id/MyTripsFragment" />
+        <action
+            android:id="@+id/action_NewTripFragment_to_confirmTripFragment"
+            app:destination="@id/confirmTripFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmTripFragment"
+        android:name="com.unnamedgroup.tourapp.view.fragment.ConfirmTripFragment"
+        android:label="fragment_confirm_trip"
+        tools:layout="@layout/fragment_confirm_trip" >
+        <action
+            android:id="@+id/action_confirmTripFragment_to_NewTripFragment"
+            app:destination="@id/NewTripFragment" />
+        <action
+            android:id="@+id/action_confirmTripFragment_to_resultScreenFragment"
+            app:destination="@id/resultScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultScreenFragment"
+        android:name="com.unnamedgroup.tourapp.view.fragment.ResultScreenFragment"
+        android:label="fragment_result_screen"
+        tools:layout="@layout/fragment_result_screen" >
+        <action
+            android:id="@+id/action_resultScreenFragment_to_MyTripsFragment"
+            app:destination="@id/MyTripsFragment" />
     </fragment>
 </navigation>
