@@ -1,4 +1,4 @@
-package com.unnamedgroup.tourapp.presenter.interface
+package com.unnamedgroup.tourapp.presenter.interfaces
 
 import com.unnamedgroup.tourapp.model.Trip
 
