@@ -11,4 +11,8 @@
     <color name="orange_variant">#FF5722</color>
     <color name="blue">#1E3AD8</color>
     <color name="blue_variant">#3F51B5</color>
+    <color name="card_gray">#E4E5ED</color>
+    <color name="green">#4CAF50</color>
+    <color name="red">#9A1111</color>
+    <color name="yellow">#BA9D09</color>
 </resources>
