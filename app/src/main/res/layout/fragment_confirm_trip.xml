@@ -6,8 +6,7 @@
     tools:context=".view.fragment.ConfirmTripFragment"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/title_confirm_trip"
+    <TextView android:id="@+id/title_confirm_trip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
@@ -18,9 +17,7 @@
         android:textStyle="bold"
         android:typeface="monospace" />
 
-
-
-    <RelativeLayout
+    <RelativeLayout android:id="@+id/trip_information"
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content">
@@ -105,7 +102,7 @@
 
 
         <TextView
-            android:id="@+id/valueOrigin"
+            android:id="@+id/value_origin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/description_origin"
@@ -119,7 +116,7 @@
 
 
         <TextView
-            android:id="@+id/valueDestination"
+            android:id="@+id/value_destination"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/description_destination"
@@ -130,9 +127,74 @@
             android:ems="10"
             android:text="Capital Federal "
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/value_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/description_date"
+            android:layout_alignTop="@id/description_date"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_toEndOf="@id/description_date"
+            android:ems="10"
+            android:text="15-05-2022"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/value_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/description_time"
+            android:layout_alignTop="@id/description_time"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_toEndOf="@id/description_time"
+            android:ems="10"
+            android:text="16:00 Hs"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/value_origin_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/description_origin_stop"
+            android:layout_alignTop="@id/description_origin_stop"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_toEndOf="@id/description_origin_stop"
+            android:ems="10"
+            android:text="Hotel Mercedes"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/value_destination_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/description_destination_stop"
+            android:layout_alignTop="@id/description_destination_stop"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_toEndOf="@id/description_destination_stop"
+            android:ems="10"
+            android:text="9 de Julio y Venezuela"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/value_number_of_passengers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/description_number_of_passengers"
+            android:layout_alignTop="@id/description_number_of_passengers"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_toEndOf="@id/description_number_of_passengers"
+            android:ems="10"
+            android:text="2"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <RelativeLayout android:id="@+id/trip_passengers"
         android:layout_width="match_parent"
         android:layout_marginTop="2dp"
         android:layout_height="wrap_content">
@@ -144,7 +206,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="2dp"
             android:text="Pasajero 1: "
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold" />
@@ -152,7 +214,7 @@
 
         <TextView
             android:id="@+id/passengerValue"
-            android:layout_width="wrap_content"
+            android:layout_width="196dp"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/passengerDescription"
             android:layout_alignTop="@id/passengerDescription"
@@ -160,7 +222,7 @@
             android:layout_marginTop="20dp"
             android:layout_toEndOf="@id/passengerDescription"
             android:ems="10"
-            android:text="Jose Macha - 20.444.222"
+            android:text="Jose Machado - 20.444.222"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
@@ -168,7 +230,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="2dp"
             android:layout_below="@id/passengerDescription"
             android:text="Pasajero 2: "
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -177,7 +239,7 @@
 
         <TextView
             android:id="@+id/passengerValue2"
-            android:layout_width="wrap_content"
+            android:layout_width="196dp"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/passengerDescription2"
             android:layout_alignTop="@id/passengerDescription2"
@@ -191,9 +253,9 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
+    <RelativeLayout android:id="@+id/trip_value"
         android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="2dp"
         android:layout_height="wrap_content">
 
     <TextView
@@ -227,8 +289,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="10dp" />
 
-    <TextView
-        android:id="@+id/bank_name"
+    <TextView android:id="@+id/bank_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
@@ -237,8 +298,7 @@
         android:text="Banco Banquero "
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
-    <TextView
-        android:id="@+id/bank_cbu"
+    <TextView android:id="@+id/bank_cbu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
@@ -246,8 +306,8 @@
         android:layout_marginRight="25dp"
         android:text="CBU: 00000000000000000000001213213"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-    <TextView
-        android:id="@+id/bank_alias"
+
+    <TextView android:id="@+id/bank_alias"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
@@ -263,8 +323,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="10dp" />
 
-    <TextView
-        android:id="@+id/bank_upload_receipt"
+    <TextView android:id="@+id/bank_upload_receipt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
@@ -273,5 +332,11 @@
         android:text="Subir el comprobante"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
+    <Button android:id="@+id/confirm_button"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Confirmar" />
 
 </LinearLayout>
