@@ -34,8 +34,8 @@ class NewTripFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_FragmentNewTrip_to_MyTripsFragment)
+        binding.bNext.setOnClickListener {
+            findNavController().navigate(R.id.action_NewTripFragment_to_confirmTripFragment)
         }
     }
 
