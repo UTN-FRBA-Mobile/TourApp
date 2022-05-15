@@ -11,6 +11,82 @@
     <string name="trip_name_text">%s - %s</string>
     <string name="trip_date_hour">%s - %shs</string>
 
+
+
+    <!-- trip Details -->
+    <string-array name="passengers_list">
+        <item>Facundo Perri - 40.400.400</item>
+        <item>Benjamin Enriquez - 40.400.401</item>
+        <item>Damian Pallares - 40.400.403</item>
+        <item>Constenla Juan - 40.400.404</item>
+        <item>Facundo Bevilacqua - 40.400.405</item>
+    </string-array>
+
+    <string-array name="departure_locations_list">
+        <item>Mercedes</item>
+        <item>Lujan</item>
+        <item>Capital Federal</item>
+        <item>Moreno</item>
+    </string-array>
+
+    <string-array name="arrival_locations_list">
+        <item>Capital Federal</item>
+        <item>Mercedes</item>
+        <item>Lujan</item>
+        <item>Moreno</item>
+    </string-array>
+
+    <string-array name="departure_times_list">
+        <item>09 : 15</item>
+        <item>09 : 30</item>
+        <item>09 : 45</item>
+        <item>10 : 15</item>
+        <item>10 : 30</item>
+        <item>10 : 45</item>
+        <item>11 : 15</item>
+        <item>11 : 30</item>
+        <item>11 : 45</item>
+        <item>12 : 15</item>
+        <item>12 : 30</item>
+        <item>12 : 45</item>
+        <item>13 : 15</item>
+        <item>13 : 30</item>
+        <item>13 : 45</item>
+        <item>14 : 15</item>
+        <item>14 : 30</item>
+        <item>14 : 45</item>
+    </string-array>
+
+    <string-array name="departure_stops_list">
+        <item>Hotel Mercedes</item>
+        <item>Universidad de Lujan</item>
+        <item>Alto Palermo</item>
+        <item>Congreso</item>
+    </string-array>
+
+    <string-array name="arrival_stops_list">
+        <item>Alto Palermo</item>
+        <item>Hotel Mercedes</item>
+        <item>Universidad de Lujan</item>
+        <item>Congreso</item>
+    </string-array>
+
+    <string name="details_trip_name">Mercedes - Capital Federal</string>
+    <string name="details_passengers">Pasajero</string>
+    <string name="details_departure_location">Origen</string>
+    <string name="details_arrival_location">Destino</string>
+    <string name="details_details_date">Fecha</string>
+    <string name="details_departure_time">Hora de Salida</string>
+    <string name="details_departure_stop">Parada de Salida</string>
+    <string name="details_arrival_stop">Parada de Llegada</string>
+    <string name="details_cancel_button">Cancelar</string>
+    <string name="details_save_button">Guardar</string>
+    <string name="details_info">* Los viajes se pueden editar hasta 24 hs antes de la partida</string>
+
+
+
+
+
     <!-- API errors -->
     <string name="get_trips_error">Error obteniendo viajes</string>
 
