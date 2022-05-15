@@ -2,6 +2,7 @@
     <string name="app_name">TourApp</string>
     <string name="action_settings">Settings</string>
     <string name="my_trips_fragment_label">Mis Viajes</string>
+    <string name="trip_details_fragment_label">Detalle Del Viaje</string>
     <string name="new_trip_fragment_label">Nuevo Viaje</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>

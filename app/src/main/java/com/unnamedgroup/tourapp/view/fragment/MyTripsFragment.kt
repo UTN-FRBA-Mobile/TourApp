@@ -40,7 +40,7 @@ class MyTripsFragment : Fragment(),
             override fun onClick(view: View, trip: Trip) {
                 val bundle = Bundle()
                 bundle.putParcelable("Trip", trip)
-                findNavController().navigate(R.id.action_MyTripsFragment_to_FragmentNewTrip, bundle)
+                findNavController().navigate(R.id.action_MyTripsFragment_to_tripDetailsFragment, bundle)
             }
         })
         myTripsPresenter.getTrips()
