@@ -31,7 +31,7 @@
     <fragment
         android:id="@+id/confirmTripFragment"
         android:name="com.unnamedgroup.tourapp.view.fragment.ConfirmTripFragment"
-        android:label="fragment_confirm_trip"
+        android:label="Confirmar Viaje"
         tools:layout="@layout/fragment_confirm_trip" >
         <action
             android:id="@+id/action_confirmTripFragment_to_NewTripFragment"
