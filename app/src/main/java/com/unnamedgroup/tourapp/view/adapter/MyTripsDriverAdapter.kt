@@ -38,9 +38,9 @@ class MyTripsDriverAdapter(private var mTrips: MutableList<Trip>, private val mC
         showingList = mTrips.filter {
             it.state.text.contains(filterValue, true) ||
                     it.id.toString().contains(filterValue, true) ||
-                    it.origin.contains(filterValue, true) ||
-                    it.destination.contains(filterValue, true) ||
-                    it.departureTime.contains(filterValue, true)
+                    it.origin!!.contains(filterValue, true) ||
+                    it.destination!!.contains(filterValue, true) ||
+                    it.departureTime!!.contains(filterValue, true)
         }.toMutableList()
         notifyDataSetChanged()
     }

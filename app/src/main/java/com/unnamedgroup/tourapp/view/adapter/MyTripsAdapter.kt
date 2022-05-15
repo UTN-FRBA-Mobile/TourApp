@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +14,7 @@ import com.unnamedgroup.tourapp.R
 import com.unnamedgroup.tourapp.model.Trip
 import com.unnamedgroup.tourapp.utils.Utils
 
-class MyTripsAdapter(private var mTrips: MutableList<Trip>, private val mContext: Context?) :
+class MyTripsAdapter(private var mTrips: MutableList<Trip>, private val mContext: Context?, private val onClickListener: OnItemClickListener) :
     RecyclerView.Adapter<MyTripsAdapter.ViewHolder>() {
 
     var tripsFilter : String = ""
@@ -21,13 +22,18 @@ class MyTripsAdapter(private var mTrips: MutableList<Trip>, private val mContext
 
     class ViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyTripsAdapter.ViewHolder {
+    interface OnItemClickListener {
+        fun onClick(view: View, trip: Trip)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.mytrips_viewholder, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val trip = showingList[position]
+        val tripLinearLayout : LinearLayout = holder.view.findViewById(R.id.trip_card_linear_layout)
         val stateTextView : TextView = holder.view.findViewById(R.id.trip_state_textview)
         val stateImageView : ImageView = holder.view.findViewById(R.id.trip_state_imageview)
         val originDestinationTextView : TextView = holder.view.findViewById(R.id.trip_origin_destination_textview)
@@ -37,6 +43,7 @@ class MyTripsAdapter(private var mTrips: MutableList<Trip>, private val mContext
         stateImageView.setColorFilter(ContextCompat.getColor(mContext!!, getColorByState(trip.state.int)))
         originDestinationTextView.text = mContext.getString(R.string.trip_name_text, trip.origin, trip.destination)
         dateHourTextView.text = mContext.getString(R.string.trip_date_hour, trip.dateStr, trip.departureTime)
+        tripLinearLayout.setOnClickListener { view -> onClickListener.onClick(view, trip) }
     }
 
     private fun getColorByState(state: Int) : Int {
@@ -56,10 +63,10 @@ class MyTripsAdapter(private var mTrips: MutableList<Trip>, private val mContext
         tripsFilter = filterValue
         showingList = mTrips.filter {
             it.state.text.contains(filterValue, true) ||
-                    it.origin.contains(filterValue, true) ||
-                    it.destination.contains(filterValue, true) ||
+                    it.origin!!.contains(filterValue, true) ||
+                    it.destination!!.contains(filterValue, true) ||
                     it.dateStr.contains(filterValue, true) ||
-                    it.departureTime.contains(filterValue, true)
+                    it.departureTime!!.contains(filterValue, true)
         }.toMutableList()
         notifyDataSetChanged()
     }
@@ -69,4 +76,5 @@ class MyTripsAdapter(private var mTrips: MutableList<Trip>, private val mContext
         showingList = trips
         notifyDataSetChanged()
     }
+
 }
