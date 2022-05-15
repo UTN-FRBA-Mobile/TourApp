@@ -36,7 +36,13 @@ class MyTripsFragment : Fragment(),
             savedInstanceState: Bundle?
     ): View {
 
-        viewAdapter = MyTripsAdapter(mutableListOf(), context)
+        viewAdapter = MyTripsAdapter(mutableListOf(), context, object: MyTripsAdapter.OnItemClickListener {
+            override fun onClick(view: View, trip: Trip) {
+                val bundle = Bundle()
+                bundle.putParcelable("Trip", trip)
+                findNavController().navigate(R.id.action_MyTripsFragment_to_FragmentNewTrip, bundle)
+            }
+        })
         myTripsPresenter.getTrips()
 
         _binding = FragmentMyTripsBinding.inflate(inflater, container, false)
