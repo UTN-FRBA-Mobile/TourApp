@@ -3,18 +3,26 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2385" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.334375" />
+        <entry key="app/src/main/res/layout/content_main.xml" value="0.259375" />
+        <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.1598731884057971" />
         <entry key="app/src/main/res/layout/fragment_confirm_trip.xml" value="0.334375" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.3458333333333333" />
         <entry key="app/src/main/res/layout/fragment_my_trips.xml" value="0.334375" />
+        <entry key="app/src/main/res/layout/fragment_my_trips_driver.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_new_trip.xml" value="0.334375" />
         <entry key="app/src/main/res/layout/fragment_result_screen.xml" value="0.334375" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.334375" />
-        <entry key="app/src/main/res/layout/mytrips_viewholder.xml" value="0.334375" />
+        <entry key="app/src/main/res/layout/mytrips_viewholder.xml" value="0.22916666666666666" />
+        <entry key="app/src/main/res/layout/mytripsdriver_viewholder.xml" value="0.22916666666666666" />
+        <entry key="app/src/main/res/menu/menu_main.xml" value="0.1890625" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2385" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -16,6 +16,12 @@
             app:destination="@id/NewTripFragment" />
     </fragment>
     <fragment
+        android:id="@+id/MyTripsDriverFragment"
+        android:name="com.unnamedgroup.tourapp.view.fragment.MyTripsDriverFragment"
+        android:label="Viajes del Día"
+        tools:layout="@layout/fragment_my_trips_driver">
+    </fragment>
+    <fragment
         android:id="@+id/NewTripFragment"
         android:name="com.unnamedgroup.tourapp.view.fragment.NewTripFragment"
         android:label="@string/new_trip_fragment_label"
@@ -49,4 +55,5 @@
             android:id="@+id/action_resultScreenFragment_to_MyTripsFragment"
             app:destination="@id/MyTripsFragment" />
     </fragment>
+
 </navigation>

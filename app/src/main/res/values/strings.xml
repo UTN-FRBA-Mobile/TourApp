@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TourApp</string>
+    <string name="app_name">TourApp 2</string>
     <string name="action_settings">Settings</string>
     <string name="my_trips_fragment_label">Mis Viajes</string>
     <string name="new_trip_fragment_label">Nuevo Viaje</string>
@@ -10,12 +10,13 @@
     <string name="trip_state_content_destription">Estado del viaje</string>
     <string name="trip_name_text">%s - %s</string>
     <string name="trip_date_hour">%s - %shs</string>
+    <string name="trip_id">Viaje - %d</string>
+    <string name="trip_origin_destination_hour">%s - %s - %s hs</string>
 
     <!-- API errors -->
     <string name="get_trips_error">Error obteniendo viajes</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
