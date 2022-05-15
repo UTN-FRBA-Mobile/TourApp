@@ -7,6 +7,12 @@
     <string name="previous">Previous</string>
     <string name="new_trip_button">Nuevo Viaje</string>
     <string name="search_placeholder">Buscar…</string>
+    <string name="trip_state_content_destription">Estado del viaje</string>
+    <string name="trip_name_text">%s - %s</string>
+    <string name="trip_date_hour">%s - %shs</string>
+
+    <!-- API errors -->
+    <string name="get_trips_error">Error obteniendo viajes</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>

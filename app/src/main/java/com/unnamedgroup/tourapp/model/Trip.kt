@@ -1,5 +1,6 @@
 package com.unnamedgroup.tourapp.model
 
+import com.unnamedgroup.tourapp.utils.Utils
 import java.util.*
 
 class Trip(
@@ -7,16 +8,18 @@ class Trip(
     var state: TripState,
     val origin: String,
     val destination: String,
-    val departureTime: Date,
+    val departureTime: String,
     val date: Date,
     val passengers: List<Passenger>
 ) {
 
-    enum class TripState(val int: Int) {
-        PROCESSING(1),
-        CONFIRMED(2),
-        DELAYED(3),
-        CANCELLED(4),
+    val dateStr = Utils.getDateWithFormat(date, "EEEE dd/MM/yyyy")
+
+    enum class TripState(val int: Int, val text: String) {
+        PROCESSING(1, "Procesando"),
+        CONFIRMED(2, "Confirmado"),
+        DELAYED(3, "Demorado"),
+        CANCELLED(4, "Cancelado"),
     }
 
 }
