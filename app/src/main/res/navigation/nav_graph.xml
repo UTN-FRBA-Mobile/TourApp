@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_MyTripsFragment_to_FragmentNewTrip"
             app:destination="@id/NewTripFragment" />
+        <action
+            android:id="@+id/action_MyTripsFragment_to_tripDetailsFragment"
+            app:destination="@id/tripDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/NewTripFragment"
@@ -47,6 +50,15 @@
         tools:layout="@layout/fragment_result_screen" >
         <action
             android:id="@+id/action_resultScreenFragment_to_MyTripsFragment"
+            app:destination="@id/MyTripsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tripDetailsFragment"
+        android:name="com.unnamedgroup.tourapp.view.fragment.TripDetailsFragment"
+        android:label="fragment_trip_details"
+        tools:layout="@layout/fragment_trip_details" >
+        <action
+            android:id="@+id/action_tripDetailsFragment_to_MyTripsFragment"
             app:destination="@id/MyTripsFragment" />
     </fragment>
 </navigation>
