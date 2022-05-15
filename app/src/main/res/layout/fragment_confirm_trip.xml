@@ -1,14 +1,277 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragment.ConfirmTripFragment">
+    tools:context=".view.fragment.ConfirmTripFragment"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/title_confirm_trip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:text="Confirmar Viaje"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@android:color/background_dark"
+        android:textStyle="bold"
+        android:typeface="monospace" />
 
-</FrameLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content">
+        <!-- TODO Ver si no lo sacamos afuera en otro fragment (no seria necesario por el momento)-->
+
+        <TextView
+            android:id="@+id/description_origin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:text="Desde: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/description_destination"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/description_origin"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="2dp"
+            android:text="Hasta: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/description_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/description_destination"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="2dp"
+            android:text="Fecha: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/description_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/description_date"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="2dp"
+            android:text="Hora: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/description_origin_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/description_time"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="2dp"
+            android:text="Parada Origen: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/description_destination_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/description_origin_stop"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="2dp"
+            android:text="Parada Destino: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/description_number_of_passengers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/description_destination_stop"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="2dp"
+            android:text="Numero de pasajeros: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textStyle="bold" />
+
+
+
+        <TextView
+            android:id="@+id/valueOrigin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/description_origin"
+            android:layout_alignTop="@id/description_origin"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@id/description_origin"
+            android:ems="10"
+            android:text="Mercedes"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+
+        <TextView
+            android:id="@+id/valueDestination"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/description_destination"
+            android:layout_alignTop="@id/description_destination"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_toEndOf="@id/description_destination"
+            android:ems="10"
+            android:text="Capital Federal "
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="2dp"
+        android:layout_height="wrap_content">
+
+        <!-- TODO Hay que sacar esto en otro frame para armarlo dinamicamente -->
+
+        <TextView
+            android:id="@+id/passengerDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:text="Pasajero 1: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/passengerValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/passengerDescription"
+            android:layout_alignTop="@id/passengerDescription"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@id/passengerDescription"
+            android:ems="10"
+            android:text="Jose Macha - 20.444.222"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/passengerDescription2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/passengerDescription"
+            android:text="Pasajero 2: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/passengerValue2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/passengerDescription2"
+            android:layout_alignTop="@id/passengerDescription2"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@id/passengerDescription2"
+            android:ems="10"
+            android:text="Juan Lopez - 25.444.222"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/description_import"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:text="Debe pagar un total de $: "
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+        <TextView
+            android:id="@+id/value_import"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/description_import"
+            android:layout_alignTop="@id/description_import"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@id/description_import"
+            android:ems="10"
+            android:text="1.500"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+    </RelativeLayout>
+
+    <TextView android:id="@+id/legal_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Los pagos se realizaran via transferencia a la siguiente cuenta:"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/bank_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="25dp"
+        android:text="Banco Banquero "
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+    <TextView
+        android:id="@+id/bank_cbu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="25dp"
+        android:text="CBU: 00000000000000000000001213213"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+    <TextView
+        android:id="@+id/bank_alias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="25dp"
+        android:text="Alias: tour.app"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+    <TextView android:id="@+id/upload_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Debe subir el comprobante y esperar a que su pago sea validado."
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/bank_upload_receipt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="25dp"
+        android:text="Subir el comprobante"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+
+</LinearLayout>
