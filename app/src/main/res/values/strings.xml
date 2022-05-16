@@ -96,7 +96,9 @@
     <!--Nuevo viaje-->
     <string name="last_trip">Copiar ultimo viaje</string>
     <string name="from">Desde</string>
+
     <string name="to">Hasta</string>
+
     <string name="departure_date">Fecha</string>
     <string name="calendar_icon_description">Calendario</string>
     <string name="departure_hour">Hora</string>
@@ -109,7 +111,27 @@
     <string name="price">Precio: $X.XXX</string>
     <!---->
 
+    <!--Confirmar viaje-->
+    <string name="from_colon">Desde:</string>
+    <string name="to_colon">Hasta:</string>
+    <string name="departure_date_colon">Fecha:</string>
+    <string name="departure_hour_colon">Hora:</string>
+    <string name="departure_stop_colon">Lugar de subida:</string>
+    <string name="arrival_stop_colon">Lugar de bajada:</string>
+    <string name="number_of_tickets_colon">Cantidad de pasajes:</string>
+    <string name="price_colon">Debe pagar un total de : $</string>
+    <!---->
+
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bank">Banco</string>
+    <string name="bank_name">Banco Banquero</string>
+    <string name="cbu">CBU</string>
+    <string name="cbu_number">00000000000000000000001213213</string>
+    <string name="reference_payment">Los pagos se realizaran via transferencia a la siguiente cuenta:</string>
+    <string name="payment_information">Debe subir el comprobante y esperar a que su pago sea validado.</string>
+    <string name="upload_receipt">Subir comprobante</string>
+    <string name="alias_colon">Alias:</string>
+    <string name="confirm">Confirmar</string>
 </resources>
