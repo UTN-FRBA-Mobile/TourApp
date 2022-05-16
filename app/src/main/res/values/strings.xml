@@ -134,4 +134,7 @@
     <string name="upload_receipt">Subir comprobante</string>
     <string name="alias_colon">Alias:</string>
     <string name="confirm">Confirmar</string>
+    <string name="confirmation_text">Se está procesando su pago. Será notificado cuando se confirme su viaje</string>
+    <string name="ready">¡Listo!</string>
+    <string name="result_continue">Continuar</string>
 </resources>
