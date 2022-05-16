@@ -92,5 +92,4 @@ class MyTripsFragment : Fragment(),
     override fun onGetTripsError(error: String) {
         Toast.makeText(context, getString(R.string.get_trips_error), Toast.LENGTH_SHORT).show()
     }
-
 }
