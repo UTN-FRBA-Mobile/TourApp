@@ -1,14 +1,17 @@
 package com.unnamedgroup.tourapp.view.fragment
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.navigation.fragment.findNavController
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.unnamedgroup.tourapp.R
 import com.unnamedgroup.tourapp.databinding.FragmentTripDetailsBinding
+import com.unnamedgroup.tourapp.model.Trip
 import java.util.*
 
 /**
@@ -90,7 +93,6 @@ class TripDetailsFragment : Fragment() {
             setText(arrivalStopsAdapter!!.getItem(0), false)
         }
 
-
         val c = Calendar.getInstance()
         val day = c.get(Calendar.DAY_OF_MONTH)
         val month = c.get(Calendar.MONTH)
@@ -102,10 +104,18 @@ class TripDetailsFragment : Fragment() {
             showDatePickerDialog()
         }
 
+        binding.cancelButton.setOnClickListener() {
+            findNavController().navigate(R.id.action_tripDetailsFragment_to_MyTripsFragment)
+        }
+
+        binding.saveButton.setOnClickListener() {
+            findNavController().navigate(R.id.action_tripDetailsFragment_to_MyTripsFragment)
+        }
+
         with (binding.qrCode){
             try {
                 val barcodeEncoder = BarcodeEncoder()
-                val bitmap = barcodeEncoder.encodeBitmap("Mercedes - Capital Federal", BarcodeFormat.QR_CODE, 400, 400)
+                val bitmap = barcodeEncoder.encodeBitmap(R.string.details_trip_name.toString(), BarcodeFormat.QR_CODE, 400, 400)
                 setImageBitmap(bitmap)
             } catch (e: Exception) {
             }
