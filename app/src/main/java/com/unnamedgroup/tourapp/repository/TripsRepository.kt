@@ -1,5 +1,6 @@
 package com.unnamedgroup.tourapp.repository
 
+import com.unnamedgroup.tourapp.BuildConfig
 import com.unnamedgroup.tourapp.model.business.Trip
 import com.unnamedgroup.tourapp.model.rest.TripREST
 import com.unnamedgroup.tourapp.presenter.interfaces.MyTripsPresenterInt
@@ -13,7 +14,7 @@ class TripsRepository() {
 
     private val service = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl("http://192.168.0.218:3000/")
+        .baseUrl(BuildConfig.API_URL)
         .build()
         .create(TripsService::class.java)
 
