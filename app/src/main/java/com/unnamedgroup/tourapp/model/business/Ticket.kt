@@ -7,14 +7,18 @@ class Ticket(
     val id: Int,
     val user: User,
     val dni: String,
-    val trip: Trip
+    val trip: Trip,
+    val busBoarding: String,
+    val busStop: String,
 ): Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readParcelable(User::class.java.classLoader)!!,
         parcel.readString()!!,
-        parcel.readParcelable(Trip::class.java.classLoader)!!
+        parcel.readParcelable(Trip::class.java.classLoader)!!,
+        parcel.readString()!!,
+        parcel.readString()!!
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -22,6 +26,8 @@ class Ticket(
         parcel.writeParcelable(user, flags)
         parcel.writeString(dni)
         parcel.writeParcelable(trip, flags)
+        parcel.writeString(busBoarding)
+        parcel.writeString(busStop)
     }
 
     override fun describeContents(): Int {
