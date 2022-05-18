@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.unnamedgroup.tourapp.R
 import com.unnamedgroup.tourapp.databinding.FragmentMyTripsDriverBinding
-import com.unnamedgroup.tourapp.model.Trip
+import com.unnamedgroup.tourapp.model.business.Trip
 import com.unnamedgroup.tourapp.presenter.implementation.MyTripsPresenterImpl
 import com.unnamedgroup.tourapp.presenter.interfaces.MyTripsPresenterInt
 import com.unnamedgroup.tourapp.view.adapter.MyTripsDriverAdapter

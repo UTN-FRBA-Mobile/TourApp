@@ -1,7 +1,6 @@
 package com.unnamedgroup.tourapp.view.adapter
 
 import android.content.Context
-import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +10,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.unnamedgroup.tourapp.R
-import com.unnamedgroup.tourapp.model.Trip
-import com.unnamedgroup.tourapp.utils.Utils
+import com.unnamedgroup.tourapp.model.business.Trip
 
 class MyTripsAdapter(private var mTrips: MutableList<Trip>, private val mContext: Context?, private val onClickListener: OnItemClickListener) :
     RecyclerView.Adapter<MyTripsAdapter.ViewHolder>() {

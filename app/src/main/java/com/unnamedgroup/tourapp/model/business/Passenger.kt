@@ -1,4 +1,4 @@
-package com.unnamedgroup.tourapp.model
+package com.unnamedgroup.tourapp.model.business
 
 import android.os.Parcel
 import android.os.Parcelable

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.unnamedgroup.tourapp.R
-import com.unnamedgroup.tourapp.model.Trip
+import com.unnamedgroup.tourapp.model.business.Trip
 
 class MyTripsDriverAdapter(private var mTrips: MutableList<Trip>, private val mContext: Context?) :
     RecyclerView.Adapter<MyTripsDriverAdapter.ViewHolder>() {

@@ -1,4 +1,4 @@
-package com.unnamedgroup.tourapp.model
+package com.unnamedgroup.tourapp.model.business
 
 import android.os.Parcel
 import android.os.Parcelable
@@ -7,26 +7,30 @@ import java.util.*
 
 class Trip(
     val id: Int,
-    var state: TripState,
-    val origin: String?,
-    val destination: String?,
-    val departureTime: String?,
+    val origin: String,
+    val destination: String,
+    val passengerAmount: Int,
+    val price: Float,
+    val busBoardings: MutableList<String>,
+    val busStops: MutableList<String>,
+    val departureTime: String,
     val date: Date,
-    val passengers: MutableList<Passenger>
-): Parcelable {
+    val state: TripState
+    ): Parcelable {
 
-    val dateStr = Utils.getDateWithFormat(date, "EEEE dd/MM/yyyy")
+    val dateStr = Utils.getDateWithFormat(date, "dd/MM/yyyy")
 
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
-        TripState.valueOf(parcel.readString()!!),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readInt(),
+        parcel.readFloat(),
+        mutableListOf<String>().apply { parcel.readArray(String::class.java.classLoader) },
+        mutableListOf<String>().apply { parcel.readArray(String::class.java.classLoader) },
+        parcel.readString()!!,
         Date(parcel.readLong()),
-        mutableListOf<Passenger>().apply {
-            parcel.readArray(Passenger::class.java.classLoader)
-        }
+        TripState.valueOf(parcel.readString()!!),
     )
 
     enum class TripState(val int: Int, val text: String) {
@@ -38,12 +42,15 @@ class Trip(
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
-        parcel.writeString(state.name)
         parcel.writeString(origin)
         parcel.writeString(destination)
+        parcel.writeInt(passengerAmount)
+        parcel.writeFloat(price)
+        parcel.writeStringArray(busBoardings.toTypedArray())
+        parcel.writeStringArray(busStops.toTypedArray())
         parcel.writeString(departureTime)
         parcel.writeLong(date.time)
-        parcel.writeParcelableArray(passengers.toTypedArray(), flags)
+        parcel.writeString(state.name)
     }
 
     override fun describeContents(): Int {
