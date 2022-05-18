@@ -51,8 +51,8 @@
     </fragment>
     <fragment
         android:id="@+id/resultScreenFragment"
+        android:label="@string/result_screen_label"
         android:name="com.unnamedgroup.tourapp.view.fragment.ResultScreenFragment"
-        android:label="fragment_result_screen"
         tools:layout="@layout/fragment_result_screen" >
         <action
             android:id="@+id/action_resultScreenFragment_to_MyTripsFragment"
