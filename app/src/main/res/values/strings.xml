@@ -137,4 +137,5 @@
     <string name="confirmation_text">Se está procesando su pago. Será notificado cuando se confirme su viaje</string>
     <string name="ready">¡Listo!</string>
     <string name="result_continue">Continuar</string>
+    <string name="result_screen_label">Viaje Aceptado</string>
 </resources>

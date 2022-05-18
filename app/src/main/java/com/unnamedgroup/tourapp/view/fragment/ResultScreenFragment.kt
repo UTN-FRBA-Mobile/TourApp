@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.unnamedgroup.tourapp.R
-import com.unnamedgroup.tourapp.databinding.FragmentConfirmTripBinding
-import com.unnamedgroup.tourapp.databinding.FragmentNewTripBinding
 import com.unnamedgroup.tourapp.databinding.FragmentResultScreenBinding
 
 // TODO: Rename parameter arguments, choose names that match
