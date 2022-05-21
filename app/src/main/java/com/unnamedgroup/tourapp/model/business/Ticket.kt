@@ -6,7 +6,7 @@ import android.os.Parcelable
 class Ticket(
     val id: Int,
     val user: User,
-    val dni: String,
+    var passengers: MutableList<Passenger>,
     val trip: Trip,
     val busBoarding: String,
     val busStop: String,
@@ -15,7 +15,7 @@ class Ticket(
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readParcelable(User::class.java.classLoader)!!,
-        parcel.readString()!!,
+        mutableListOf<Passenger>().apply {  parcel.readParcelable(Passenger::class.java.classLoader)!! },
         parcel.readParcelable(Trip::class.java.classLoader)!!,
         parcel.readString()!!,
         parcel.readString()!!
@@ -24,7 +24,7 @@ class Ticket(
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
         parcel.writeParcelable(user, flags)
-        parcel.writeString(dni)
+        parcel.writeArray(passengers.toTypedArray())
         parcel.writeParcelable(trip, flags)
         parcel.writeString(busBoarding)
         parcel.writeString(busStop)
