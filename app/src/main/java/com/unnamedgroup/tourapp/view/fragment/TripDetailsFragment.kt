@@ -11,7 +11,7 @@ import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.unnamedgroup.tourapp.R
 import com.unnamedgroup.tourapp.databinding.FragmentTripDetailsBinding
-import com.unnamedgroup.tourapp.model.Trip
+import com.unnamedgroup.tourapp.model.business.Trip
 import java.util.*
 
 /**

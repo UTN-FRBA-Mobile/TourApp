@@ -2,8 +2,9 @@ package com.unnamedgroup.tourapp.model.business
 
 import android.os.Parcel
 import android.os.Parcelable
+import android.view.ViewDebug
 
-class Passenger(
+data class Passenger(
     val name: String?,
     val dni: String?,
 ) : Parcelable {
@@ -12,7 +13,6 @@ class Passenger(
         parcel.readString()
     ) {
     }
-
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
         parcel.writeString(dni)
