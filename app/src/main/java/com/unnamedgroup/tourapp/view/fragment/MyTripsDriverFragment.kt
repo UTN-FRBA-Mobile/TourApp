@@ -3,26 +3,26 @@ package com.unnamedgroup.tourapp.view.fragment
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.unnamedgroup.tourapp.R
 import com.unnamedgroup.tourapp.databinding.FragmentMyTripsDriverBinding
 import com.unnamedgroup.tourapp.model.business.Trip
-import com.unnamedgroup.tourapp.presenter.implementation.MyTripsPresenterImpl
-import com.unnamedgroup.tourapp.presenter.interfaces.MyTripsPresenterInt
+import com.unnamedgroup.tourapp.presenter.implementation.GetTripsPresenterImpl
+import com.unnamedgroup.tourapp.presenter.interfaces.GetTripsPresenterInt
 import com.unnamedgroup.tourapp.view.adapter.MyTripsDriverAdapter
 
 /**
  * A simple [Fragment] subclass.
  */
-class MyTripsDriverFragment : Fragment(), MyTripsPresenterInt.View {
+class MyTripsDriverFragment : Fragment(), GetTripsPresenterInt.View {
 
     private var _binding: FragmentMyTripsDriverBinding? = null
-    private var myTripsPresenter : MyTripsPresenterInt = MyTripsPresenterImpl(this)
+    private var myTripsPresenter : GetTripsPresenterInt = GetTripsPresenterImpl(this)
     private var viewAdapter : MyTripsDriverAdapter? = null
 
     private val binding get() = _binding!!
