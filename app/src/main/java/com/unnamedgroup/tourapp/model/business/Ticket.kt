@@ -8,8 +8,8 @@ class Ticket(
     val user: User,
     var passengers: MutableList<Passenger>,
     val trip: Trip,
-    val busBoarding: String,
-    val busStop: String,
+    var busBoarding: String,
+    var busStop: String,
 ): Parcelable {
 
     constructor(parcel: Parcel) : this(
