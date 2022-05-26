@@ -40,15 +40,9 @@ class ConfirmTripFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private val listPassenger = mutableListOf<Passenger>(Passenger(name="Maria Felcitas", dni = "25.060.550"),
-        Passenger(name="Juana de Arco", dni = "5.060.550"),Passenger(name="Juana de Barco", dni = "5.060.550"),
-        Passenger(name="Juana de Arco", dni = "5.060.550"),Passenger(name="Juana de Barco", dni = "5.060.550"))
-
     private var _binding: FragmentConfirmTripBinding? = null
 
     private val binding get() = _binding!!
-
-
 
     private val ticket = generateTicket()
 
@@ -74,17 +68,16 @@ class ConfirmTripFragment : Fragment() {
         binding.valueTime.text = ticket.trip.departureTime
         binding.valueOriginStop.text = ticket.busBoarding
         binding.valueDestinationStop.text = ticket.busStop
-        binding.valueNumberOfPassengers.text = listPassenger.size.toString()
+        binding.valueNumberOfPassengers.text = ticket.passengers.size.toString()
 
+        // Complete recyclerView of passengers
         val viewManager = LinearLayoutManager(this.context)
-        val viewAdapter = ConfirmTripPassengersAdapter(listPassenger)
+        val viewAdapter = ConfirmTripPassengersAdapter(ticket.passengers)
 
         recyclerView = binding.confirmTripReciclerView.apply {
             layoutManager = viewManager
             adapter = viewAdapter
         }
-
-
 
         return binding.root
     }
@@ -109,5 +102,9 @@ fun generateTicket(): Ticket{
 
     val trip = Trip(1,"Mercedes","Capital Federal",20,500.0F, mutableListOf(), mutableListOf(),"18:00", Date(),Trip.TripState.CONFIRMED)
 
-    return Ticket(1, user,"",trip,"Iglesia","Obelisco")
+     val listPassenger = mutableListOf<Passenger>(Passenger(name="Maria Felcitas", dni = "25.060.550"),
+        Passenger(name="Juana de Arco", dni = "5.060.550"),Passenger(name="Juana de Barco", dni = "5.060.550"),
+        Passenger(name="Juana de Arco", dni = "5.060.550"),Passenger(name="Juana de Barco", dni = "5.060.550"))
+
+    return Ticket(1, user,listPassenger,trip,"Iglesia","Obelisco")
 }
