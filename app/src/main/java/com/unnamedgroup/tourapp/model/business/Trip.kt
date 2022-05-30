@@ -40,6 +40,10 @@ class Trip(
         CANCELLED(4, "Cancelado"),
     }
 
+    fun getName(): String {
+        return "${this.origin} - ${this.destination}"
+    }
+
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
         parcel.writeString(origin)
