@@ -12,4 +12,7 @@ interface TripsService {
 
     @GET("tickets")
     fun getTicketsByUser(@Query("user.id") userId: Int): Call<MutableList<TicketREST>>
+
+    @GET("tickets")
+    fun getTicketsByTrip(@Query("trip.id") tripId: Int): Call<MutableList<TicketREST>>
 }

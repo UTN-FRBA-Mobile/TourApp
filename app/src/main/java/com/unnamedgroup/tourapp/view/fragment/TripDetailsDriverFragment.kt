@@ -3,50 +3,41 @@ package com.unnamedgroup.tourapp.view.fragment
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.unnamedgroup.tourapp.R
-import com.unnamedgroup.tourapp.databinding.FragmentMyTripsDriverBinding
+import com.unnamedgroup.tourapp.databinding.FragmentTripDetailsBinding
+import com.unnamedgroup.tourapp.databinding.FragmentTripDetailsDriverBinding
 import com.unnamedgroup.tourapp.model.business.Ticket
 import com.unnamedgroup.tourapp.model.business.Trip
 import com.unnamedgroup.tourapp.model.business.TripPassenger
 import com.unnamedgroup.tourapp.presenter.implementation.GetTripsPresenterImpl
+import com.unnamedgroup.tourapp.presenter.implementation.MyTripsPresenterImpl
 import com.unnamedgroup.tourapp.presenter.interfaces.GetTripsPresenterInt
-import com.unnamedgroup.tourapp.view.adapter.MyTripsAdapter
+import com.unnamedgroup.tourapp.presenter.interfaces.MyTripsPresenterInt
 import com.unnamedgroup.tourapp.view.adapter.MyTripsDriverAdapter
 import com.unnamedgroup.tourapp.view.adapter.TripDetailsDriverAdapter
 
-/**
- * A simple [Fragment] subclass.
- */
-class MyTripsDriverFragment : Fragment(), GetTripsPresenterInt.View {
+class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
 
-    private var _binding: FragmentMyTripsDriverBinding? = null
-    private var myTripsPresenter : GetTripsPresenterInt = GetTripsPresenterImpl(this)
-    private var viewAdapter : MyTripsDriverAdapter? = null
+    private var _binding: FragmentTripDetailsDriverBinding? = null
+    private var myTripsPresenter : MyTripsPresenterImpl = MyTripsPresenterImpl(this)
+    private var viewAdapter : TripDetailsDriverAdapter? = null
 
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
+        viewAdapter = TripDetailsDriverAdapter(mutableListOf(), context)
+        myTripsPresenter.getTicketsByTrip(arguments?.getParcelable<Trip>("Trip")!!.id)
 
-        viewAdapter = MyTripsDriverAdapter(mutableListOf(), context, object: MyTripsDriverAdapter.OnItemClickListener {
-            override fun onClick(view: View, trip: Trip) {
-                val bundle = Bundle()
-                bundle.putParcelable("Trip", trip)
-                findNavController().navigate(R.id.action_MyTripsDriverFragment_to_tripDetailsDriverFragment, bundle)
-            }
-        })
-        myTripsPresenter.getTrips()
-
-        _binding = FragmentMyTripsDriverBinding.inflate(inflater, container, false)
+        _binding = FragmentTripDetailsDriverBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -55,7 +46,7 @@ class MyTripsDriverFragment : Fragment(), GetTripsPresenterInt.View {
 
         val viewManager = LinearLayoutManager(this.context)
 
-        binding.driverSearchInput.addTextChangedListener(object : TextWatcher {
+        binding.tripDetailsDriverSearchInput.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -67,26 +58,34 @@ class MyTripsDriverFragment : Fragment(), GetTripsPresenterInt.View {
             }
         })
 
-        binding.driverTripsRecyclerview.apply {
+        binding.tripDetailsDriverRecyclerview.apply {
             layoutManager = viewManager
             adapter = viewAdapter
         }
     }
 
-    private fun setRecyclerViewList(trips: MutableList<Trip>) {
-        viewAdapter!!.setList(trips)
+    private fun setRecyclerViewList(passengers: MutableList<TripPassenger>) {
+        viewAdapter!!.setList(passengers)
     }
 
-    override fun onGetTripsOk(trips: MutableList<Trip>) {
+    override fun onGetTicketsByTripOk(trips: MutableList<TripPassenger>) {
         setRecyclerViewList(trips)
     }
 
-    override fun onGetTripsError(error: String) {
+    override fun onGetTicketsByTripFailed(error: String) {
         Toast.makeText(context, getString(R.string.get_trips_error), Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onGetTicketsByUserOk(tickets: MutableList<Ticket>) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetTicketsByUserFailed(error: String) {
+        TODO("Not yet implemented")
     }
 }

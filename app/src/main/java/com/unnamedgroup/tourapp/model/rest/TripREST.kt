@@ -1,6 +1,7 @@
 package com.unnamedgroup.tourapp.model.rest
 
 import com.unnamedgroup.tourapp.model.business.Trip
+import com.unnamedgroup.tourapp.model.business.User
 import com.unnamedgroup.tourapp.utils.Utils
 
 data class TripREST(
@@ -13,7 +14,8 @@ data class TripREST(
     val busStops: MutableList<String>,
     val departureTime: String,
     val date: String,
-    val state: String
+    val state: String,
+    val driver: User
 ) {
     fun toTrip(): Trip {
         val date = Utils.parseDateWithFormat(date, "dd-MM-yyyy")
@@ -28,7 +30,8 @@ data class TripREST(
             busStops,
             departureTime,
             date,
-            state
+            state,
+            driver
         )
     }
 }

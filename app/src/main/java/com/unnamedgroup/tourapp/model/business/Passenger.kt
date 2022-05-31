@@ -1,21 +1,27 @@
 package com.unnamedgroup.tourapp.model.business
 
+import android.annotation.SuppressLint
 import android.os.Parcel
 import android.os.Parcelable
 
 class Passenger(
     val name: String?,
     val dni: String?,
+    val busBoarded: Boolean,
 ) : Parcelable {
+    @SuppressLint("NewApi")
     constructor(parcel: Parcel) : this(
         parcel.readString(),
-        parcel.readString()
+        parcel.readString(),
+        parcel.readBoolean()!!
     ) {
     }
 
+    @SuppressLint("NewApi")
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
         parcel.writeString(dni)
+        parcel.writeBoolean(busBoarded)
     }
 
     override fun describeContents(): Int {

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/MyTripsFragment">
+    app:startDestination="@id/MyTripsDriverFragment">
 
     <fragment
         android:id="@+id/MyTripsFragment"
@@ -23,6 +23,15 @@
         android:name="com.unnamedgroup.tourapp.view.fragment.MyTripsDriverFragment"
         android:label="Viajes del Día"
         tools:layout="@layout/fragment_my_trips_driver">
+        <action
+            android:id="@+id/action_MyTripsDriverFragment_to_tripDetailsDriverFragment"
+            app:destination="@id/TripDetailsDriverFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/TripDetailsDriverFragment"
+        android:name="com.unnamedgroup.tourapp.view.fragment.TripDetailsDriverFragment"
+        android:label="Viaje"
+        tools:layout="@layout/fragment_trip_details_driver">
     </fragment>
     <fragment
         android:id="@+id/NewTripFragment"

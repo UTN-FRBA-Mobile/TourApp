@@ -15,7 +15,8 @@ class Trip(
     val busStops: MutableList<String>,
     val departureTime: String,
     val date: Date,
-    val state: TripState
+    val state: TripState,
+    val driver: User
     ): Parcelable {
 
     val dateStr = Utils.getDateWithFormat(date, "dd/MM/yyyy")
@@ -31,7 +32,8 @@ class Trip(
         parcel.readString()!!,
         Date(parcel.readLong()),
         TripState.valueOf(parcel.readString()!!),
-    )
+        parcel.readParcelable(User::class.java.classLoader)!!,
+        )
 
     enum class TripState(val int: Int, val text: String) {
         PROCESSING(1, "Procesando"),
@@ -51,6 +53,7 @@ class Trip(
         parcel.writeString(departureTime)
         parcel.writeLong(date.time)
         parcel.writeString(state.name)
+        parcel.writeParcelable(driver, flags)
     }
 
     override fun describeContents(): Int {

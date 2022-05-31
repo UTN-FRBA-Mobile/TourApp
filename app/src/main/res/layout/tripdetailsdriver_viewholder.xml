@@ -12,7 +12,6 @@
         android:layout_marginBottom="@dimen/card_separation">
 
         <LinearLayout
-            android:id="@+id/trip_card_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/card_padding"
@@ -26,17 +25,29 @@
                 android:layout_marginStart="@dimen/trip_card_icon_and_text_separation">
 
                 <TextView
-                    android:id="@+id/trip_id_textview"
+                    android:id="@+id/passenger_name_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Viaje 105485"
+                    android:text="Alfredo Lopez"
                     android:textColor="@color/black" />
 
                 <TextView
-                    android:id="@+id/trip_destination_hour_textview"
+                    android:id="@+id/passenger_dni_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Mercedes - Capital Federal - 16hs"/>
+                    android:text="DNI: 40225931"/>
+
+                <TextView
+                    android:id="@+id/passenger_bus_boarding_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sube en: Hotel Mercedes"/>
+
+                <TextView
+                    android:id="@+id/passenger_bus_stop_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Baja en: 9 de Julio y Venezuela"/>
             </LinearLayout>
         </LinearLayout>
 

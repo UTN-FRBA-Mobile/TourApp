@@ -14,6 +14,7 @@ import com.unnamedgroup.tourapp.R
 import com.unnamedgroup.tourapp.databinding.FragmentMyTripsBinding
 import com.unnamedgroup.tourapp.model.business.Ticket
 import com.unnamedgroup.tourapp.model.business.Trip
+import com.unnamedgroup.tourapp.model.business.TripPassenger
 import com.unnamedgroup.tourapp.presenter.implementation.MyTripsPresenterImpl
 import com.unnamedgroup.tourapp.presenter.interfaces.MyTripsPresenterInt
 import com.unnamedgroup.tourapp.view.adapter.MyTripsAdapter
@@ -44,7 +45,7 @@ class MyTripsFragment : Fragment(),
                 findNavController().navigate(R.id.action_MyTripsFragment_to_tripDetailsFragment, bundle)
             }
         })
-        myTripsPresenter.getTicketsByUser(1)  // todo: deshardcodear
+        myTripsPresenter.getTicketsByUser(1)  // TODO: deshardcodear
 
         _binding = FragmentMyTripsBinding.inflate(inflater, container, false)
         return binding.root
@@ -92,5 +93,13 @@ class MyTripsFragment : Fragment(),
 
     override fun onGetTicketsByUserFailed(error: String) {
         Toast.makeText(context, getString(R.string.get_trips_error), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onGetTicketsByTripOk(tickets: MutableList<TripPassenger>) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetTicketsByTripFailed(error: String) {
+        TODO("Not yet implemented")
     }
 }
