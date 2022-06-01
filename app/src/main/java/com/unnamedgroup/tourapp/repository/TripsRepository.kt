@@ -72,7 +72,7 @@ class TripsRepository() {
                 val tripPassengers: MutableList<TripPassenger> = mutableListOf()
                 for (r in respList) {
                     for (p in r.toTicket().passengers){
-                        tripPassengers.add(TripPassenger(p.name!!, p.dni!!, r.toTicket().busBoarding, r.toTicket().busStop))
+                        tripPassengers.add(TripPassenger(p.name!!, p.dni!!, r.toTicket().busBoarding, r.toTicket().busStop, p.busBoarded))
                     }
                 }
                 presenter.onGetTicketsByTripOk(tripPassengers)

@@ -30,7 +30,7 @@
     <fragment
         android:id="@+id/TripDetailsDriverFragment"
         android:name="com.unnamedgroup.tourapp.view.fragment.TripDetailsDriverFragment"
-        android:label="Viaje"
+        android:label="Detalle del Viaje"
         tools:layout="@layout/fragment_trip_details_driver">
     </fragment>
     <fragment

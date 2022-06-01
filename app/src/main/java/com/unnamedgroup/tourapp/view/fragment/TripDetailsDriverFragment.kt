@@ -7,17 +7,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.unnamedgroup.tourapp.R
-import com.unnamedgroup.tourapp.databinding.FragmentTripDetailsBinding
 import com.unnamedgroup.tourapp.databinding.FragmentTripDetailsDriverBinding
 import com.unnamedgroup.tourapp.model.business.Ticket
 import com.unnamedgroup.tourapp.model.business.Trip
 import com.unnamedgroup.tourapp.model.business.TripPassenger
-import com.unnamedgroup.tourapp.presenter.implementation.GetTripsPresenterImpl
 import com.unnamedgroup.tourapp.presenter.implementation.MyTripsPresenterImpl
-import com.unnamedgroup.tourapp.presenter.interfaces.GetTripsPresenterInt
 import com.unnamedgroup.tourapp.presenter.interfaces.MyTripsPresenterInt
 import com.unnamedgroup.tourapp.view.adapter.MyTripsDriverAdapter
 import com.unnamedgroup.tourapp.view.adapter.TripDetailsDriverAdapter
@@ -34,7 +32,7 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewAdapter = TripDetailsDriverAdapter(mutableListOf(), context)
+        viewAdapter = TripDetailsDriverAdapter(mutableListOf(), requireArguments()!!.getParcelable<Trip>("Trip")!!, context)
         myTripsPresenter.getTicketsByTrip(arguments?.getParcelable<Trip>("Trip")!!.id)
 
         _binding = FragmentTripDetailsDriverBinding.inflate(inflater, container, false)
@@ -45,6 +43,13 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
         super.onViewCreated(view, savedInstanceState)
 
         val viewManager = LinearLayoutManager(this.context)
+
+        val tripIdTextview : TextView = view.findViewById(R.id.trip_details_id_textview)
+        val tripBoardingStopHourTextview : TextView = view.findViewById(R.id.trip_origin_destination_hour_textview)
+
+        val trip = arguments?.getParcelable<Trip>("Trip")
+        tripIdTextview.text = context?.getString(R.string.trip_id, trip!!.id)
+        tripBoardingStopHourTextview.text = context?.getString(R.string.trip_origin_destination_hour, trip!!.origin, trip!!.destination, trip!!.departureTime)
 
         binding.tripDetailsDriverSearchInput.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -68,8 +73,8 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
         viewAdapter!!.setList(passengers)
     }
 
-    override fun onGetTicketsByTripOk(trips: MutableList<TripPassenger>) {
-        setRecyclerViewList(trips)
+    override fun onGetTicketsByTripOk(passengers: MutableList<TripPassenger>) {
+        setRecyclerViewList(passengers)
     }
 
     override fun onGetTicketsByTripFailed(error: String) {

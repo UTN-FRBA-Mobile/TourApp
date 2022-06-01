@@ -9,20 +9,24 @@ class TripPassenger(
     val dni: String,
     val busBoarding: String,
     val busStop: String,
+    val busBoarded: Boolean
 ): Parcelable {
     @SuppressLint("NewApi")
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
-        parcel.readString()!!
+        parcel.readString()!!,
+        parcel.readBoolean()!!
     )
 
+    @SuppressLint("NewApi")
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
         parcel.writeString(dni)
         parcel.writeString(busBoarding)
         parcel.writeString(busStop)
+        parcel.writeBoolean(busBoarded)
     }
 
     override fun describeContents(): Int {

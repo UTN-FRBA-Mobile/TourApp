@@ -48,6 +48,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Baja en: 9 de Julio y Venezuela"/>
+
+                <CheckBox
+                    android:id="@+id/passenger_bus_boarded_checkBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Presente" />
             </LinearLayout>
         </LinearLayout>
 

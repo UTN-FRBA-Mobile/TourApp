@@ -16,7 +16,7 @@
     <string name="trip_details_dni">DNI: %s</string>
     <string name="trip_details_bus_boarding">Sube en: %s</string>
     <string name="trip_details_bus_stop">Baja en: %s</string>
-
+    <string name="passenger_title">Pasajeros</string>
 
     <!-- trip Details -->
     <string-array name="passengers_list">

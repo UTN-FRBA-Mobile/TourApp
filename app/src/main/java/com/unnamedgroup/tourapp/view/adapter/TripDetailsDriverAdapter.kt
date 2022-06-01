@@ -4,14 +4,17 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.unnamedgroup.tourapp.R
+import com.unnamedgroup.tourapp.model.business.Trip
 import com.unnamedgroup.tourapp.model.business.TripPassenger
 
 
 class TripDetailsDriverAdapter(
     private var mPassengers: MutableList<TripPassenger>,
+    private var mTrip: Trip,
     private val mContext: Context?) :
     RecyclerView.Adapter<TripDetailsDriverAdapter.ViewHolder>() {
 
@@ -31,11 +34,13 @@ class TripDetailsDriverAdapter(
         val dniTextview : TextView = holder.view.findViewById(R.id.passenger_dni_textview)
         val busBoardingTextview : TextView = holder.view.findViewById(R.id.passenger_bus_boarding_textview)
         val busStopTextview : TextView = holder.view.findViewById(R.id.passenger_bus_stop_textview)
+        val busBoarded : CheckBox = holder.view.findViewById(R.id.passenger_bus_boarded_checkBox)
 
         nameTextview.text = trip.name
         dniTextview.text = mContext?.getString(R.string.trip_details_dni, trip.dni)
         busBoardingTextview.text = mContext?.getString(R.string.trip_details_bus_boarding, trip.busBoarding)
         busStopTextview.text = mContext?.getString(R.string.trip_details_bus_stop, trip.busStop)
+        busBoarded.isChecked = trip.busBoarded
     }
 
     override fun getItemCount() = showingList.size
