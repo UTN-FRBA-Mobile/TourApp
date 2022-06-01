@@ -13,10 +13,21 @@
     <string name="trip_date_hour">%s - %shs</string>
     <string name="trip_id">Viaje - %d</string>
     <string name="trip_origin_destination_hour">%s - %s - %s hs</string>
+
+    <!-- Driver trip Details -->
     <string name="trip_details_dni">DNI: %s</string>
     <string name="trip_details_bus_boarding">Sube en: %s</string>
     <string name="trip_details_bus_stop">Baja en: %s</string>
     <string name="passenger_title">Pasajeros</string>
+    <string name="trip_details_cancel_button">Cancelar viaje</string>
+    <string name="trip_details_scan_qr">Escanear QR</string>
+
+    <string-array name="trip_state_list">
+        <item>CONFIRMED</item>
+        <item>DELAYED</item>
+        <item>PROCESSING</item>
+        <item>CANCELLED</item>
+    </string-array>
 
     <!-- trip Details -->
     <string-array name="passengers_list">

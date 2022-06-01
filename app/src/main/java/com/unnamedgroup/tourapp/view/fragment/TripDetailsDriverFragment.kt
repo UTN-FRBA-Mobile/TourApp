@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,8 +26,10 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
     private var _binding: FragmentTripDetailsDriverBinding? = null
     private var myTripsPresenter : MyTripsPresenterImpl = MyTripsPresenterImpl(this)
     private var viewAdapter : TripDetailsDriverAdapter? = null
+    private var tripStatesAdapter: ArrayAdapter<String>? = null
 
     private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +37,8 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
     ): View? {
         viewAdapter = TripDetailsDriverAdapter(mutableListOf(), requireArguments()!!.getParcelable<Trip>("Trip")!!, context)
         myTripsPresenter.getTicketsByTrip(arguments?.getParcelable<Trip>("Trip")!!.id)
+        val tripStateList = resources.getStringArray((R.array.trip_state_list))
+        tripStatesAdapter = context?.let { ArrayAdapter(it, R.layout.list_item, tripStateList) }
 
         _binding = FragmentTripDetailsDriverBinding.inflate(inflater, container, false)
         return binding.root
@@ -50,6 +55,11 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
         val trip = arguments?.getParcelable<Trip>("Trip")
         tripIdTextview.text = context?.getString(R.string.trip_id, trip!!.id)
         tripBoardingStopHourTextview.text = context?.getString(R.string.trip_origin_destination_hour, trip!!.origin, trip!!.destination, trip!!.departureTime)
+
+        with(binding.tripStatusTextView) {
+            setAdapter(tripStatesAdapter)
+            setText(tripStatesAdapter!!.getItem(0), false)
+        }
 
         binding.tripDetailsDriverSearchInput.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
