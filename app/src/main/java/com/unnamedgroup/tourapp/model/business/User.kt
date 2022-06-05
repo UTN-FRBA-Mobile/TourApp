@@ -5,12 +5,16 @@ import android.os.Parcelable
 
 class User(
     val id: Int,
+    val name: String,
     val email: String,
     val dni: String,
+    val token: String
 ): Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
+        parcel.readString()!!,
+        parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!
     ) {
@@ -18,8 +22,10 @@ class User(
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
+        parcel.writeString(name)
         parcel.writeString(email)
         parcel.writeString(dni)
+        parcel.writeString(token)
     }
 
     override fun describeContents(): Int {

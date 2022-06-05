@@ -1,5 +1,8 @@
 package com.unnamedgroup.tourapp.view.fragment
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +19,8 @@ import com.unnamedgroup.tourapp.databinding.FragmentLoginBinding
 import com.unnamedgroup.tourapp.model.business.User
 import com.unnamedgroup.tourapp.presenter.implementation.LoginPresenterImpl
 import com.unnamedgroup.tourapp.presenter.interfaces.LoginPresenterInt
+import com.unnamedgroup.tourapp.utils.MyPreferences
+import com.unnamedgroup.tourapp.view.activity.MainActivity
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -38,9 +43,15 @@ class LoginFragment : Fragment(),
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        // check if user is already logged in.
+        if (MyPreferences.getUserId(requireContext()) != -1) {
+            // already logged in.
+            goToMainActivity()
+        }
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -74,10 +85,21 @@ class LoginFragment : Fragment(),
     }
 
     override fun onGetLoginOk(user: User) {
-        TODO("Not yet implemented")
+        goToMainActivity()
     }
 
     override fun onGetLoginFailed(error: String) {
         Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
     }
+
+    override fun getViewContext(): Context {
+        return requireContext()
+    }
+
+    private fun goToMainActivity() {
+        val intent = Intent(context, MainActivity::class.java)
+        startActivity(intent)
+        activity?.finish()
+    }
+
 }

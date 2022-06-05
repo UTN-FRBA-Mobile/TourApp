@@ -16,6 +16,7 @@ import com.unnamedgroup.tourapp.model.business.Ticket
 import com.unnamedgroup.tourapp.model.business.Trip
 import com.unnamedgroup.tourapp.presenter.implementation.MyTripsPresenterImpl
 import com.unnamedgroup.tourapp.presenter.interfaces.MyTripsPresenterInt
+import com.unnamedgroup.tourapp.utils.MyPreferences
 import com.unnamedgroup.tourapp.view.adapter.MyTripsAdapter
 
 /**
@@ -44,7 +45,7 @@ class MyTripsFragment : Fragment(),
                 findNavController().navigate(R.id.action_MyTripsFragment_to_tripDetailsFragment, bundle)
             }
         })
-        myTripsPresenter.getTicketsByUser(1)  // todo: deshardcodear
+        myTripsPresenter.getTicketsByUser(MyPreferences.getUserId(requireContext()))
 
         _binding = FragmentMyTripsBinding.inflate(inflater, container, false)
         return binding.root
