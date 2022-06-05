@@ -4,6 +4,7 @@
     <string name="my_trips_fragment_label">Mis Viajes</string>
     <string name="trip_details_fragment_label">Detalle Del Viaje</string>
     <string name="new_trip_fragment_label">Nuevo Viaje</string>
+    <string name="trips_fragment_label">Viajes</string>
     <string name="next">Siguiente</string>
     <string name="previous">Previous</string>
     <string name="new_trip_button">Nuevo Viaje</string>
@@ -13,7 +14,6 @@
     <string name="trip_date_hour">%s - %shs</string>
     <string name="trip_id">Viaje - %d</string>
     <string name="trip_origin_destination_hour">%s - %s - %s hs</string>
-
 
 
     <!-- trip Details -->
@@ -87,9 +87,6 @@
     <string name="details_info">* Los viajes se pueden editar hasta 24 hs antes de la partida</string>
 
 
-
-
-
     <!-- API errors -->
     <string name="get_trips_error">Error obteniendo viajes</string>
 
@@ -108,7 +105,7 @@
     <string name="passenger_name">Nombre de pasajero</string>
     <string name="passenger_dni">DNI pasajero</string>
     <string name="round_trip">Ida y vuelta</string>
-    <string name="price">Precio: $X.XXX</string>
+    <string name="price">Precio: $</string>
     <!---->
 
     <!--Confirmar viaje-->
