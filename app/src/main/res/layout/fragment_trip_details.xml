@@ -19,18 +19,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/info_margin_horizontal"
-            android:textStyle="bold"
-            android:textSize="25dp"
             android:ellipsize="end"
             android:text="@string/details_trip_name"
-            android:layout_marginBottom="10dp"/>
+            android:textSize="25dp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/trip_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/info_margin_horizontal"
+            android:layout_marginBottom="10dp"
+            android:ellipsize="end"
+            android:text="@string/details_trip_name"
+            android:layout_below="@+id/trip"
+            android:textSize="15dp"
+            android:textStyle="normal" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/departure_stop"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/trip"
+            android:layout_below="@+id/trip_time"
             android:layout_marginHorizontal="@dimen/dropdowns_margin_Horizontal"
             android:layout_marginVertical="@dimen/dropdowns_margin_vertical">
 
@@ -72,7 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/passengers_recyclerview"
-            android:layout_marginVertical="@dimen/buttons_margin_Vertical"
+            android:layout_marginBottom="@dimen/buttons_margin_Vertical"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -103,7 +113,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/buttons_margin_between"
-                android:text="@string/details_save_button" />
+                android:text="@string/details_save_button"
+                />
         </LinearLayout>
 
         <TextView

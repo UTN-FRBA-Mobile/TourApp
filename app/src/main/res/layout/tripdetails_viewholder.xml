@@ -6,7 +6,7 @@
     android:id="@+id/td_passenger"
     android:orientation="horizontal"
     android:baselineAligned="false"
-    android:layout_marginHorizontal="@dimen/dropdowns_margin_Horizontal">
+    android:layout_marginVertical="@dimen/dropdowns_margin_vertical">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/td_passenger_name_layout"
