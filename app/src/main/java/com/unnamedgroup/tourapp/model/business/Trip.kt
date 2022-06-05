@@ -60,11 +60,11 @@ class Trip(
     }
 
     fun getName(): String {
-        return "${this.origin} - ${this.destination}"
+        return "$origin - $destination"
     }
 
     fun getFormattedDepartureTime(): String {
-        return "${this.dateStr} - ${this.departureTime}"
+        return "$dateStr - $departureTime"
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

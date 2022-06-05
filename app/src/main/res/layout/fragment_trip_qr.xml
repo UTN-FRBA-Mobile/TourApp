@@ -36,7 +36,7 @@
             android:textStyle="normal" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/departure_stop"
+            android:id="@+id/passenger"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -45,87 +45,52 @@
             android:layout_marginVertical="@dimen/dropdowns_margin_vertical">
 
             <AutoCompleteTextView
-                android:id="@+id/departure_stop_text"
+                android:id="@+id/passenger_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/details_departure_stop"
+                android:hint="@string/details_passengers"
                 android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/arrival_stop"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/departure_stop"
-            android:layout_marginHorizontal="@dimen/dropdowns_margin_Horizontal"
-            android:layout_marginVertical="@dimen/dropdowns_margin_vertical">
-
-            <AutoCompleteTextView
-                android:id="@+id/arrival_stop_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/details_arrival_stop"
-                android:inputType="none" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/passengers_recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/arrival_stop"
-            android:layout_marginHorizontal="@dimen/recyclerview_margin_horizontal"
-            android:layout_marginBottom="@dimen/recyclerview_margin_vertical" />
 
         <LinearLayout
-            android:id="@+id/qr"
+            android:id="@+id/qr_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/passengers_recyclerview"
-            android:layout_marginVertical="@dimen/buttons_margin_Vertical"
+            android:layout_below="@+id/passenger"
+            android:layout_marginBottom="@dimen/buttons_margin_Vertical"
             android:gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/qr_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/details_qr_button"
-                />
+            <ImageView
+                android:id="@+id/qr_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></ImageView>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/buttons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/qr"
+            android:layout_below="@+id/qr_container"
             android:layout_marginVertical="@dimen/buttons_margin_Vertical"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/cancel_button"
+                android:id="@+id/back_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/buttons_margin_between"
-                android:text="@string/details_cancel_button" />
+                android:text="@string/details_back_button" />
 
             <Button
-                android:id="@+id/save_button"
+                android:id="@+id/share_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/buttons_margin_between"
-                android:text="@string/details_save_button"
+                android:text="@string/details_share_button"
                 />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/info_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/buttons"
-            android:layout_marginHorizontal="@dimen/info_margin_horizontal"
-            android:text="@string/details_info" />
 
     </RelativeLayout>
 </ScrollView>

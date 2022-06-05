@@ -3,6 +3,7 @@
     <string name="action_settings">Settings</string>
     <string name="my_trips_fragment_label">Mis Viajes</string>
     <string name="trip_details_fragment_label">Detalle Del Viaje</string>
+    <string name="trip_qr_fragment_label">Certificados</string>
     <string name="new_trip_fragment_label">Nuevo Viaje</string>
     <string name="next">Siguiente</string>
     <string name="previous">Previous</string>
@@ -30,9 +31,16 @@
     <string name="details_departure_time">Hora de Salida</string>
     <string name="details_departure_stop">Parada de Salida</string>
     <string name="details_arrival_stop">Parada de Llegada</string>
+    <string name="details_qr_button">Ver Certificados</string>
     <string name="details_cancel_button">Cancelar</string>
     <string name="details_save_button">Guardar</string>
+    <string name="details_back_button">Volver</string>
+    <string name="details_share_button">Compartir</string>
     <string name="details_info">* Los viajes se pueden editar hasta 24 hs antes de la partida</string>
+
+    <!-- trip Qr -->
+
+    <string name="generate_qr_error">Error al generar el Qr, intente de nuevo mas tarde</string>
 
 
 

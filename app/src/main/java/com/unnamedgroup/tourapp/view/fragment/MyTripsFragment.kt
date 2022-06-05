@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.unnamedgroup.tourapp.R
 import com.unnamedgroup.tourapp.databinding.FragmentMyTripsBinding
 import com.unnamedgroup.tourapp.model.business.Ticket
-import com.unnamedgroup.tourapp.model.business.Trip
 import com.unnamedgroup.tourapp.presenter.implementation.MyTripsPresenterImpl
 import com.unnamedgroup.tourapp.presenter.interfaces.MyTripsPresenterInt
 import com.unnamedgroup.tourapp.view.adapter.MyTripsAdapter
@@ -27,6 +26,8 @@ class MyTripsFragment : Fragment(),
     private var _binding: FragmentMyTripsBinding? = null
     private var myTripsPresenter : MyTripsPresenterInt = MyTripsPresenterImpl(this)
     private var viewAdapter : MyTripsAdapter? = null
+    private var tickets: MutableList<Ticket> = mutableListOf()
+    private lateinit var modifiedTicket : Ticket
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -44,9 +45,21 @@ class MyTripsFragment : Fragment(),
                 findNavController().navigate(R.id.action_MyTripsFragment_to_tripDetailsFragment, bundle)
             }
         })
-        myTripsPresenter.getTicketsByUser(1)  // todo: deshardcodear
 
         _binding = FragmentMyTripsBinding.inflate(inflater, container, false)
+
+        val bundle  = this.arguments
+
+        if (bundle != null) {
+           modifiedTicket = bundle!!.getParcelable("ModifiedTicket")!!
+        }
+
+        if(tickets.size == 0){
+            myTripsPresenter.getTicketsByUser(1)  // todo: deshardcodear
+        } else{
+            setRecyclerViewList(tickets)
+        }
+
         return binding.root
     }
 
@@ -86,8 +99,9 @@ class MyTripsFragment : Fragment(),
         _binding = null
     }
 
-    override fun onGetTicketsByUserOk(tickets: MutableList<Ticket>) {
-        setRecyclerViewList(tickets)
+    override fun onGetTicketsByUserOk(ticketsList: MutableList<Ticket>) {
+        tickets = ticketsList
+        setRecyclerViewList(ticketsList)
     }
 
     override fun onGetTicketsByUserFailed(error: String) {

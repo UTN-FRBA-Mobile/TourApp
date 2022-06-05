@@ -132,6 +132,12 @@ class TripDetailsFragment : Fragment(),
             tripDetailsPresenter.modifyTicket(draftTicket)
         }
 
+        binding.qrButton.setOnClickListener(){
+            val bundle = Bundle()
+            bundle.putParcelable("Ticket", currentTicket)
+            findNavController().navigate(R.id.action_tripDetailsFragment_to_tripQrFragment, bundle)
+        }
+
         val viewManager = LinearLayoutManager(this.context)
 
         binding.passengersRecyclerview.apply {
@@ -139,20 +145,12 @@ class TripDetailsFragment : Fragment(),
             adapter = viewAdapter
         }
 
-        with (binding.qrCode){
-            try {
-                val barcodeEncoder = BarcodeEncoder()
-                val bitmap = barcodeEncoder.encodeBitmap(currentTicket.trip.id.toString(), BarcodeFormat.QR_CODE, 400, 400)
-                setImageBitmap(bitmap)
-            } catch (e: Exception) {
-            }
-        }
-
     }
 
     fun onEditTrip(){
         isEditing = true
         binding.saveButton.isEnabled = true
+        binding.qrButton.isEnabled = false
     }
 
     override fun onDestroyView() {
@@ -162,7 +160,7 @@ class TripDetailsFragment : Fragment(),
 
     override fun onModifyTicketOk(ticket: Ticket) {
         val bundle = Bundle()
-        bundle.putParcelable("modifyTicket", ticket)
+        bundle.putParcelable("ModifiedTicket", ticket)
         findNavController().navigate(R.id.action_tripDetailsFragment_to_MyTripsFragment, bundle)
     }
 

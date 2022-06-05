@@ -19,6 +19,9 @@ class Passenger(
     fun toRest(): PassengerREST {
         return PassengerREST(id, name, dni)
     }
+    fun getFormatted() : String {
+        return "$name - $dni"
+    }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
