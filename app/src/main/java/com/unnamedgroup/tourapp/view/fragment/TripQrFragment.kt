@@ -1,5 +1,6 @@
 package com.unnamedgroup.tourapp.view.fragment
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -10,6 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.zxing.BarcodeFormat
@@ -21,6 +24,7 @@ import com.unnamedgroup.tourapp.model.business.Ticket
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
+import java.util.*
 
 
 /**
@@ -85,25 +89,29 @@ class TripQrFragment : Fragment() {
             findNavController().popBackStack()
         }
 
-        /*binding.shareButton.setOnClickListener(){
+        binding.shareButton.setOnClickListener(){
             try {
+                // get qr
                 var qrCodeData = "${currentTicket.id}-${currentPassenger.id}"
                 val barcodeEncoder = BarcodeEncoder()
+                val bitmap = barcodeEncoder.encodeBitmap(qrCodeData, BarcodeFormat.QR_CODE, 600, 600)
+
+                // share qr
+
                 val share = Intent(Intent.ACTION_SEND)
                 share.type = "image/jpeg"
-                val bitmap = barcodeEncoder.encodeBitmap(qrCodeData, BarcodeFormat.QR_CODE, 600, 600)
-                val bytes = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
-                val f = File("${currentPassenger.name}-${currentPassenger.dni}.jpg")
-                f.createNewFile()
-                val fo = FileOutputStream(f)
-                fo.write(bytes.toByteArray())
-                share.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:///sdcard/temporary_file.jpg"))
+
+                var bmpUri : Uri = context?.let { c -> saveImage(bitmap, c.applicationContext) }!!
+                share.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                share.putExtra(Intent.EXTRA_STREAM, bmpUri)
+                share.putExtra(Intent.EXTRA_STREAM, "New App")
+                startActivity(Intent.createChooser(share, "Share Content"))
+
                 startActivity(Intent.createChooser(share, "Share Image"))
             } catch (e: Exception) {
                 Toast.makeText(context, getString(R.string.generate_qr_error), Toast.LENGTH_LONG).show()
             }
-        }*/
+        }
 
     }
 
@@ -117,7 +125,25 @@ class TripQrFragment : Fragment() {
             } catch (e: Exception) {
                 Toast.makeText(context, getString(R.string.generate_qr_error), Toast.LENGTH_LONG).show()
             }
+        }
     }
+
+    private fun saveImage(image: Bitmap, context: Context) : Uri? {
+        var imagesFolder = File(context.cacheDir, "images")
+        var uri: Uri? = null
+        try {
+         imagesFolder.mkdirs()
+         var file = File(imagesFolder, "${currentPassenger.name}-${currentPassenger.dni}.jpg" )
+
+         var stream = FileOutputStream(file)
+         image.compress(Bitmap.CompressFormat.JPEG, 90, stream)
+         stream.flush()
+         uri = FileProvider.getUriForFile(requireContext(), "com.unnamedgroup.tourapp" +".provider", file)
+
+        } catch (e: Exception){
+            Toast.makeText(context, getString(R.string.generate_qr_error), Toast.LENGTH_LONG).show()
+        }
+        return uri
     }
 
     override fun onDestroyView() {

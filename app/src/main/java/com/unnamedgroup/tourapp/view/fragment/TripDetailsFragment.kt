@@ -87,7 +87,7 @@ class TripDetailsFragment : Fragment(),
 
         with(binding.departureStopText) {
             setAdapter(departureStopsAdapter)
-            setText(departureStopsAdapter!!.getItem(0), false)
+            setText(currentTicket.busBoarding, false)
             setOnItemClickListener { _, _, position, _ ->
                 val newStop = adapter.getItem(position) ?: ""
                 draftTicket.busBoarding = newStop.toString()
@@ -96,10 +96,10 @@ class TripDetailsFragment : Fragment(),
         }
         with(binding.arrivalStopText) {
             setAdapter(arrivalStopsAdapter)
-            setText(arrivalStopsAdapter!!.getItem(0), false)
+            setText(currentTicket.busStop, false)
             setOnItemClickListener { _, _, position, _ ->
                 val newStop = adapter.getItem(position) ?: ""
-                draftTicket.busBoarding = newStop.toString()
+                draftTicket.busStop= newStop.toString()
                 onEditTrip()
             }
         }
@@ -159,9 +159,9 @@ class TripDetailsFragment : Fragment(),
     }
 
     override fun onModifyTicketOk(ticket: Ticket) {
-        val bundle = Bundle()
-        bundle.putParcelable("ModifiedTicket", ticket)
-        findNavController().navigate(R.id.action_tripDetailsFragment_to_MyTripsFragment, bundle)
+        //val bundle = Bundle()
+        //bundle.putParcelable("ModifiedTicket", ticket)
+        findNavController().navigate(R.id.action_tripDetailsFragment_to_MyTripsFragment)
     }
 
     override fun onModifyTicketFailed(error: String) {

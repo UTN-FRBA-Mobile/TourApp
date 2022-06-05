@@ -31,7 +31,7 @@
     <string name="details_departure_time">Hora de Salida</string>
     <string name="details_departure_stop">Parada de Salida</string>
     <string name="details_arrival_stop">Parada de Llegada</string>
-    <string name="details_qr_button">Ver Certificados</string>
+    <string name="details_qr_button">Certificados</string>
     <string name="details_cancel_button">Cancelar</string>
     <string name="details_save_button">Guardar</string>
     <string name="details_back_button">Volver</string>

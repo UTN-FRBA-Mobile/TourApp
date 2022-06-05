@@ -26,8 +26,6 @@ class MyTripsFragment : Fragment(),
     private var _binding: FragmentMyTripsBinding? = null
     private var myTripsPresenter : MyTripsPresenterInt = MyTripsPresenterImpl(this)
     private var viewAdapter : MyTripsAdapter? = null
-    private var tickets: MutableList<Ticket> = mutableListOf()
-    private lateinit var modifiedTicket : Ticket
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -47,18 +45,7 @@ class MyTripsFragment : Fragment(),
         })
 
         _binding = FragmentMyTripsBinding.inflate(inflater, container, false)
-
-        val bundle  = this.arguments
-
-        if (bundle != null) {
-           modifiedTicket = bundle!!.getParcelable("ModifiedTicket")!!
-        }
-
-        if(tickets.size == 0){
-            myTripsPresenter.getTicketsByUser(1)  // todo: deshardcodear
-        } else{
-            setRecyclerViewList(tickets)
-        }
+        myTripsPresenter.getTicketsByUser(1)  // todo: deshardcodear
 
         return binding.root
     }
@@ -100,7 +87,6 @@ class MyTripsFragment : Fragment(),
     }
 
     override fun onGetTicketsByUserOk(ticketsList: MutableList<Ticket>) {
-        tickets = ticketsList
         setRecyclerViewList(ticketsList)
     }
 
