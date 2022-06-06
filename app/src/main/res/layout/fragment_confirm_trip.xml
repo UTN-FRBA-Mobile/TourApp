@@ -189,65 +189,12 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/trip_passengers"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/confirm_trip_recicler_view"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="25dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp">
-
-            <!-- TODO Hay que sacar esto en otro frame para armarlo dinamicamente -->
-
-            <TextView
-                android:id="@+id/passengerDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="2dp"
-                android:text="Pasajero 1: "
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textStyle="bold" />
-
-
-            <TextView
-                android:id="@+id/passengerValue"
-                android:layout_width="196dp"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/passengerDescription"
-                android:layout_alignTop="@id/passengerDescription"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="20dp"
-                android:layout_toEndOf="@id/passengerDescription"
-                android:ems="10"
-                android:text="Jose Machado - 20.444.222"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-            <TextView
-                android:id="@+id/passengerDescription2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/passengerDescription"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="2dp"
-                android:text="Pasajero 2: "
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textStyle="bold" />
-
-
-            <TextView
-                android:id="@+id/passengerValue2"
-                android:layout_width="196dp"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/passengerDescription2"
-                android:layout_alignTop="@id/passengerDescription2"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="20dp"
-                android:layout_toEndOf="@id/passengerDescription2"
-                android:ems="10"
-                android:text="Juan Lopez - 25.444.222"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-
-        </RelativeLayout>
+            android:layout_height="match_parent"/>
 
         <RelativeLayout
             android:id="@+id/trip_value"
