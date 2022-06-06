@@ -17,6 +17,20 @@
     <string name="trip_id">Viaje - %d</string>
     <string name="trip_origin_destination_hour">%s - %s - %s hs</string>
 
+    <!-- Driver trip Details -->
+    <string name="trip_details_dni">DNI: %s</string>
+    <string name="trip_details_bus_boarding">Sube en: %s</string>
+    <string name="trip_details_bus_stop">Baja en: %s</string>
+    <string name="passenger_title">Pasajeros</string>
+    <string name="trip_details_cancel_button">Cancelar viaje</string>
+    <string name="trip_details_scan_qr">Escanear QR</string>
+
+    <string-array name="trip_state_list">
+        <item>CONFIRMED</item>
+        <item>DELAYED</item>
+        <item>PROCESSING</item>
+        <item>CANCELLED</item>
+    </string-array>
 
     <!-- trip Details -->
 
@@ -41,7 +55,6 @@
 
     <!-- trip Qr -->
     <string name="generate_qr_error">Error al generar el Qr, intente de nuevo mas tarde</string>
-
 
     <!-- API errors -->
     <string name="get_trips_error">Error obteniendo viajes</string>

@@ -8,13 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.unnamedgroup.tourapp.R
 import com.unnamedgroup.tourapp.databinding.FragmentMyTripsDriverBinding
+import com.unnamedgroup.tourapp.model.business.Ticket
 import com.unnamedgroup.tourapp.model.business.Trip
+import com.unnamedgroup.tourapp.model.business.TripPassenger
 import com.unnamedgroup.tourapp.presenter.implementation.GetTripsPresenterImpl
 import com.unnamedgroup.tourapp.presenter.interfaces.GetTripsPresenterInt
+import com.unnamedgroup.tourapp.view.adapter.MyTripsAdapter
 import com.unnamedgroup.tourapp.view.adapter.MyTripsDriverAdapter
+import com.unnamedgroup.tourapp.view.adapter.TripDetailsDriverAdapter
 
 /**
  * A simple [Fragment] subclass.
@@ -32,7 +37,13 @@ class MyTripsDriverFragment : Fragment(), GetTripsPresenterInt.View {
         savedInstanceState: Bundle?
     ): View {
 
-        viewAdapter = MyTripsDriverAdapter(mutableListOf(), context)
+        viewAdapter = MyTripsDriverAdapter(mutableListOf(), context, object: MyTripsDriverAdapter.OnItemClickListener {
+            override fun onClick(view: View, trip: Trip) {
+                val bundle = Bundle()
+                bundle.putParcelable("Trip", trip)
+                findNavController().navigate(R.id.action_MyTripsDriverFragment_to_tripDetailsDriverFragment, bundle)
+            }
+        })
         myTripsPresenter.getTrips()
 
         _binding = FragmentMyTripsDriverBinding.inflate(inflater, container, false)
@@ -62,11 +73,6 @@ class MyTripsDriverFragment : Fragment(), GetTripsPresenterInt.View {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     private fun setRecyclerViewList(trips: MutableList<Trip>) {
         viewAdapter!!.setList(trips)
     }
@@ -77,5 +83,10 @@ class MyTripsDriverFragment : Fragment(), GetTripsPresenterInt.View {
 
     override fun onGetTripsError(error: String) {
         Toast.makeText(context, getString(R.string.get_trips_error), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

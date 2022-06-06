@@ -3,6 +3,7 @@ package com.unnamedgroup.tourapp.repository
 import com.unnamedgroup.tourapp.BuildConfig
 import com.unnamedgroup.tourapp.model.business.Ticket
 import com.unnamedgroup.tourapp.model.business.Trip
+import com.unnamedgroup.tourapp.model.business.TripPassenger
 import com.unnamedgroup.tourapp.model.rest.TicketREST
 import com.unnamedgroup.tourapp.model.rest.TripREST
 import com.unnamedgroup.tourapp.presenter.interfaces.GetTripsPresenterInt
@@ -15,7 +16,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class TripsRepository {
+class TripsRepository() {
 
     private val service = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
@@ -93,4 +94,27 @@ class TripsRepository {
             }
         })
     }
+
+    fun getTicketsByTrip(presenter: MyTripsPresenterInt, tripId: Int) {
+        service.getTicketsByTrip(tripId).enqueue(object : Callback<MutableList<TicketREST>> {
+            override fun onResponse(
+                call: Call<MutableList<TicketREST>>,
+                response: Response<MutableList<TicketREST>>
+            ) {
+                val respList: MutableList<TicketREST> = response.body()!!
+                val tripPassengers: MutableList<TripPassenger> = mutableListOf()
+                for (r in respList) {
+                    for (p in r.toTicket().passengers){
+                        tripPassengers.add(TripPassenger(p.name, p.dni, r.toTicket().busBoarding, r.toTicket().busStop, p.busBoarded))
+                    }
+                }
+                presenter.onGetTicketsByTripOk(tripPassengers)
+            }
+
+            override fun onFailure(call: Call<MutableList<TicketREST>>, t: Throwable) {
+                presenter.onGetTicketsByUserFailed(t.toString())
+            }
+        })
+    }
+
 }

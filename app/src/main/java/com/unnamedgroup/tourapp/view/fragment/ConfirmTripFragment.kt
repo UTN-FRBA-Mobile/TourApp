@@ -98,11 +98,11 @@ class ConfirmTripFragment : Fragment() {
 fun generateTicket(): Ticket{
     val user = User(1,"pablito","pablito@mail","1234564","asdasdasd")
 
-    val trip = Trip(1,"Mercedes","Capital Federal",20,500.0F, mutableListOf(), mutableListOf(),"18:00", Date(),Trip.TripState.CONFIRMED)
+    val trip = Trip(1,"Mercedes","Capital Federal",20,500.0F, mutableListOf(), mutableListOf(),"18:00", Date(),Trip.TripState.CONFIRMED, User(1, "test", "test@test.ar", "40233444", "asdasd"))
 
-     val listPassenger = mutableListOf<Passenger>(Passenger(name="Maria Felcitas", dni = "25.060.550",id=1),
-        Passenger(name="Juana de Arco", dni = "5.060.550",id=2),Passenger(name="Juana de Barco", dni = "5.060.550",id=3),
-        Passenger(name="Juana de Arco", dni = "5.060.550",id=4),Passenger(name="Juana de Barco", dni = "5.060.550",id=5))
+     val listPassenger = mutableListOf<Passenger>(Passenger(name="Maria Felcitas", dni = "25.060.550",id=1, busBoarded = false),
+        Passenger(name="Juana de Arco", dni = "5.060.550",id=2, busBoarded = false),Passenger(name="Juana de Barco", dni = "5.060.550",id=3, busBoarded = false),
+        Passenger(name="Juana de Arco", dni = "5.060.550",id=4, busBoarded = false),Passenger(name="Juana de Barco", dni = "5.060.550",id=5, busBoarded = false))
 
     return Ticket(1, user,listPassenger,trip,"Iglesia","Obelisco")
 }

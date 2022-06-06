@@ -141,7 +141,7 @@ class NewTripFragment : Fragment() {
             val name = it.findViewById<TextInputLayout>(R.id.til_passenger_name).editText?.text.toString()
             val dni = it.findViewById<TextInputLayout>(R.id.til_passenger_dni).editText?.text.toString()
             //TODO: Generar id del pasajero?
-            passengers.add(Passenger(1, name, dni))
+            passengers.add(Passenger(1, name, dni, false))
         }
 
         val busBoarding = binding.tilBoarding.editText?.text.toString()
