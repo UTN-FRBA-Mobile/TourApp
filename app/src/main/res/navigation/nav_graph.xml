@@ -67,5 +67,14 @@
         <action
             android:id="@+id/action_tripDetailsFragment_to_MyTripsFragment"
             app:destination="@id/MyTripsFragment" />
+        <action
+            android:id="@+id/action_tripDetailsFragment_to_tripQrFragment"
+            app:destination="@id/tripQrFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tripQrFragment"
+        android:name="com.unnamedgroup.tourapp.view.fragment.TripQrFragment"
+        android:label="@string/trip_qr_fragment_label"
+        tools:layout="@layout/fragment_trip_qr" >
     </fragment>
 </navigation>

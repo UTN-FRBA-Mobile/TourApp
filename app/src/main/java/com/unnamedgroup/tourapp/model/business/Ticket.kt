@@ -2,6 +2,8 @@ package com.unnamedgroup.tourapp.model.business
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.unnamedgroup.tourapp.model.rest.PassengerREST
+import com.unnamedgroup.tourapp.model.rest.TicketREST
 
 class Ticket(
     val id: Int,
@@ -20,6 +22,14 @@ class Ticket(
         parcel.readString()!!,
         parcel.readString()!!
     )
+
+    fun toRest(): TicketREST{
+        val restPassengers: MutableList<PassengerREST> = mutableListOf()
+        for (p in passengers) {
+                restPassengers.add(p.toRest())
+        }
+        return TicketREST(id, restPassengers, user.toRest(), trip.toRest(), busBoarding, busStop)
+    }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)

@@ -2,18 +2,29 @@ package com.unnamedgroup.tourapp.model.business
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.unnamedgroup.tourapp.model.rest.PassengerREST
 
 class Passenger(
-    val name: String?,
-    val dni: String?,
+    var id: Int,
+    var name: String,
+    var dni: String,
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
-        parcel.readString()
+        parcel.readInt(),
+        parcel.readString()!!,
+        parcel.readString()!!
     )
 
+    fun toRest(): PassengerREST {
+        return PassengerREST(id, name, dni)
+    }
+    fun getFormatted() : String {
+        return "$name - $dni"
+    }
+
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(id)
         parcel.writeString(name)
         parcel.writeString(dni)
     }
