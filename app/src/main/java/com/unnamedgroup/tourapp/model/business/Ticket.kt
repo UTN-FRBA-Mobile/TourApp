@@ -8,8 +8,8 @@ class Ticket(
     val user: User,
     var passengers: MutableList<Passenger>,
     val trip: Trip,
-    var busBoarding: String,
-    var busStop: String
+    val busBoarding: String,
+    val busStop: String,
 ): Parcelable {
 
     constructor(parcel: Parcel) : this(
@@ -19,7 +19,6 @@ class Ticket(
         parcel.readParcelable(Trip::class.java.classLoader)!!,
         parcel.readString()!!,
         parcel.readString()!!
-
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

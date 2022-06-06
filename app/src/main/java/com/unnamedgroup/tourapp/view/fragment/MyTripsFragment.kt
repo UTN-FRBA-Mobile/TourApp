@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.unnamedgroup.tourapp.R
 import com.unnamedgroup.tourapp.databinding.FragmentMyTripsBinding
+import com.unnamedgroup.tourapp.model.business.Ticket
 import com.unnamedgroup.tourapp.model.business.Trip
 import com.unnamedgroup.tourapp.presenter.implementation.MyTripsPresenterImpl
 import com.unnamedgroup.tourapp.presenter.interfaces.MyTripsPresenterInt
@@ -37,13 +38,13 @@ class MyTripsFragment : Fragment(),
     ): View {
 
         viewAdapter = MyTripsAdapter(mutableListOf(), context, object: MyTripsAdapter.OnItemClickListener {
-            override fun onClick(view: View, trip: Trip) {
+            override fun onClick(view: View, ticket: Ticket) {
                 val bundle = Bundle()
-                bundle.putParcelable("Trip", trip)
+                bundle.putParcelable("Ticket", ticket)
                 findNavController().navigate(R.id.action_MyTripsFragment_to_tripDetailsFragment, bundle)
             }
         })
-        myTripsPresenter.getTrips()
+        myTripsPresenter.getTicketsByUser(1)  // todo: deshardcodear
 
         _binding = FragmentMyTripsBinding.inflate(inflater, container, false)
         return binding.root
@@ -76,8 +77,8 @@ class MyTripsFragment : Fragment(),
         }
     }
 
-    private fun setRecyclerViewList(trips: MutableList<Trip>) {
-        viewAdapter!!.setList(trips)
+    private fun setRecyclerViewList(tickets: MutableList<Ticket>) {
+        viewAdapter!!.setList(tickets)
     }
 
     override fun onDestroyView() {
@@ -85,11 +86,11 @@ class MyTripsFragment : Fragment(),
         _binding = null
     }
 
-    override fun onGetTripsOk(trips: MutableList<Trip>) {
-        setRecyclerViewList(trips)
+    override fun onGetTicketsByUserOk(tickets: MutableList<Ticket>) {
+        setRecyclerViewList(tickets)
     }
 
-    override fun onGetTripsError(error: String) {
+    override fun onGetTicketsByUserFailed(error: String) {
         Toast.makeText(context, getString(R.string.get_trips_error), Toast.LENGTH_SHORT).show()
     }
 }
