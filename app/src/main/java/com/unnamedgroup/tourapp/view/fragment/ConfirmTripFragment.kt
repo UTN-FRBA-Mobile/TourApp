@@ -102,9 +102,9 @@ fun generateTicket(): Ticket{
 
     val trip = Trip(1,"Mercedes","Capital Federal",20,500.0F, mutableListOf(), mutableListOf(),"18:00", Date(),Trip.TripState.CONFIRMED)
 
-     val listPassenger = mutableListOf<Passenger>(Passenger(name="Maria Felcitas", dni = "25.060.550"),
-        Passenger(name="Juana de Arco", dni = "5.060.550"),Passenger(name="Juana de Barco", dni = "5.060.550"),
-        Passenger(name="Juana de Arco", dni = "5.060.550"),Passenger(name="Juana de Barco", dni = "5.060.550"))
+     val listPassenger = mutableListOf<Passenger>(Passenger(name="Maria Felcitas", dni = "25.060.550",id=1),
+        Passenger(name="Juana de Arco", dni = "5.060.550",id=2),Passenger(name="Juana de Barco", dni = "5.060.550",id=3),
+        Passenger(name="Juana de Arco", dni = "5.060.550",id=4),Passenger(name="Juana de Barco", dni = "5.060.550",id=5))
 
     return Ticket(1, user,listPassenger,trip,"Iglesia","Obelisco")
 }
