@@ -11,7 +11,7 @@ class Trip(
     val id: Int,
     val origin: String,
     val destination: String,
-    val passengersAmount: Int,
+    val passengerAmount: Int,
     val price: Float,
     val busBoardings: MutableList<String>,
     val busStops: MutableList<String>,
@@ -71,7 +71,7 @@ class Trip(
         parcel.writeInt(id)
         parcel.writeString(origin)
         parcel.writeString(destination)
-        parcel.writeInt(passengersAmount)
+        parcel.writeInt(passengerAmount)
         parcel.writeFloat(price)
         parcel.writeStringArray(busBoardings.toTypedArray())
         parcel.writeStringArray(busStops.toTypedArray())

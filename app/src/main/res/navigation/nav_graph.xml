@@ -12,11 +12,11 @@
         tools:layout="@layout/fragment_my_trips">
 
         <action
+            android:id="@+id/action_MyTripsFragment_to_FragmentNewTrip"
+            app:destination="@id/NewTripFragment" />
+        <action
             android:id="@+id/action_MyTripsFragment_to_tripDetailsFragment"
             app:destination="@id/tripDetailsFragment" />
-        <action
-            android:id="@+id/action_MyTripsFragment_to_tripsFragment"
-            app:destination="@id/tripsFragment" />
     </fragment>
     <fragment
         android:id="@+id/MyTripsDriverFragment"
@@ -31,11 +31,11 @@
         tools:layout="@layout/fragment_new_trip">
 
         <action
+            android:id="@+id/action_FragmentNewTrip_to_MyTripsFragment"
+            app:destination="@id/MyTripsFragment" />
+        <action
             android:id="@+id/action_NewTripFragment_to_confirmTripFragment"
             app:destination="@id/confirmTripFragment" />
-        <action
-            android:id="@+id/action_NewTripFragment_to_tripsFragment"
-            app:destination="@id/tripsFragment" />
     </fragment>
     <fragment
         android:id="@+id/confirmTripFragment"
@@ -76,17 +76,5 @@
         android:name="com.unnamedgroup.tourapp.view.fragment.TripQrFragment"
         android:label="@string/trip_qr_fragment_label"
         tools:layout="@layout/fragment_trip_qr" >
-    </fragment>
-    <fragment
-        android:id="@+id/tripsFragment"
-        android:name="com.unnamedgroup.tourapp.view.fragment.TripsFragment"
-        android:label="@string/trips_fragment_label"
-        tools:layout="@layout/fragment_trips" >
-        <action
-            android:id="@+id/action_tripsFragment_to_NewTripFragment"
-            app:destination="@id/NewTripFragment" />
-        <action
-            android:id="@+id/action_tripsFragment_to_MyTripsFragment"
-            app:destination="@id/MyTripsFragment" />
     </fragment>
 </navigation>
