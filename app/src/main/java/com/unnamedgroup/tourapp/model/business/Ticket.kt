@@ -6,8 +6,8 @@ import com.unnamedgroup.tourapp.model.rest.PassengerREST
 import com.unnamedgroup.tourapp.model.rest.TicketREST
 
 class Ticket(
-    val id: Int?,
-    val user: User?,
+    val id: Int,
+    val user: User,
     var passengers: MutableList<Passenger>,
     val trip: Trip,
     var busBoarding: String,
@@ -32,7 +32,7 @@ class Ticket(
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        id?.let { parcel.writeInt(it) }
+        parcel.writeInt(id)
         parcel.writeParcelable(user, flags)
         parcel.writeArray(passengers.toTypedArray())
         parcel.writeParcelable(trip, flags)
