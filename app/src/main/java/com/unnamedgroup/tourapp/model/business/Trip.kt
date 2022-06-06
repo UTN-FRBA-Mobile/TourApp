@@ -2,6 +2,8 @@ package com.unnamedgroup.tourapp.model.business
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.unnamedgroup.tourapp.R
+import com.unnamedgroup.tourapp.model.rest.TripREST
 import com.unnamedgroup.tourapp.utils.Utils
 import java.util.*
 
@@ -9,7 +11,7 @@ class Trip(
     val id: Int,
     val origin: String,
     val destination: String,
-    val passengerAmount: Int,
+    val passengersAmount: Int,
     val price: Float,
     val busBoardings: MutableList<String>,
     val busStops: MutableList<String>,
@@ -35,6 +37,11 @@ class Trip(
         parcel.readParcelable(User::class.java.classLoader)!!,
         )
 
+    fun toRest(): TripREST{
+        val restDate = Utils.getDateWithFormat(date, "dd-MM-yyyy")
+        return TripREST(id,origin, destination, passengersAmount, price, busBoardings, busStops, departureTime, restDate,  this.getRestTripState(), driver)
+    }
+
     enum class TripState(val int: Int, val text: String) {
         PROCESSING(1, "Procesando"),
         CONFIRMED(2, "Confirmado"),
@@ -42,11 +49,31 @@ class Trip(
         CANCELLED(4, "Cancelado"),
     }
 
+    private fun getRestTripState(): String {
+        return when (state.text){
+            TripState.PROCESSING.text -> "PROCESSING"
+            TripState.DELAYED.text -> "DELAYED"
+            TripState.CONFIRMED.text -> "CONFIRMED"
+            TripState.CANCELLED.text -> "CANCELLED"
+            else -> {
+                "PROCESSING"
+            }
+        }
+    }
+
+    fun getName(): String {
+        return "$origin - $destination"
+    }
+
+    fun getFormattedDepartureTime(): String {
+        return "$dateStr - $departureTime"
+    }
+
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
         parcel.writeString(origin)
         parcel.writeString(destination)
-        parcel.writeInt(passengerAmount)
+        parcel.writeInt(passengersAmount)
         parcel.writeFloat(price)
         parcel.writeStringArray(busBoardings.toTypedArray())
         parcel.writeStringArray(busStops.toTypedArray())

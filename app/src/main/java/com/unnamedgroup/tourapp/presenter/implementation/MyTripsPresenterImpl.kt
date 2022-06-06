@@ -3,6 +3,7 @@ package com.unnamedgroup.tourapp.presenter.implementation
 import com.unnamedgroup.tourapp.model.business.Ticket
 import com.unnamedgroup.tourapp.model.business.TripPassenger
 import com.unnamedgroup.tourapp.presenter.interfaces.MyTripsPresenterInt
+import com.unnamedgroup.tourapp.repository.Repository
 import com.unnamedgroup.tourapp.repository.TripsRepository
 import com.unnamedgroup.tourapp.utils.AbstractPresenter
 
@@ -11,7 +12,7 @@ class MyTripsPresenterImpl(private val mView: MyTripsPresenterInt.View) : MyTrip
 ) {
 
     override fun getTicketsByUser(userId: Int) {
-        TripsRepository().getTicketsByUser(this, userId)
+        Repository().getTicketsByUser(this, userId)
     }
 
     override fun onGetTicketsByUserOk(tickets: MutableList<Ticket>) {
