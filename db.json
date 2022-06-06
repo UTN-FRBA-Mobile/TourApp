@@ -222,11 +222,13 @@
       "passengers": [
         {
           "name": "Jose López",
-          "DNI": "402559315"
+          "dni": "402559315",
+          "id": 0
         },
         {
           "name": "Pedro López",
-          "DNI": "402559316"
+          "dni": "402559316",
+          "id": 1
         }
       ],
       "trip": {
@@ -268,11 +270,13 @@
       "passengers": [
         {
           "name": "Jose López",
-          "DNI": "402559315"
+          "dni": "402559315",
+          "id": 0
         },
         {
           "name": "Pedro López",
-          "DNI": "402559316"
+          "dni": "402559316",
+          "id": 1
         }
       ],
       "trip": {

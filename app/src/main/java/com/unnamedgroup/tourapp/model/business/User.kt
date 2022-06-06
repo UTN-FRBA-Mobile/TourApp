@@ -2,6 +2,7 @@ package com.unnamedgroup.tourapp.model.business
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.unnamedgroup.tourapp.model.rest.UserREST
 
 class User(
     val id: Int,
@@ -18,6 +19,10 @@ class User(
         parcel.readString()!!,
         parcel.readString()!!
     ) {
+    }
+
+    fun toRest(): UserREST{
+        return UserREST(id, name, email, dni, token)
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

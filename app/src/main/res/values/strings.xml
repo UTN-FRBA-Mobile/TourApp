@@ -4,7 +4,9 @@
     <string name="action_logout">Cerrar Sesión</string>
     <string name="my_trips_fragment_label">Mis Viajes</string>
     <string name="trip_details_fragment_label">Detalle Del Viaje</string>
+    <string name="trip_qr_fragment_label">Certificados</string>
     <string name="new_trip_fragment_label">Nuevo Viaje</string>
+    <string name="trips_fragment_label">Viajes</string>
     <string name="next">Siguiente</string>
     <string name="previous">Previous</string>
     <string name="new_trip_button">Nuevo Viaje</string>
@@ -17,63 +19,11 @@
 
 
     <!-- trip Details -->
-    <string-array name="passengers_list">
-        <item>Facundo Perri - 40.400.400</item>
-        <item>Benjamin Enriquez - 40.400.401</item>
-        <item>Damian Pallares - 40.400.403</item>
-        <item>Constenla Juan - 40.400.404</item>
-        <item>Facundo Bevilacqua - 40.400.405</item>
-    </string-array>
 
-    <string-array name="departure_locations_list">
-        <item>Mercedes</item>
-        <item>Lujan</item>
-        <item>Capital Federal</item>
-        <item>Moreno</item>
-    </string-array>
-
-    <string-array name="arrival_locations_list">
-        <item>Capital Federal</item>
-        <item>Mercedes</item>
-        <item>Lujan</item>
-        <item>Moreno</item>
-    </string-array>
-
-    <string-array name="departure_times_list">
-        <item>09 : 15</item>
-        <item>09 : 30</item>
-        <item>09 : 45</item>
-        <item>10 : 15</item>
-        <item>10 : 30</item>
-        <item>10 : 45</item>
-        <item>11 : 15</item>
-        <item>11 : 30</item>
-        <item>11 : 45</item>
-        <item>12 : 15</item>
-        <item>12 : 30</item>
-        <item>12 : 45</item>
-        <item>13 : 15</item>
-        <item>13 : 30</item>
-        <item>13 : 45</item>
-        <item>14 : 15</item>
-        <item>14 : 30</item>
-        <item>14 : 45</item>
-    </string-array>
-
-    <string-array name="departure_stops_list">
-        <item>Hotel Mercedes</item>
-        <item>Universidad de Lujan</item>
-        <item>Alto Palermo</item>
-        <item>Congreso</item>
-    </string-array>
-
-    <string-array name="arrival_stops_list">
-        <item>Alto Palermo</item>
-        <item>Hotel Mercedes</item>
-        <item>Universidad de Lujan</item>
-        <item>Congreso</item>
-    </string-array>
-
+    <string name="details_alert_title">¿Desea salir sin guardar?</string>
+    <string name="details_alert_message">Existen cambios sin guardar, ¿seguro desea salir?</string>
+    <string name="details_alert_yes">SI</string>
+    <string name="details_alert_no">NO</string>
     <string name="details_trip_name">Mercedes - Capital Federal</string>
     <string name="details_passengers">Pasajero</string>
     <string name="details_departure_location">Origen</string>
@@ -82,13 +32,20 @@
     <string name="details_departure_time">Hora de Salida</string>
     <string name="details_departure_stop">Parada de Salida</string>
     <string name="details_arrival_stop">Parada de Llegada</string>
+    <string name="details_qr_button">Certificados</string>
     <string name="details_cancel_button">Cancelar</string>
     <string name="details_save_button">Guardar</string>
+    <string name="details_back_button">Volver</string>
+    <string name="details_share_button">Compartir</string>
     <string name="details_info">* Los viajes se pueden editar hasta 24 hs antes de la partida</string>
+
+    <!-- trip Qr -->
+    <string name="generate_qr_error">Error al generar el Qr, intente de nuevo mas tarde</string>
 
 
     <!-- API errors -->
     <string name="get_trips_error">Error obteniendo viajes</string>
+    <string name="modify_ticket_error">Error al guardar, intente de nuevo mas tarde</string>
     <string name="get_login_error">Error intentando loguear al usuario</string>
 
     <!--Nuevo viaje-->
@@ -106,7 +63,7 @@
     <string name="passenger_name">Nombre de pasajero</string>
     <string name="passenger_dni">DNI pasajero</string>
     <string name="round_trip">Ida y vuelta</string>
-    <string name="price">Precio: $X.XXX</string>
+    <string name="price">Precio: $</string>
     <!---->
 
     <!--Confirmar viaje-->

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginTop="2dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/passengerDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pasajero: "
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/passengerNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/passengerDescription"
+        android:layout_alignTop="@id/passengerDescription"
+        android:layout_toEndOf="@id/passengerDescription"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="2dp"
+        android:text="1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/passengerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/passengerNumber"
+        android:layout_alignTop="@id/passengerNumber"
+        android:layout_toEndOf="@id/passengerNumber"
+        android:layout_marginLeft="2dp"
+        android:ems="10"
+        android:text="Jose Machado"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+    <TextView
+        android:id="@+id/passengerDNI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/passengerName"
+        android:layout_alignTop="@id/passengerName"
+        android:layout_toEndOf="@id/passengerName"
+        android:layout_marginLeft="2dp"
+        android:ems="10"
+        android:text="20.444.222"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+</RelativeLayout>

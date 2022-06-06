@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.unnamedgroup.tourapp.R
 import com.unnamedgroup.tourapp.databinding.FragmentMyTripsBinding
 import com.unnamedgroup.tourapp.model.business.Ticket
-import com.unnamedgroup.tourapp.model.business.Trip
 import com.unnamedgroup.tourapp.presenter.implementation.MyTripsPresenterImpl
 import com.unnamedgroup.tourapp.presenter.interfaces.MyTripsPresenterInt
 import com.unnamedgroup.tourapp.utils.MyPreferences
@@ -45,9 +44,10 @@ class MyTripsFragment : Fragment(),
                 findNavController().navigate(R.id.action_MyTripsFragment_to_tripDetailsFragment, bundle)
             }
         })
-        myTripsPresenter.getTicketsByUser(MyPreferences.getUserId(requireContext()))
 
         _binding = FragmentMyTripsBinding.inflate(inflater, container, false)
+        myTripsPresenter.getTicketsByUser(MyPreferences.getUserId(requireContext()))
+
         return binding.root
     }
 
@@ -55,7 +55,7 @@ class MyTripsFragment : Fragment(),
         super.onViewCreated(view, savedInstanceState)
 
         binding.fab.setOnClickListener {
-            findNavController().navigate(R.id.action_MyTripsFragment_to_FragmentNewTrip)
+            findNavController().navigate(R.id.action_MyTripsFragment_to_tripsFragment)
         }
 
         val viewManager = LinearLayoutManager(this.context)

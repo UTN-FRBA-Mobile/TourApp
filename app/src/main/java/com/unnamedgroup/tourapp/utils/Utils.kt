@@ -1,5 +1,7 @@
 package com.unnamedgroup.tourapp.utils
 
+import android.content.Intent
+import android.graphics.Bitmap
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
