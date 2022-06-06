@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.unnamedgroup.tourapp.R
 import com.unnamedgroup.tourapp.databinding.FragmentMyTripsBinding
 import com.unnamedgroup.tourapp.model.business.Ticket
-import com.unnamedgroup.tourapp.model.business.Trip
 import com.unnamedgroup.tourapp.presenter.implementation.MyTripsPresenterImpl
 import com.unnamedgroup.tourapp.presenter.interfaces.MyTripsPresenterInt
 import com.unnamedgroup.tourapp.view.adapter.MyTripsAdapter
@@ -44,9 +43,10 @@ class MyTripsFragment : Fragment(),
                 findNavController().navigate(R.id.action_MyTripsFragment_to_tripDetailsFragment, bundle)
             }
         })
-        myTripsPresenter.getTicketsByUser(1)  // todo: deshardcodear
 
         _binding = FragmentMyTripsBinding.inflate(inflater, container, false)
+        myTripsPresenter.getTicketsByUser(1)  // todo: deshardcodear
+
         return binding.root
     }
 
@@ -54,7 +54,7 @@ class MyTripsFragment : Fragment(),
         super.onViewCreated(view, savedInstanceState)
 
         binding.fab.setOnClickListener {
-            findNavController().navigate(R.id.action_MyTripsFragment_to_FragmentNewTrip)
+            findNavController().navigate(R.id.action_MyTripsFragment_to_tripsFragment)
         }
 
         val viewManager = LinearLayoutManager(this.context)
@@ -86,8 +86,8 @@ class MyTripsFragment : Fragment(),
         _binding = null
     }
 
-    override fun onGetTicketsByUserOk(tickets: MutableList<Ticket>) {
-        setRecyclerViewList(tickets)
+    override fun onGetTicketsByUserOk(ticketsList: MutableList<Ticket>) {
+        setRecyclerViewList(ticketsList)
     }
 
     override fun onGetTicketsByUserFailed(error: String) {

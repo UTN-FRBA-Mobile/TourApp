@@ -13,10 +13,11 @@
 
     <!-- trip Details -->
     <dimen name="dropdowns_margin_vertical">10dp</dimen>
-    <dimen name="dropdowns_margin_Horizontal">40dp</dimen>
-    <dimen name="buttons_margin_Vertical">20dp</dimen>
+    <dimen name="dropdowns_margin_Horizontal">20dp</dimen>
+    <dimen name="buttons_margin_Vertical">10dp</dimen>
     <dimen name="buttons_margin_between">20dp</dimen>
     <dimen name="info_margin_horizontal">20dp</dimen>
     <dimen name="screen_margin_vertical">20dp</dimen>
+    <dimen name="passenger_right_margin">8dp</dimen>
 
 </resources>
