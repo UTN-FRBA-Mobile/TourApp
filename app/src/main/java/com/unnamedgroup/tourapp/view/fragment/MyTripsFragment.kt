@@ -54,7 +54,7 @@ class MyTripsFragment : Fragment(),
         super.onViewCreated(view, savedInstanceState)
 
         binding.fab.setOnClickListener {
-            findNavController().navigate(R.id.action_MyTripsFragment_to_FragmentNewTrip)
+            findNavController().navigate(R.id.action_MyTripsFragment_to_tripsFragment)
         }
 
         val viewManager = LinearLayoutManager(this.context)

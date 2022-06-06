@@ -8,6 +8,7 @@ import com.unnamedgroup.tourapp.model.rest.TripREST
 import com.unnamedgroup.tourapp.presenter.interfaces.GetTripsPresenterInt
 import com.unnamedgroup.tourapp.presenter.interfaces.MyTripsPresenterInt
 import com.unnamedgroup.tourapp.presenter.interfaces.TripDetailsPresenterInt
+import com.unnamedgroup.tourapp.presenter.interfaces.TripsPresenterInt
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -61,6 +62,7 @@ class TripsRepository() {
             }
         })
     }
+
     fun modifyTicket(presenter: TripDetailsPresenterInt, ticketId :Int, newTicket: TicketREST) {
         service.modifyTicket(ticketId, newTicket).enqueue(object : Callback<TicketREST> {
             override fun onResponse(call: Call<TicketREST>, response: Response<TicketREST>) {
@@ -71,6 +73,23 @@ class TripsRepository() {
 
             override fun onFailure(call: Call<TicketREST>, t: Throwable) {
                 presenter.onModifyTicketFailed(t.toString())
+
+            }
+        })
+    }
+
+    fun getLastTicketByUser(presenter: TripsPresenterInt, userId: Int) {
+        service.getLastTicketByUser(userId).enqueue(object : Callback<MutableList<TicketREST>> {
+            override fun onResponse(
+                call: Call<MutableList<TicketREST>>,
+                response: Response<MutableList<TicketREST>>
+            ) {
+                val resp: MutableList<TicketREST> = response.body()!!
+                presenter.onGetLastTicketByUserOk(resp.get(0).toTicket())
+            }
+
+            override fun onFailure(call: Call<MutableList<TicketREST>>, t: Throwable) {
+                presenter.onGetLastTicketByUserFailed(t.toString())
             }
         })
     }

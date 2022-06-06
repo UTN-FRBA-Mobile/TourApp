@@ -15,4 +15,7 @@ interface TripsService {
 
     @PUT("tickets/{id}")
     fun modifyTicket(@Path("id") ticketId: Int , @Body newTicket: TicketREST): Call<TicketREST>
+
+    @GET("tickets?_sort=trip.date,trip.departureTime&_order=desc,desc&_limit=1")
+    fun getLastTicketByUser(@Query("user.id") userId: Int): Call<MutableList<TicketREST>>
 }
