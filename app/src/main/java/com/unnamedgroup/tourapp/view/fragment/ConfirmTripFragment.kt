@@ -37,21 +37,17 @@ class ConfirmTripFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
 
-    private var param1: String? = null
-    private var param2: String? = null
 
     private var _binding: FragmentConfirmTripBinding? = null
 
     private val binding get() = _binding!!
 
-    private val ticket = generateTicket()
+    private var ticket : Ticket? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
+        ticket = arguments?.getParcelable<Ticket>("Ticket")!!
 
     }
 
@@ -62,17 +58,19 @@ class ConfirmTripFragment : Fragment() {
         _binding = FragmentConfirmTripBinding.inflate(inflater, container, false)
 
         // Complete textview
-        binding.valueOrigin.text = ticket.trip.origin
-        binding.valueDestination.text = ticket.trip.destination
-        binding.valueDate.text = Utils.getDateWithFormat(ticket.trip.date, "dd/MM/yyyy")
-        binding.valueTime.text = ticket.trip.departureTime
-        binding.valueOriginStop.text = ticket.busBoarding
-        binding.valueDestinationStop.text = ticket.busStop
-        binding.valueNumberOfPassengers.text = ticket.passengers.size.toString()
+        ticket?.let {
+            binding.valueOrigin.text = it.trip.origin
+            binding.valueDestination.text = it.trip.destination
+            binding.valueDate.text = Utils.getDateWithFormat(it.trip.date, "dd/MM/yyyy")
+            binding.valueTime.text = it.trip.departureTime
+            binding.valueOriginStop.text = it.busBoarding
+            binding.valueDestinationStop.text = it.busStop
+            binding.valueNumberOfPassengers.text = it.passengers.size.toString()
+        }
 
         // Complete recyclerView of passengers
         val viewManager = LinearLayoutManager(this.context)
-        val viewAdapter = ConfirmTripPassengersAdapter(ticket.passengers)
+        val viewAdapter = ConfirmTripPassengersAdapter(ticket!!.passengers)
 
         recyclerView = binding.confirmTripReciclerView.apply {
             layoutManager = viewManager
