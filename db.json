@@ -220,12 +220,12 @@
         {
           "name": "Jose López",
           "dni": "402559315",
-          "id": 0,
+          "id": 0
         },
         {
           "name": "Pedro López",
           "dni": "402559316",
-          "id": 1,
+          "id": 1
         }
       ],
       "trip": {
@@ -265,12 +265,12 @@
         {
           "name": "Jose López",
           "dni": "402559315",
-          "id": 0,
+          "id": 0
         },
         {
           "name": "Pedro López",
           "dni": "402559316",
-          "id": 1,
+          "id": 1
         }
       ],
       "trip": {
