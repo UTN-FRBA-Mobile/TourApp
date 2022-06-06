@@ -5,7 +5,7 @@
       "origin": "Mercedes",
       "destination": "Capital Federal",
       "passengersAmount": 20,
-      "price": 800.0,
+      "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
         "29 y 40",
@@ -28,7 +28,7 @@
       "origin": "Mercedes",
       "destination": "Capital Federal",
       "passengersAmount": 20,
-      "price": 800.0,
+      "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
         "29 y 40",
@@ -51,7 +51,7 @@
       "origin": "Mercedes",
       "destination": "Capital Federal",
       "passengersAmount": 20,
-      "price": 800.0,
+      "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
         "29 y 40",
@@ -74,7 +74,7 @@
       "origin": "Mercedes",
       "destination": "Capital Federal",
       "passengersAmount": 20,
-      "price": 800.0,
+      "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
         "29 y 40",
@@ -97,7 +97,7 @@
       "origin": "Mercedes",
       "destination": "Capital Federal",
       "passengersAmount": 20,
-      "price": 800.0,
+      "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
         "29 y 40",
@@ -120,7 +120,7 @@
       "origin": "Mercedes",
       "destination": "Capital Federal",
       "passengersAmount": 20,
-      "price": 800.0,
+      "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
         "29 y 40",
@@ -143,7 +143,7 @@
       "origin": "Mercedes",
       "destination": "Capital Federal",
       "passengersAmount": 20,
-      "price": 800.0,
+      "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
         "29 y 40",
@@ -166,7 +166,7 @@
       "origin": "Mercedes",
       "destination": "Capital Federal",
       "passengersAmount": 20,
-      "price": 800.0,
+      "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
         "29 y 40",
@@ -189,7 +189,7 @@
       "origin": "Mercedes",
       "destination": "Capital Federal",
       "passengersAmount": 20,
-      "price": 800.0,
+      "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
         "29 y 40",
@@ -213,8 +213,11 @@
       "id": 1,
       "user": {
         "id": 1,
+        "name": "Benjamín Enríquez",
         "email": "benjaenriquez@frba.utn.edu.ar",
-        "dni": "40255931"
+        "dni": "40255931",
+        "password": "Norberto10",
+        "token": "asdasdasdasdasd"
       },
       "passengers": [
         {
@@ -233,7 +236,7 @@
         "origin": "Mercedes",
         "destination": "Capital Federal",
         "passengersAmount": 20,
-        "price": 800.0,
+        "price": 800,
         "busBoardings": [
           "Hotel Mercedes",
           "29 y 40",
@@ -258,8 +261,11 @@
       "id": 2,
       "user": {
         "id": 1,
+        "name": "Benjamín Enríquez",
         "email": "benjaenriquez@frba.utn.edu.ar",
-        "dni": "40255931"
+        "dni": "40255931",
+        "password": "Norberto10",
+        "token": "asdasdasdasdasd"
       },
       "passengers": [
         {
@@ -278,7 +284,7 @@
         "origin": "Mercedes",
         "destination": "Capital Federal",
         "passengersAmount": 20,
-        "price": 800.0,
+        "price": 800,
         "busBoardings": [
           "Hotel Mercedes",
           "29 y 40",
@@ -298,6 +304,16 @@
       },
       "busBoarding": "Hotel Mercedes",
       "busStop": "Alto Palermo"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Benjamín Enríquez",
+      "email": "benjaenriquez@frba.utn.edu.ar",
+      "dni": "40255931",
+      "password": "Norberto10",
+      "token": "asdasdasdasdasd"
     }
   ]
 }

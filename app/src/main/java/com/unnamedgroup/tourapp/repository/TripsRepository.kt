@@ -15,7 +15,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class TripsRepository() {
+class TripsRepository {
 
     private val service = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())

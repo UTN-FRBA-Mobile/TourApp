@@ -6,25 +6,31 @@ import com.unnamedgroup.tourapp.model.rest.UserREST
 
 class User(
     val id: Int,
+    val name: String,
     val email: String,
     val dni: String,
+    val token: String
 ): Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
+        parcel.readString()!!,
+        parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!
     ) {
     }
 
     fun toRest(): UserREST{
-        return UserREST(id, email, dni)
+        return UserREST(id, name, email, dni, token)
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
+        parcel.writeString(name)
         parcel.writeString(email)
         parcel.writeString(dni)
+        parcel.writeString(token)
     }
 
     override fun describeContents(): Int {

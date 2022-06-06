@@ -96,7 +96,7 @@ class ConfirmTripFragment : Fragment() {
 }
 
 fun generateTicket(): Ticket{
-    val user = User(1,"pablito@mail","1234564")
+    val user = User(1,"pablito","pablito@mail","1234564","asdasdasd")
 
     val trip = Trip(1,"Mercedes","Capital Federal",20,500.0F, mutableListOf(), mutableListOf(),"18:00", Date(),Trip.TripState.CONFIRMED)
 

@@ -15,6 +15,7 @@ import com.unnamedgroup.tourapp.databinding.FragmentMyTripsBinding
 import com.unnamedgroup.tourapp.model.business.Ticket
 import com.unnamedgroup.tourapp.presenter.implementation.MyTripsPresenterImpl
 import com.unnamedgroup.tourapp.presenter.interfaces.MyTripsPresenterInt
+import com.unnamedgroup.tourapp.utils.MyPreferences
 import com.unnamedgroup.tourapp.view.adapter.MyTripsAdapter
 
 /**
@@ -45,7 +46,7 @@ class MyTripsFragment : Fragment(),
         })
 
         _binding = FragmentMyTripsBinding.inflate(inflater, container, false)
-        myTripsPresenter.getTicketsByUser(1)  // todo: deshardcodear
+        myTripsPresenter.getTicketsByUser(MyPreferences.getUserId(requireContext()))
 
         return binding.root
     }
@@ -86,8 +87,8 @@ class MyTripsFragment : Fragment(),
         _binding = null
     }
 
-    override fun onGetTicketsByUserOk(ticketsList: MutableList<Ticket>) {
-        setRecyclerViewList(ticketsList)
+    override fun onGetTicketsByUserOk(tickets: MutableList<Ticket>) {
+        setRecyclerViewList(tickets)
     }
 
     override fun onGetTicketsByUserFailed(error: String) {

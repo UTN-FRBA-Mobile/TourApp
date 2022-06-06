@@ -1,6 +1,5 @@
 package com.unnamedgroup.tourapp.repository
 
-import com.unnamedgroup.tourapp.model.business.Ticket
 import com.unnamedgroup.tourapp.model.rest.TicketREST
 import com.unnamedgroup.tourapp.model.rest.TripREST
 import retrofit2.Call
