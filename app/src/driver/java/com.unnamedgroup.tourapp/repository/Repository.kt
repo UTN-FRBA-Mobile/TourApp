@@ -1,8 +1,8 @@
 package com.unnamedgroup.tourapp.repository
 
 import com.unnamedgroup.tourapp.BuildConfig
-import com.unnamedgroup.tourapp.model.business.Ticket
 import com.unnamedgroup.tourapp.model.business.Trip
+import com.unnamedgroup.tourapp.model.business.TripPassenger
 import com.unnamedgroup.tourapp.model.rest.NewUserREST
 import com.unnamedgroup.tourapp.model.rest.TicketREST
 import com.unnamedgroup.tourapp.model.rest.TripREST
@@ -45,29 +45,6 @@ class Repository() {
             }
             override fun onFailure(call: Call<MutableList<TripREST>>, t: Throwable) {
                 presenter.onGetTripsFailed(t.toString())
-            }
-        })
-    }
-
-    fun getTicketsByUser(presenter: MyTripsPresenterInt, userId: Int) {
-        service.getTicketsByUser(userId).enqueue(object : Callback<MutableList<TicketREST>> {
-            override fun onResponse(
-                call: Call<MutableList<TicketREST>>,
-                response: Response<MutableList<TicketREST>>
-            ) {
-                if (response.isSuccessful) {
-                    val respList: MutableList<TicketREST> = response.body()!!
-                    val tickets: MutableList<Ticket> = mutableListOf()
-                    for (r in respList) {
-                        tickets.add(r.toTicket())
-                    }
-                    presenter.onGetTicketsByUserOk(tickets)
-                } else {
-                    presenter.onGetTicketsByUserFailed(response.message())
-                }
-            }
-            override fun onFailure(call: Call<MutableList<TicketREST>>, t: Throwable) {
-                presenter.onGetTicketsByUserFailed(t.toString())
             }
         })
     }
@@ -133,6 +110,28 @@ class Repository() {
             }
             override fun onFailure(call: Call<UserREST>, t: Throwable) {
                 presenter.onRegisterUserFailed(t.toString())
+            }
+        })
+    }
+
+    fun getTicketsByTrip(presenter: MyTripsPresenterInt, tripId: Int) {
+        service.getTicketsByTrip(tripId).enqueue(object : Callback<MutableList<TicketREST>> {
+            override fun onResponse(
+                call: Call<MutableList<TicketREST>>,
+                response: Response<MutableList<TicketREST>>
+            ) {
+                val respList: MutableList<TicketREST> = response.body()!!
+                val tripPassengers: MutableList<TripPassenger> = mutableListOf()
+                for (r in respList) {
+                    for (p in r.toTicket().passengers){
+                        tripPassengers.add(TripPassenger(p.name, p.dni, r.toTicket().busBoarding, r.toTicket().busStop, p.busBoarded))
+                    }
+                }
+                presenter.onGetPassengersByTripOk(tripPassengers)
+            }
+
+            override fun onFailure(call: Call<MutableList<TicketREST>>, t: Throwable) {
+                presenter.onGetPassengersByTripFailed(t.toString())
             }
         })
     }

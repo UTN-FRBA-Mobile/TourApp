@@ -12,14 +12,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.unnamedgroup.tourapp.R
 import com.unnamedgroup.tourapp.databinding.FragmentMyTripsDriverBinding
-import com.unnamedgroup.tourapp.model.business.Ticket
 import com.unnamedgroup.tourapp.model.business.Trip
-import com.unnamedgroup.tourapp.model.business.TripPassenger
 import com.unnamedgroup.tourapp.presenter.implementation.GetTripsPresenterImpl
 import com.unnamedgroup.tourapp.presenter.interfaces.GetTripsPresenterInt
-import com.unnamedgroup.tourapp.view.adapter.MyTripsAdapter
 import com.unnamedgroup.tourapp.view.adapter.MyTripsDriverAdapter
-import com.unnamedgroup.tourapp.view.adapter.TripDetailsDriverAdapter
 
 /**
  * A simple [Fragment] subclass.

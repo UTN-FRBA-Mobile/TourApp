@@ -45,6 +45,9 @@
     <string name="details_share_button">Compartir</string>
     <string name="details_info">* Los viajes se pueden editar hasta 24 hs antes de la partida</string>
 
+    <!-- trip Qr -->
+    <string name="generate_qr_error">Error al generar el Qr, intente de nuevo mas tarde</string>
+
     <!-- API errors -->
     <string name="get_trips_error">Error obteniendo viajes</string>
     <string name="modify_ticket_error">Error al guardar, intente de nuevo mas tarde</string>
@@ -100,12 +103,14 @@
     <string name="passwords_too_short">La contraseña debe contener al menos ocho caracteres</string>
     <string name="invalid_email">Email inválido</string>
 
-    <!--Login-->
-    <string name="login_title">Iniciar Sesión</string>
-    <string name="login_register">¿Aún no es usuario? Registrarse</string>
-    <string name="login_email">Email</string>
-    <string name="login_password">Password</string>
-    <string name="login_text">Ingresar</string>
+    <!--Registro-->
+    <string name="register_title">Registro</string>
+    <string name="register_name">Nombre y Apellido</string>
+    <string name="register_dni">DNI</string>
+    <string name="register_password">Password</string>
+    <string name="register_re_enter_password">Repetir Password</string>
+    <string name="register_button">Registrarse</string>
+    <string name="register_cancel_button">Cancelar</string>
     <!---->
 
 </resources>
