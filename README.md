@@ -6,6 +6,6 @@ https://www.npmjs.com/package/json-server#getting-started
 Para ejecutarlo:
 - Abrir una terminal.
 - Ir a la carpeta del proyecto.
-- Correr el siguiente comando: json-server --watch db.json --host 10.0.2.2
+- Correr el siguiente comando: json-server --watch db.json --host 0.0.0.0
 
 Una vez hecho esto, se puede buildear y lanzar la aplicación.
