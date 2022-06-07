@@ -95,12 +95,4 @@ class MyTripsFragment : Fragment(),
     override fun onGetTicketsByUserFailed(error: String) {
         Toast.makeText(context, getString(R.string.get_trips_error), Toast.LENGTH_SHORT).show()
     }
-
-    override fun onGetTicketsByTripOk(tickets: MutableList<TripPassenger>) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onGetTicketsByTripFailed(error: String) {
-        TODO("Not yet implemented")
-    }
 }

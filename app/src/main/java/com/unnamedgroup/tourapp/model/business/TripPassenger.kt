@@ -1,6 +1,5 @@
 package com.unnamedgroup.tourapp.model.business
 
-import android.annotation.SuppressLint
 import android.os.Parcel
 import android.os.Parcelable
 
@@ -11,22 +10,24 @@ class TripPassenger(
     val busStop: String,
     val busBoarded: Boolean
 ): Parcelable {
-    @SuppressLint("NewApi")
+
+    fun Boolean.toInt() = if (this) 1 else 0
+
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
-        parcel.readBoolean()!!
+        parcel.readInt() == 1
     )
 
-    @SuppressLint("NewApi")
+
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
         parcel.writeString(dni)
         parcel.writeString(busBoarding)
         parcel.writeString(busStop)
-        parcel.writeBoolean(busBoarded)
+        parcel.writeInt(busBoarded.toInt())
     }
 
     override fun describeContents(): Int {

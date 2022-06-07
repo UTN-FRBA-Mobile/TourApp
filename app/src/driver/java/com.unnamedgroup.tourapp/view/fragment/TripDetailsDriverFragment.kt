@@ -13,12 +13,10 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.unnamedgroup.tourapp.R
 import com.unnamedgroup.tourapp.databinding.FragmentTripDetailsDriverBinding
-import com.unnamedgroup.tourapp.model.business.Ticket
 import com.unnamedgroup.tourapp.model.business.Trip
 import com.unnamedgroup.tourapp.model.business.TripPassenger
 import com.unnamedgroup.tourapp.presenter.implementation.MyTripsPresenterImpl
 import com.unnamedgroup.tourapp.presenter.interfaces.MyTripsPresenterInt
-import com.unnamedgroup.tourapp.view.adapter.MyTripsDriverAdapter
 import com.unnamedgroup.tourapp.view.adapter.TripDetailsDriverAdapter
 
 class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
@@ -36,7 +34,7 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
         savedInstanceState: Bundle?
     ): View? {
         viewAdapter = TripDetailsDriverAdapter(mutableListOf(), requireArguments()!!.getParcelable<Trip>("Trip")!!, context)
-        myTripsPresenter.getTicketsByTrip(arguments?.getParcelable<Trip>("Trip")!!.id)
+        myTripsPresenter.getPassengersByTrip(arguments?.getParcelable<Trip>("Trip")!!.id)
         val tripStateList = resources.getStringArray((R.array.trip_state_list))
         tripStatesAdapter = context?.let { ArrayAdapter(it, R.layout.list_item, tripStateList) }
 
@@ -83,24 +81,16 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
         viewAdapter!!.setList(passengers)
     }
 
-    override fun onGetTicketsByTripOk(passengers: MutableList<TripPassenger>) {
+    override fun onGetPassengersByTripOk(passengers: MutableList<TripPassenger>) {
         setRecyclerViewList(passengers)
     }
 
-    override fun onGetTicketsByTripFailed(error: String) {
+    override fun onGetPassengersByTripFailed(error: String) {
         Toast.makeText(context, getString(R.string.get_trips_error), Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onGetTicketsByUserOk(tickets: MutableList<Ticket>) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onGetTicketsByUserFailed(error: String) {
-        TODO("Not yet implemented")
     }
 }
