@@ -7,6 +7,7 @@ interface TripDetailsPresenterInt {
 
     fun modifyTicket(newTicket: Ticket)
     fun onModifyTicketOk(ticket: Ticket)
+    fun addTicket(newTicket: Ticket)
     fun onModifyTicketFailed(error: String)
 
     interface View: BaseView {

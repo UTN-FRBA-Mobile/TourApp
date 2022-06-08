@@ -165,4 +165,19 @@ class Repository() {
         })
     }
 
+    fun addTicket(presenter: TripDetailsPresenterInt, newTicket: TicketREST) {
+        service.addTicket(newTicket).enqueue(object : Callback<TicketREST> {
+            override fun onResponse(call: Call<TicketREST>, response: Response<TicketREST>) {
+                val resp: TicketREST = response.body()!!
+                val ticket: Ticket = resp.toTicket()
+                presenter.onModifyTicketOk(ticket)
+            }
+
+            override fun onFailure(call: Call<TicketREST>, t: Throwable) {
+                presenter.onModifyTicketFailed(t.toString())
+
+            }
+        })
+    }
+
 }

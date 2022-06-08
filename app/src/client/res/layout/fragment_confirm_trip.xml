@@ -261,15 +261,18 @@
             android:layout_marginLeft="25dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="25dp"
+            android:focusable="false"
             android:hint="@string/cbu"
             app:endIconContentDescription="@string/calendar_icon_description"
             app:endIconDrawable="@drawable/ic_copy"
             app:endIconMode="custom">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/bank_cbu_textfield"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:enabled="false"
+                android:focusable="false"
                 android:text="@string/cbu_number"
                 android:textColor="#000000" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -282,14 +285,17 @@
             android:layout_marginLeft="25dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="25dp"
+            android:focusable="false"
             android:hint="@string/alias_colon"
             app:endIconContentDescription="@string/calendar_icon_description"
             app:endIconDrawable="@drawable/ic_copy"
             app:endIconMode="custom">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/bank_alias_textfield"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusable="false"
                 android:enabled="false"
                 android:text="tour.app"
                 android:textColor="#000000" />
