@@ -6,6 +6,7 @@
     <string name="trip_qr_fragment_label">Certificados</string>
     <string name="new_trip_fragment_label">Nuevo Viaje</string>
     <string name="trips_fragment_label">Viajes</string>
+    <string name="qr_scanner_fragment_label">Escaneo de pasajero</string>
     <string name="next">Siguiente</string>
     <string name="previous">Previous</string>
     <string name="new_trip_button">Nuevo Viaje</string>
