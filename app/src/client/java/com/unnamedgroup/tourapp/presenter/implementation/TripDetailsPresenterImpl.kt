@@ -13,6 +13,10 @@ class TripDetailsPresenterImpl(private val mView: TripDetailsPresenterInt.View) 
         Repository().modifyTicket(this, newTicket.id!!, newTicket.toRest())
     }
 
+    override fun addTicket(newTicket: Ticket) {
+        Repository().addTicket(this, newTicket.toRest())
+    }
+
     override fun onModifyTicketOk(ticket: Ticket) {
         mView.onModifyTicketOk(ticket)
     }

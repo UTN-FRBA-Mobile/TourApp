@@ -4,7 +4,7 @@ import com.unnamedgroup.tourapp.model.business.Passenger
 import com.unnamedgroup.tourapp.model.business.Ticket
 
 data class TicketREST(
-    val id: Int,
+    val id: Int?,
     val passengers: MutableList<PassengerREST>,
     val user: UserREST,
     val trip: TripREST,

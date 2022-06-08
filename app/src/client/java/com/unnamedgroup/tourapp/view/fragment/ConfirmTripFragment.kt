@@ -1,39 +1,29 @@
 package com.unnamedgroup.tourapp.view.fragment
 
-import android.os.Build
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Context.CLIPBOARD_SERVICE
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
+import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.unnamedgroup.tourapp.R
 import com.unnamedgroup.tourapp.databinding.FragmentConfirmTripBinding
-import com.unnamedgroup.tourapp.model.business.Passenger
 import com.unnamedgroup.tourapp.model.business.Ticket
-import com.unnamedgroup.tourapp.model.business.Trip
-import com.unnamedgroup.tourapp.model.business.User
+import com.unnamedgroup.tourapp.presenter.implementation.TripDetailsPresenterImpl
+import com.unnamedgroup.tourapp.presenter.interfaces.TripDetailsPresenterInt
 import com.unnamedgroup.tourapp.utils.Utils
 import com.unnamedgroup.tourapp.view.adapter.ConfirmTripPassengersAdapter
-import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ConfirmTripFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ConfirmTripFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View {
 
     private lateinit var recyclerView: RecyclerView
 
@@ -42,7 +32,9 @@ class ConfirmTripFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-    private var ticket : Ticket? = null
+    private var ticket: Ticket? = null
+    private var tripDetailsPresenterInt: TripDetailsPresenterInt = TripDetailsPresenterImpl(this)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,25 +76,39 @@ class ConfirmTripFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.confirmButton.setOnClickListener {
-            findNavController().navigate(R.id.action_confirmTripFragment_to_resultScreenFragment)
+            tripDetailsPresenterInt.addTicket(ticket!!)
         }
 
-        binding.bankCbu.setOnClickListener {
+        binding.bankCbu.setEndIconOnClickListener {
+            copyData(binding.bankCbuTextfield.text.toString(), "CBU")
+        }
+
+
+
+        binding.bankAlias.setEndIconOnClickListener {
+
+            copyData(binding.bankCbuTextfield.text.toString(), "Alias")
 
         }
+
+
 
     }
 
-}
+    private fun copyData(text: String, data: String) {
+        val myClipboard: ClipboardManager =
+            requireActivity().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+        val clipData = ClipData.newPlainText("text", text)
+        myClipboard.setPrimaryClip(clipData)
+        Toast.makeText(context, "$data Copiado al portapapeles", Toast.LENGTH_SHORT).show()
+    }
 
-fun generateTicket(): Ticket{
-    val user = User(1,"pablito","pablito@mail","1234564","asdasdasd")
+    override fun onModifyTicketOk(ticket: Ticket) {
+        findNavController().navigate(R.id.action_confirmTripFragment_to_resultScreenFragment)
+    }
 
-    val trip = Trip(1,"Mercedes","Capital Federal",20,500.0F, mutableListOf(), mutableListOf(),"18:00", Date(),Trip.TripState.CONFIRMED, User(1, "test", "test@test.ar", "40233444", "asdasd"))
+    override fun onModifyTicketFailed(error: String) {
+        Toast.makeText(context, getString(R.string.get_trips_error), Toast.LENGTH_SHORT).show()
+    }
 
-     val listPassenger = mutableListOf<Passenger>(Passenger(name="Maria Felcitas", dni = "25.060.550",id=1, busBoarded = false),
-        Passenger(name="Juana de Arco", dni = "5.060.550",id=2, busBoarded = false),Passenger(name="Juana de Barco", dni = "5.060.550",id=3, busBoarded = false),
-        Passenger(name="Juana de Arco", dni = "5.060.550",id=4, busBoarded = false),Passenger(name="Juana de Barco", dni = "5.060.550",id=5, busBoarded = false))
-
-    return Ticket(1, user,listPassenger,trip,"Iglesia","Obelisco")
 }
