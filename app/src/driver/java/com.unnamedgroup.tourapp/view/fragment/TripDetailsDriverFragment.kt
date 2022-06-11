@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.unnamedgroup.tourapp.R
 import com.unnamedgroup.tourapp.databinding.FragmentTripDetailsDriverBinding
+import com.unnamedgroup.tourapp.model.business.Ticket
 import com.unnamedgroup.tourapp.model.business.Trip
 import com.unnamedgroup.tourapp.model.business.TripPassenger
 import com.unnamedgroup.tourapp.presenter.implementation.MyTripsPresenterImpl
@@ -27,6 +28,7 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
     private var viewAdapter : TripDetailsDriverAdapter? = null
     private var tripStatesAdapter: ArrayAdapter<String>? = null
     private var scanResult: String = ""
+    private var currentTickets: MutableList<Ticket>? = null
 
     private val binding get() = _binding!!
 
@@ -34,9 +36,9 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        viewAdapter = TripDetailsDriverAdapter(mutableListOf(), requireArguments()!!.getParcelable<Trip>("Trip")!!, context)
-        myTripsPresenter.getPassengersByTrip(arguments?.getParcelable<Trip>("Trip")!!.id)
+    ): View {
+        viewAdapter = TripDetailsDriverAdapter(mutableListOf(), context)
+        myTripsPresenter.getTicketsByTrip(arguments?.getParcelable<Trip>("Trip")!!.id)
         val tripStateList = resources.getStringArray((R.array.trip_state_list))
         tripStatesAdapter = context?.let { ArrayAdapter(it, R.layout.list_item, tripStateList) }
 
@@ -44,7 +46,7 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
 
         val bundle  = this.arguments
         if (bundle !=null && bundle.containsKey("ScanResult")){
-            scanResult = bundle!!.getString("ScanResult")!!
+            scanResult = bundle.getString("ScanResult")!!
             //todo: select passenger by resul logic
             //scanresult tripId-passengerId
         }
@@ -62,7 +64,7 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
 
         val trip = arguments?.getParcelable<Trip>("Trip")
         tripIdTextview.text = context?.getString(R.string.trip_id, trip!!.id)
-        tripBoardingStopHourTextview.text = context?.getString(R.string.trip_origin_destination_hour, trip!!.origin, trip!!.destination, trip!!.departureTime)
+        tripBoardingStopHourTextview.text = context?.getString(R.string.trip_origin_destination_hour, trip!!.origin, trip.destination, trip.departureTime)
 
         with(binding.tripStatusTextView) {
             setAdapter(tripStatesAdapter)
@@ -71,6 +73,10 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
 
         binding.qrButton.setOnClickListener(){
             findNavController().navigate(R.id.action_TripDetailsDriverFragment_to_QrScannerFragment)
+        }
+
+        binding.saveButton.setOnClickListener {
+            myTripsPresenter.saveTrip(trip!!)
         }
 
         binding.tripDetailsDriverSearchInput.addTextChangedListener(object : TextWatcher {
@@ -95,12 +101,29 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
         viewAdapter!!.setList(passengers)
     }
 
-    override fun onGetPassengersByTripOk(passengers: MutableList<TripPassenger>) {
+    override fun onGetTicketsByTripOk(tickets: MutableList<Ticket>, passengers: MutableList<TripPassenger>) {
+        currentTickets = tickets
         setRecyclerViewList(passengers)
     }
 
-    override fun onGetPassengersByTripFailed(error: String) {
+    override fun onGetTicketsByTripFailed(error: String) {
         Toast.makeText(context, getString(R.string.get_trips_error), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onSaveTripOk() {
+        myTripsPresenter.saveTickets(currentTickets!!)
+    }
+
+    override fun onSaveTripError(error: String) {
+        Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onSaveTicketOk() {
+        findNavController().popBackStack()
+    }
+
+    override fun onSaveTicketError(error: String) {
+        Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {

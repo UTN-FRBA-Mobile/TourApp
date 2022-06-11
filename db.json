@@ -1,11 +1,6 @@
 {
   "trips": [
     {
-      "id": 1,
-      "origin": "Mercedes",
-      "destination": "Capital Federal",
-      "passengersAmount": 20,
-      "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
         "29 y 40",
@@ -19,15 +14,20 @@
         "Cerrito y Paraguay",
         "Alto Palermo"
       ],
-      "departureTime": "05:05",
       "date": "18-05-2022",
-      "state": "DELAYED",
+      "departureTime": "05:05",
+      "destination": "Capital Federal",
       "driver": {
-        "id": 101,
-        "name": "test",
+        "dni": "39184443",
         "email": "fbevilacqua@frba.utn.edu.ar",
-        "dni": "39184443"
-      }
+        "id": 101,
+        "name": "test"
+      },
+      "id": 1,
+      "origin": "Mercedes",
+      "passengersAmount": 20,
+      "price": 800,
+      "state": "DELAYED"
     },
     {
       "id": 2,
@@ -505,7 +505,7 @@
       "name": "Benjamín Enríquez",
       "email": "benjaenriquez@frba.utn.edu.ar",
       "dni": "40255931",
-      "password": "Norberto11",
+      "password": "Norberto10",
       "token": "asdasdasdasdasd"
     }
   ]

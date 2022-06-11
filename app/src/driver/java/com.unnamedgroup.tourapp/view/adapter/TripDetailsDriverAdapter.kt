@@ -14,7 +14,6 @@ import com.unnamedgroup.tourapp.model.business.TripPassenger
 
 class TripDetailsDriverAdapter(
     private var mPassengers: MutableList<TripPassenger>,
-    private var mTrip: Trip,
     private val mContext: Context?) :
     RecyclerView.Adapter<TripDetailsDriverAdapter.ViewHolder>() {
 
@@ -48,10 +47,10 @@ class TripDetailsDriverAdapter(
     fun setFilter(filterValue : String) {
         passengersFilter = filterValue
         showingList = mPassengers.filter {
-            it.dni!!.contains(filterValue, true) ||
-            it.name!!.contains(filterValue, true) ||
-            it.busBoarding!!.contains(filterValue, true) ||
-            it.busStop!!.contains(filterValue, true)
+            it.dni.contains(filterValue, true) ||
+            it.name.contains(filterValue, true) ||
+            it.busBoarding.contains(filterValue, true) ||
+            it.busStop.contains(filterValue, true)
         }.toMutableList()
         notifyDataSetChanged()
     }

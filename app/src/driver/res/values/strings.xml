@@ -6,7 +6,7 @@
     <string name="trip_details_bus_boarding">Sube en: %s</string>
     <string name="trip_details_bus_stop">Baja en: %s</string>
     <string name="passenger_title">Pasajeros</string>
-    <string name="trip_details_cancel_button">Cancelar viaje</string>
+    <string name="trip_details_cancel_button">Guardar</string>
     <string name="trip_details_scan_qr">Escanear QR</string>
 
 </resources>
