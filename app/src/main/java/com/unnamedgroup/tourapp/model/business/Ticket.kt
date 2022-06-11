@@ -28,7 +28,7 @@ class Ticket(
         for (p in passengers) {
                 restPassengers.add(p.toRest())
         }
-        return TicketREST(id!!, restPassengers, user.toRest(), trip.toRest(), busBoarding, busStop)
+        return TicketREST(id, restPassengers, user.toRest(), trip.toRest(), busBoarding, busStop)
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

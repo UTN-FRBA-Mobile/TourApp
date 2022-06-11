@@ -34,6 +34,21 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    flavorDimensions += "version"
+    productFlavors {
+        create("client") {
+            dimension = "version"
+            applicationIdSuffix = ".client"
+            versionNameSuffix = "-client"
+        }
+        create("driver") {
+            dimension = "version"
+            applicationIdSuffix = ".driver"
+            versionNameSuffix = "-driver"
+        }
+    }
+
 }
 
 dependencies {

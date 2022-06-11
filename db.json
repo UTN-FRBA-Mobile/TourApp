@@ -5,7 +5,7 @@
       "origin": "Mercedes",
       "destination": "Capital Federal",
       "passengersAmount": 20,
-      "price": 800.0,
+      "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
         "29 y 40",
@@ -21,14 +21,20 @@
       ],
       "departureTime": "05:05",
       "date": "18-05-2022",
-      "state": "DELAYED"
+      "state": "DELAYED",
+      "driver": {
+        "id": 101,
+        "name": "test",
+        "email": "fbevilacqua@frba.utn.edu.ar",
+        "dni": "39184443"
+      }
     },
     {
       "id": 2,
       "origin": "Mercedes",
       "destination": "Capital Federal",
       "passengersAmount": 20,
-      "price": 800.0,
+      "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
         "29 y 40",
@@ -44,14 +50,20 @@
       ],
       "departureTime": "05:35",
       "date": "18-05-2022",
-      "state": "CONFIRMED"
+      "state": "CONFIRMED",
+      "driver": {
+        "id": 101,
+        "name": "test",
+        "email": "fbevilacqua@frba.utn.edu.ar",
+        "dni": "39184443"
+      }
     },
     {
       "id": 3,
       "origin": "Mercedes",
       "destination": "Capital Federal",
       "passengersAmount": 20,
-      "price": 800.0,
+      "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
         "29 y 40",
@@ -67,14 +79,20 @@
       ],
       "departureTime": "06:10",
       "date": "18-05-2022",
-      "state": "PROCESSING"
+      "state": "PROCESSING",
+      "driver": {
+        "id": 101,
+        "name": "test",
+        "email": "fbevilacqua@frba.utn.edu.ar",
+        "dni": "39184443"
+      }
     },
     {
       "id": 4,
       "origin": "Mercedes",
       "destination": "Capital Federal",
       "passengersAmount": 20,
-      "price": 800.0,
+      "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
         "29 y 40",
@@ -90,14 +108,20 @@
       ],
       "departureTime": "06:50",
       "date": "18-05-2022",
-      "state": "PROCESSING"
+      "state": "PROCESSING",
+      "driver": {
+        "id": 101,
+        "name": "test",
+        "email": "fbevilacqua@frba.utn.edu.ar",
+        "dni": "39184443"
+      }
     },
     {
       "id": 5,
       "origin": "Mercedes",
       "destination": "Capital Federal",
       "passengersAmount": 20,
-      "price": 800.0,
+      "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
         "29 y 40",
@@ -113,14 +137,20 @@
       ],
       "departureTime": "08:00",
       "date": "18-05-2022",
-      "state": "PROCESSING"
+      "state": "PROCESSING",
+      "driver": {
+        "id": 101,
+        "name": "test",
+        "email": "fbevilacqua@frba.utn.edu.ar",
+        "dni": "39184443"
+      }
     },
     {
       "id": 6,
       "origin": "Mercedes",
       "destination": "Capital Federal",
       "passengersAmount": 20,
-      "price": 800.0,
+      "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
         "29 y 40",
@@ -136,14 +166,20 @@
       ],
       "departureTime": "11:00",
       "date": "18-05-2022",
-      "state": "CONFIRMED"
+      "state": "CONFIRMED",
+      "driver": {
+        "id": 101,
+        "name": "test",
+        "email": "fbevilacqua@frba.utn.edu.ar",
+        "dni": "39184443"
+      }
     },
     {
       "id": 7,
       "origin": "Mercedes",
       "destination": "Capital Federal",
       "passengersAmount": 20,
-      "price": 800.0,
+      "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
         "29 y 40",
@@ -159,14 +195,20 @@
       ],
       "departureTime": "16:00",
       "date": "18-05-2022",
-      "state": "CANCELLED"
+      "state": "CANCELLED",
+      "driver": {
+        "id": 101,
+        "name": "test",
+        "email": "fbevilacqua@frba.utn.edu.ar",
+        "dni": "39184443"
+      }
     },
     {
       "id": 8,
       "origin": "Mercedes",
       "destination": "Capital Federal",
       "passengersAmount": 20,
-      "price": 800.0,
+      "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
         "29 y 40",
@@ -182,14 +224,20 @@
       ],
       "departureTime": "18:00",
       "date": "18-05-2022",
-      "state": "DELAYED"
+      "state": "DELAYED",
+      "driver": {
+        "id": 101,
+        "name": "test",
+        "email": "fbevilacqua@frba.utn.edu.ar",
+        "dni": "39184443"
+      }
     },
     {
       "id": 9,
       "origin": "Mercedes",
       "destination": "Capital Federal",
       "passengersAmount": 20,
-      "price": 800.0,
+      "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
         "29 y 40",
@@ -205,35 +253,35 @@
       ],
       "departureTime": "20:00",
       "date": "18-05-2022",
-      "state": "PROCESSING"
+      "state": "PROCESSING",
+      "driver": {
+        "id": 101,
+        "name": "test",
+        "email": "fbevilacqua@frba.utn.edu.ar",
+        "dni": "39184443"
+      }
     }
   ],
   "tickets": [
     {
+      "busBoarding": "Hotel Mercedes",
+      "busStop": "Alto Palermo",
       "id": 1,
-      "user": {
-        "id": 1,
-        "email": "benjaenriquez@frba.utn.edu.ar",
-        "dni": "40255931"
-      },
       "passengers": [
         {
-          "name": "Jose López",
+          "busBoarded": false,
           "dni": "402559315",
-          "id": 0
+          "id": 0,
+          "name": "Jose López"
         },
         {
-          "name": "Pedro López",
+          "busBoarded": false,
           "dni": "402559316",
-          "id": 1
+          "id": 1,
+          "name": "Pedro López"
         }
       ],
       "trip": {
-        "id": 1,
-        "origin": "Mercedes",
-        "destination": "Capital Federal",
-        "passengersAmount": 20,
-        "price": 800.0,
         "busBoardings": [
           "Hotel Mercedes",
           "29 y 40",
@@ -247,19 +295,38 @@
           "Cerrito y Paraguay",
           "Alto Palermo"
         ],
-        "departureTime": "05:05",
         "date": "18-05-2022",
+        "departureTime": "05:05",
+        "destination": "Capital Federal",
+        "driver": {
+          "dni": "39184443",
+          "email": "fbevilacqua@frba.utn.edu.ar",
+          "id": 101,
+          "name": "test"
+        },
+        "id": 1,
+        "origin": "Mercedes",
+        "passengersAmount": 20,
+        "price": 800,
         "state": "DELAYED"
       },
-      "busBoarding": "Hotel Mercedes",
-      "busStop": "Alto Palermo"
+      "user": {
+        "dni": "40255931",
+        "email": "benjaenriquez@frba.utn.edu.ar",
+        "id": 1,
+        "name": "Benjamín Enríquez",
+        "token": "asdasdasdasdasd"
+      }
     },
     {
       "id": 2,
       "user": {
         "id": 1,
+        "name": "Benjamín Enríquez",
         "email": "benjaenriquez@frba.utn.edu.ar",
-        "dni": "40255931"
+        "dni": "40255931",
+        "password": "Norberto10",
+        "token": "asdasdasdasdasd"
       },
       "passengers": [
         {
@@ -278,7 +345,7 @@
         "origin": "Mercedes",
         "destination": "Capital Federal",
         "passengersAmount": 20,
-        "price": 800.0,
+        "price": 800,
         "busBoardings": [
           "Hotel Mercedes",
           "29 y 40",
@@ -294,10 +361,152 @@
         ],
         "departureTime": "05:35",
         "date": "18-05-2022",
-        "state": "CONFIRMED"
+        "state": "CONFIRMED",
+        "driver": {
+          "id": 101,
+          "name": "test",
+          "email": "fbevilacqua@frba.utn.edu.ar",
+          "dni": "39184443"
+        }
       },
       "busBoarding": "Hotel Mercedes",
       "busStop": "Alto Palermo"
+    },
+    {
+      "busBoarding": "Hotel Mercedes",
+      "busStop": "Alto Palermo",
+      "passengers": [
+        {
+          "busBoarded": false,
+          "dni": "402559315",
+          "id": 1,
+          "name": "Jose López"
+        },
+        {
+          "busBoarded": false,
+          "dni": "402559316",
+          "id": 1,
+          "name": "Pedro López"
+        },
+        {
+          "busBoarded": false,
+          "dni": "4023634",
+          "id": 1,
+          "name": "adrian Lopez"
+        }
+      ],
+      "trip": {
+        "busBoardings": [
+          "Hotel Mercedes",
+          "29 y 40",
+          "1 y 40",
+          "1 y 2",
+          "Rotonda Mercedes"
+        ],
+        "busStops": [
+          "Irigoyen y Estados Unidos",
+          "Irigoyen y Venezuela",
+          "Cerrito y Paraguay",
+          "Alto Palermo"
+        ],
+        "date": "18-05-2022",
+        "departureTime": "05:35",
+        "destination": "Capital Federal",
+        "driver": {
+          "dni": "39184443",
+          "email": "fbevilacqua@frba.utn.edu.ar",
+          "id": 101,
+          "name": "test"
+        },
+        "id": 2,
+        "origin": "Mercedes",
+        "passengersAmount": 20,
+        "price": 800,
+        "state": "CONFIRMED"
+      },
+      "user": {
+        "dni": "",
+        "email": "",
+        "id": 1,
+        "name": "",
+        "token": ""
+      },
+      "id": 3
+    },
+    {
+      "busBoarding": "Hotel Mercedes",
+      "busStop": "Alto Palermo",
+      "passengers": [
+        {
+          "busBoarded": false,
+          "dni": "402559315",
+          "id": 1,
+          "name": "Jose López"
+        },
+        {
+          "busBoarded": false,
+          "dni": "402559316",
+          "id": 1,
+          "name": "Pedro López"
+        }
+      ],
+      "trip": {
+        "busBoardings": [
+          "Hotel Mercedes",
+          "29 y 40",
+          "1 y 40",
+          "1 y 2",
+          "Rotonda Mercedes"
+        ],
+        "busStops": [
+          "Irigoyen y Estados Unidos",
+          "Irigoyen y Venezuela",
+          "Cerrito y Paraguay",
+          "Alto Palermo"
+        ],
+        "date": "18-05-2022",
+        "departureTime": "05:35",
+        "destination": "Capital Federal",
+        "driver": {
+          "dni": "39184443",
+          "email": "fbevilacqua@frba.utn.edu.ar",
+          "id": 101,
+          "name": "test"
+        },
+        "id": 2,
+        "origin": "Mercedes",
+        "passengersAmount": 20,
+        "price": 800,
+        "state": "CONFIRMED"
+      },
+      "user": {
+        "dni": "",
+        "email": "",
+        "id": 1,
+        "name": "",
+        "token": ""
+      },
+      "id": 4
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Benjamín Enríquez",
+      "email": "benjaenriquez@frba.utn.edu.ar",
+      "dni": "40255931",
+      "password": "Norberto10",
+      "token": "asdasdasdasdasd"
+    }
+  ],
+  "drivers": [
+    {
+      "id": 1,
+      "name": "Benjamín Enríquez",
+      "email": "benjaenriquez@frba.utn.edu.ar",
+      "dni": "40255931",
+      "password": "Norberto11",
+      "token": "asdasdasdasdasd"
     }
   ]
 }
