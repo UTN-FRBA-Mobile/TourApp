@@ -83,10 +83,4 @@
             android:id="@+id/action_tripsFragment_to_MyTripsFragment"
             app:destination="@id/MyTripsFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/QrScannerFragment"
-        android:name="com.unnamedgroup.tourapp.view.fragment.QrScannerFragment"
-        android:label="@string/qr_scanner_fragment_label"
-        tools:layout="@layout/fragment_qr_scanner" >
-    </fragment>
 </navigation>

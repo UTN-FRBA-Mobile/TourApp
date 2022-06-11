@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.unnamedgroup.tourapp.R
 import com.unnamedgroup.tourapp.databinding.FragmentTripDetailsDriverBinding
@@ -25,6 +26,7 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
     private var myTripsPresenter : MyTripsPresenterImpl = MyTripsPresenterImpl(this)
     private var viewAdapter : TripDetailsDriverAdapter? = null
     private var tripStatesAdapter: ArrayAdapter<String>? = null
+    private var scanResult: String = ""
 
     private val binding get() = _binding!!
 
@@ -39,6 +41,14 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
         tripStatesAdapter = context?.let { ArrayAdapter(it, R.layout.list_item, tripStateList) }
 
         _binding = FragmentTripDetailsDriverBinding.inflate(inflater, container, false)
+
+        val bundle  = this.arguments
+        if (bundle !=null && bundle.containsKey("ScanResult")){
+            scanResult = bundle!!.getString("ScanResult")!!
+            //todo: select passenger by resul logic
+            //scanresult tripId-passengerId
+        }
+
         return binding.root
     }
 
@@ -57,6 +67,10 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
         with(binding.tripStatusTextView) {
             setAdapter(tripStatesAdapter)
             setText(tripStatesAdapter!!.getItem(0), false)
+        }
+
+        binding.qrButton.setOnClickListener(){
+            findNavController().navigate(R.id.action_TripDetailsDriverFragment_to_QrScannerFragment)
         }
 
         binding.tripDetailsDriverSearchInput.addTextChangedListener(object : TextWatcher {

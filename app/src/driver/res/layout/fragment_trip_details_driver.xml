@@ -102,7 +102,7 @@
             android:text="@string/trip_details_cancel_button" />
 
         <Button
-            android:id="@+id/save_button"
+            android:id="@+id/qr_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/buttons_margin_between"
