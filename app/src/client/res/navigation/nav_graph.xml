@@ -13,7 +13,7 @@
 
         <action
             android:id="@+id/action_MyTripsFragment_to_tripDetailsFragment"
-            app:destination="@id/QrScannerFragment" />
+            app:destination="@id/tripDetailsFragment" />
         <action
             android:id="@+id/action_MyTripsFragment_to_tripsFragment"
             app:destination="@id/tripsFragment" />
