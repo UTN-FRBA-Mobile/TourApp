@@ -8,7 +8,6 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.unnamedgroup.tourapp.R
-import com.unnamedgroup.tourapp.model.business.Trip
 import com.unnamedgroup.tourapp.model.business.TripPassenger
 
 
@@ -28,7 +27,7 @@ class TripDetailsDriverAdapter(
 
     class ViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TripDetailsDriverAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.tripdetailsdriver_viewholder, parent, false)
         return ViewHolder(view)
     }
@@ -47,7 +46,7 @@ class TripDetailsDriverAdapter(
         busStopTextview.text = mContext?.getString(R.string.trip_details_bus_stop, passenger.busStop)
         busBoarded.isChecked = passenger.busBoarded
         busBoarded.setOnCheckedChangeListener{ _, isChecked ->
-            onItemToggleListener.onToggle(holder.adapterPosition, isChecked )
+            onItemToggleListener.onToggle(holder.adapterPosition, isChecked)
         }
     }
 

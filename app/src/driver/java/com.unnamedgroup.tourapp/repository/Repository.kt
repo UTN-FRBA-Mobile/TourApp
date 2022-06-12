@@ -192,7 +192,6 @@ class Repository() {
     }
 
     fun saveTickets(presenter: MyTripsPresenterInt, tickets: MutableList<Ticket>) {
-
         try {
             for (ticket: Ticket in tickets) {
                 service.saveTicket(ticket.id!!, ticket.toRest()).enqueue(object : Callback<Void> {
@@ -203,8 +202,7 @@ class Repository() {
         } catch (e: Exception) {
             presenter.onSaveTicketError(e.toString())
         }
-
-
+        presenter.onSaveTicketOk()
     }
 
 
