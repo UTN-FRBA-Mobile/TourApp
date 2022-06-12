@@ -20,7 +20,7 @@ class MyTripsPresenterImpl(private val mView: MyTripsPresenterInt.View) : MyTrip
         val passengers: MutableList<TripPassenger> = mutableListOf()
         for (ticket: Ticket in tickets) {
             for (passenger: Passenger in ticket.passengers)
-            passengers.add(TripPassenger(passenger.name, passenger.dni, ticket.busBoarding, ticket.busStop, passenger.busBoarded))
+            passengers.add(TripPassenger(passenger.id, passenger.name, passenger.dni, ticket.busBoarding, ticket.busStop, passenger.busBoarded))
         }
         mView.onGetTicketsByTripOk(tickets, passengers)
     }
