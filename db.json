@@ -27,7 +27,7 @@
       "origin": "Mercedes",
       "passengersAmount": 20,
       "price": 800,
-      "state": "DELAYED"
+      "state": "PROCESSING"
     },
     {
       "id": 2,
@@ -269,13 +269,13 @@
       "id": 1,
       "passengers": [
         {
-          "busBoarded": true,
+          "busBoarded": false,
           "dni": "402559315",
           "id": 0,
           "name": "Jose López"
         },
         {
-          "busBoarded": false,
+          "busBoarded": true,
           "dni": "402559316",
           "id": 1,
           "name": "Pedro López"
@@ -308,7 +308,7 @@
         "origin": "Mercedes",
         "passengersAmount": 20,
         "price": 800,
-        "state": "DELAYED"
+        "state": "PROCESSING"
       },
       "user": {
         "dni": "40255931",

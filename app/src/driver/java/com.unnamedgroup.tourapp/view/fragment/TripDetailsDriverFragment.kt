@@ -139,7 +139,7 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
     }
 
     override fun onSaveTripOk() {
-        myTripsPresenter.saveTickets(currentTickets, currentPassengers)
+        myTripsPresenter.saveTickets(currentTickets, currentPassengers, trip)
     }
 
     override fun onSaveTripError(error: String) {

@@ -15,7 +15,7 @@ interface MyTripsPresenterInt {
     fun onSaveTripOk()
     fun onSaveTripError(error: String)
 
-    fun saveTickets(tickets: MutableList<Ticket>, passengers: MutableList<TripPassenger>)
+    fun saveTickets(tickets: MutableList<Ticket>, passengers: MutableList<TripPassenger>, trip: Trip)
     fun onSaveTicketOk()
     fun onSaveTicketError(error: String)
 

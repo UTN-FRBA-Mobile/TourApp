@@ -41,15 +41,17 @@ class MyTripsPresenterImpl(private val mView: MyTripsPresenterInt.View) : MyTrip
         mView.onSaveTripError(error)
     }
 
-    override fun saveTickets(tickets: MutableList<Ticket>, passengers: MutableList<TripPassenger>) {
-        for (tp: TripPassenger in passengers) {
-            for (t: Ticket in tickets) {
+    override fun saveTickets(tickets: MutableList<Ticket>, passengers: MutableList<TripPassenger>, trip: Trip) {
+        for (t: Ticket in tickets) {
+            t.trip.state = trip.state
+            for (tp: TripPassenger in passengers) {
                 val passenger: Passenger? = t.passengers.find { passenger -> passenger.dni == tp.dni }
                 if (passenger != null) {
                     passenger.busBoarded = tp.busBoarded
                 }
             }
         }
+
         Repository().saveTickets(this, tickets)
     }
 
