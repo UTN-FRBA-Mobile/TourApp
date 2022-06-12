@@ -60,6 +60,8 @@ class QrScannerFragment : Fragment() {
                 }
                 else {
                     Toast.makeText(context, getString(R.string.must_grant_permission), Toast.LENGTH_SHORT).show()
+                    val bundle = Bundle()
+                    bundle.putParcelable("Trip", trip)
                     findNavController().navigate(R.id.action_QrScannerFragment_to_TripDetailsDriverFragment, bundle)
                 }
             }
