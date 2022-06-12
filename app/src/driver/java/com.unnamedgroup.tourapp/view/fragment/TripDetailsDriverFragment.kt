@@ -158,7 +158,6 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
 
     override fun onSaveTicketError(error: String, passengerPosition: Int, newValue: Boolean) {
         Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
-        viewAdapter!!.togglePassenger(passengerPosition, !newValue)
     }
 
     override fun onDestroyView() {

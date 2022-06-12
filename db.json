@@ -269,7 +269,7 @@
       "id": 1,
       "passengers": [
         {
-          "busBoarded": false,
+          "busBoarded": true,
           "dni": "402559315",
           "id": 0,
           "name": "Jose López"
