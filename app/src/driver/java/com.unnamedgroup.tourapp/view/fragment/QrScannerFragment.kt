@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -17,6 +18,7 @@ import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ScanMode
 import com.unnamedgroup.tourapp.R
 import com.unnamedgroup.tourapp.databinding.FragmentQrScannerBinding
+import com.unnamedgroup.tourapp.model.business.Trip
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -26,6 +28,7 @@ class QrScannerFragment : Fragment() {
     private var _binding: FragmentQrScannerBinding? = null
     private val binding get() = _binding!!
     private lateinit var codeScanner: CodeScanner
+    private var trip: Trip? = null
 
 
     override fun onCreateView(
@@ -33,8 +36,14 @@ class QrScannerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentQrScannerBinding.inflate(inflater, container, false)
-        return binding.root
 
+        if (arguments == null || !requireArguments().containsKey("Trip")) {
+            val bundle = Bundle()
+            bundle.putParcelable("Trip", trip)
+            findNavController().navigate(R.id.action_QrScannerFragment_to_TripDetailsDriverFragment, bundle)
+        }
+        trip = requireArguments().getParcelable("Trip")
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,7 +59,8 @@ class QrScannerFragment : Fragment() {
                     startScanning()
                 }
                 else {
-                    // Do otherwise
+                    Toast.makeText(context, getString(R.string.must_grant_permission), Toast.LENGTH_SHORT).show()
+                    findNavController().popBackStack()
                 }
             }
             permissionLauncher.launch(Manifest.permission.CAMERA)
@@ -75,8 +85,16 @@ class QrScannerFragment : Fragment() {
             activity.runOnUiThread {
                 val scanResult = it.text
                 val bundle = Bundle()
-                bundle.putString("ScanResult", scanResult)
-                findNavController().navigate(R.id.action_QrScannerFragment_to_TripDetailsDriverFragment, bundle)
+                val splitList = scanResult.split('-')
+                if (splitList.size != 2) {
+                    Toast.makeText(context, getString(R.string.invalid_qr), Toast.LENGTH_SHORT).show()
+                } else if (splitList[0].toInt() != trip!!.id) {
+                    Toast.makeText(context, getString(R.string.qr_from_another_trip), Toast.LENGTH_SHORT).show()
+                } else {
+                    bundle.putString("ScanResult", splitList[1])
+                    bundle.putParcelable("Trip", trip)
+                    findNavController().navigate(R.id.action_QrScannerFragment_to_TripDetailsDriverFragment, bundle)
+                }
             }
         }
 

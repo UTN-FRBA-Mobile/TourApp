@@ -27,7 +27,6 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
     private var myTripsPresenter: MyTripsPresenterImpl = MyTripsPresenterImpl(this)
     private var viewAdapter: TripDetailsDriverAdapter? = null
     private var tripStatesAdapter: ArrayAdapter<String>? = null
-    private var scanResult: String = ""
     private lateinit var currentTickets: MutableList<Ticket>
     private lateinit var currentPassengers: MutableList<TripPassenger>
     private lateinit var trip: Trip
@@ -45,7 +44,9 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
             context,
             object : TripDetailsDriverAdapter.OnItemToggleListener {
                 override fun onToggle(passengerPosition: Int, newValue: Boolean) {
-                    currentPassengers[passengerPosition].busBoarded = newValue
+                    val passenger = currentPassengers[passengerPosition]
+                    passenger.busBoarded = newValue
+                    myTripsPresenter.saveTicket(currentTickets, passenger, passengerPosition, newValue)
                 }
             })
 
@@ -55,15 +56,8 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
 
         _binding = FragmentTripDetailsDriverBinding.inflate(inflater, container, false)
 
-        val bundle = this.arguments
-        if (bundle != null && bundle.containsKey("ScanResult")) {
-            scanResult = bundle.getString("ScanResult")!!
-            //todo: select passenger by resul logic
-            //scanresult tripId-passengerId
-        }
-
-        if (bundle != null && bundle.containsKey("Trip")) {
-            trip = bundle.getParcelable("Trip")!!
+        if (arguments != null && requireArguments().containsKey("Trip")) {
+            trip = requireArguments().getParcelable("Trip")!!
         }
 
         return binding.root
@@ -92,15 +86,14 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
             setOnItemClickListener { _, _, position, _ ->
                 val newState: String = (adapter.getItem(position) ?: "") as String
                 trip.state = trip.getStateByText(newState)
+                myTripsPresenter.saveTrip(trip)
             }
         }
 
         binding.qrButton.setOnClickListener {
-            findNavController().navigate(R.id.action_TripDetailsDriverFragment_to_QrScannerFragment)
-        }
-
-        binding.saveButton.setOnClickListener {
-            myTripsPresenter.saveTrip(trip)
+            val bundle = Bundle()
+            bundle.putParcelable("Trip", trip)
+            findNavController().navigate(R.id.action_TripDetailsDriverFragment_to_QrScannerFragment, bundle)
         }
 
         binding.tripDetailsDriverSearchInput.addTextChangedListener(object : TextWatcher {
@@ -132,6 +125,19 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
         currentTickets = tickets
         currentPassengers = passengers
         setRecyclerViewList(passengers)
+
+        if (arguments != null && requireArguments().containsKey("ScanResult")) {
+            val scanResultPassenger = requireArguments().getString("ScanResult")!!
+            val passenger: TripPassenger? = viewAdapter?.getPassengerById(scanResultPassenger.toInt())
+            if (passenger == null) {
+                Toast.makeText(context, getString(R.string.passenger_not_found_by_qr), Toast.LENGTH_SHORT).show()
+            } else {
+                val passengerPosition: Int = viewAdapter!!.getPassengerPosition(passenger)
+                passenger.busBoarded = true
+                myTripsPresenter.saveTicket(tickets, passenger, passengerPosition, true)
+            }
+        }
+
     }
 
     override fun onGetTicketsByTripFailed(error: String) {
@@ -139,23 +145,25 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
     }
 
     override fun onSaveTripOk() {
-        myTripsPresenter.saveTickets(currentTickets, currentPassengers, trip)
+        return
     }
 
     override fun onSaveTripError(error: String) {
         Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
     }
 
-    override fun onSaveTicketOk() {
-        findNavController().popBackStack()
+    override fun onSaveTicketOk(passengerPosition: Int, newValue: Boolean) {
+        viewAdapter!!.togglePassenger(passengerPosition, newValue)
     }
 
-    override fun onSaveTicketError(error: String) {
+    override fun onSaveTicketError(error: String, passengerPosition: Int, newValue: Boolean) {
         Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+        viewAdapter!!.togglePassenger(passengerPosition, !newValue)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+    
 }

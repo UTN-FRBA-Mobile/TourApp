@@ -191,18 +191,19 @@ class Repository() {
         })
     }
 
-    fun saveTickets(presenter: MyTripsPresenterInt, tickets: MutableList<Ticket>) {
-        try {
-            for (ticket: Ticket in tickets) {
-                service.saveTicket(ticket.id!!, ticket.toRest()).enqueue(object : Callback<Void> {
-                    override fun onResponse(call: Call<Void>, response: Response<Void>) {}
-                    override fun onFailure(call: Call<Void>, t: Throwable) {}
-                })
+    fun saveTicket(presenter: MyTripsPresenterInt, ticket: Ticket, passengerPosition: Int, newValue: Boolean) {
+        service.saveTicket(ticket.id!!, ticket.toRest()).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    presenter.onSaveTicketOk(passengerPosition, newValue)
+                } else {
+                    presenter.onSaveTicketError(response.message(), passengerPosition, newValue)
+                }
             }
-        } catch (e: Exception) {
-            presenter.onSaveTicketError(e.toString())
-        }
-        presenter.onSaveTicketOk()
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                presenter.onSaveTicketError(t.toString(), passengerPosition, newValue)
+            }
+        })
     }
 
 

@@ -68,4 +68,19 @@ class TripDetailsDriverAdapter(
         showingList = passengers
         notifyDataSetChanged()
     }
+
+    fun getPassengerById(passengerId: Int): TripPassenger? {
+        return mPassengers.find { tripPassenger -> tripPassenger.id == passengerId }
+    }
+
+    fun getPassengerPosition(passenger: TripPassenger): Int {
+        return mPassengers.indexOf(passenger)
+    }
+
+    fun togglePassenger(passengerPosition: Int, newValue: Boolean) {
+        val passenger = mPassengers[passengerPosition]
+        passenger.busBoarded = newValue
+        notifyItemChanged(passengerPosition)
+    }
+
 }

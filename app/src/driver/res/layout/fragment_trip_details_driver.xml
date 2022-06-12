@@ -104,14 +104,6 @@
                 android:text="@string/trip_details_scan_qr"
                 tools:ignore="ButtonStyle" />
 
-            <Button
-                android:id="@+id/save_button"
-                android:layout_width="@dimen/button_width"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/buttons_margin_between"
-                android:text="@string/trip_details_cancel_button"
-                tools:ignore="ButtonStyle" />
-
         </LinearLayout>
 
     </RelativeLayout>

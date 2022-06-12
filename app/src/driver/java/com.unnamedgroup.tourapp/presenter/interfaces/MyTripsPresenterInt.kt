@@ -15,9 +15,9 @@ interface MyTripsPresenterInt {
     fun onSaveTripOk()
     fun onSaveTripError(error: String)
 
-    fun saveTickets(tickets: MutableList<Ticket>, passengers: MutableList<TripPassenger>, trip: Trip)
-    fun onSaveTicketOk()
-    fun onSaveTicketError(error: String)
+    fun saveTicket(tickets: MutableList<Ticket>, tripPassenger: TripPassenger, passengerPosition: Int, newValue: Boolean)
+    fun onSaveTicketOk(passengerPosition: Int, newValue: Boolean)
+    fun onSaveTicketError(error: String, passengerPosition: Int, newValue: Boolean)
 
     interface View: BaseView {
         fun onGetTicketsByTripOk(tickets: MutableList<Ticket>, passengers: MutableList<TripPassenger>)
@@ -26,8 +26,8 @@ interface MyTripsPresenterInt {
         fun onSaveTripOk()
         fun onSaveTripError(error: String)
 
-        fun onSaveTicketOk()
-        fun onSaveTicketError(error: String)
+        fun onSaveTicketOk(passengerPosition: Int, newValue: Boolean)
+        fun onSaveTicketError(error: String, passengerPosition: Int, newValue: Boolean)
     }
 
 }

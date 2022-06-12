@@ -8,5 +8,9 @@
     <string name="passenger_title">Pasajeros</string>
     <string name="trip_details_cancel_button">Guardar</string>
     <string name="trip_details_scan_qr">Escanear QR</string>
+    <string name="invalid_qr">QR no válido</string>
+    <string name="qr_from_another_trip">El código QR se corresponde a otro viaje</string>
+    <string name="must_grant_permission">Debe conceder permisos de cámara para escanear códigos QR</string>
+    <string name="passenger_not_found_by_qr">No se encontró ningún pasajero con ese código QR</string>
 
 </resources>

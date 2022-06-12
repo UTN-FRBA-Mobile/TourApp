@@ -30,6 +30,6 @@
         tools:layout="@layout/fragment_qr_scanner" >
         <action
             android:id="@+id/action_QrScannerFragment_to_TripDetailsDriverFragment"
-            app:destination="@id/QrScannerFragment" />
+            app:destination="@id/TripDetailsDriverFragment" />
     </fragment>
 </navigation>
