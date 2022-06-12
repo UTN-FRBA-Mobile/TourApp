@@ -19,10 +19,10 @@
     <string name="trip_origin_destination_hour">%s - %s - %s hs</string>
 
     <string-array name="trip_state_list">
-        <item>CONFIRMED</item>
-        <item>DELAYED</item>
-        <item>PROCESSING</item>
-        <item>CANCELLED</item>
+        <item>Confirmado</item>
+        <item>Demorado</item>
+        <item>Procesando</item>
+        <item>Cancelado</item>
     </string-array>
 
     <!-- trip Details -->

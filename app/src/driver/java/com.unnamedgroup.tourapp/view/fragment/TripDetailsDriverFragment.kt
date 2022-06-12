@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.unnamedgroup.tourapp.R
 import com.unnamedgroup.tourapp.databinding.FragmentTripDetailsDriverBinding
+import com.unnamedgroup.tourapp.model.business.Passenger
 import com.unnamedgroup.tourapp.model.business.Ticket
 import com.unnamedgroup.tourapp.model.business.Trip
 import com.unnamedgroup.tourapp.model.business.TripPassenger
@@ -28,7 +29,12 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
     private var viewAdapter : TripDetailsDriverAdapter? = null
     private var tripStatesAdapter: ArrayAdapter<String>? = null
     private var scanResult: String = ""
-    private var currentTickets: MutableList<Ticket>? = null
+    private lateinit var currentTickets: MutableList<Ticket>
+    private lateinit var draftTickets : MutableList<Ticket>
+    private lateinit var currentPassengers: MutableList<TripPassenger>
+    private lateinit var draftPassengers: MutableList<TripPassenger>
+    private lateinit var trip: Trip
+    private lateinit var draftTrip: Trip
 
     private val binding get() = _binding!!
 
@@ -37,7 +43,17 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewAdapter = TripDetailsDriverAdapter(mutableListOf(), context)
+
+        viewAdapter = TripDetailsDriverAdapter(mutableListOf(), context, object: TripDetailsDriverAdapter.OnItemToggleListener{
+            override fun onToggle(passengerPosition: Int, newValue: Boolean) {
+                var newPassengers = draftPassengers
+                var newPassenger = newPassengers[passengerPosition]
+                newPassenger.busBoarded = newValue
+                newPassengers[passengerPosition] = newPassenger
+                draftPassengers = newPassengers
+            }
+        })
+
         myTripsPresenter.getTicketsByTrip(arguments?.getParcelable<Trip>("Trip")!!.id)
         val tripStateList = resources.getStringArray((R.array.trip_state_list))
         tripStatesAdapter = context?.let { ArrayAdapter(it, R.layout.list_item, tripStateList) }
@@ -51,6 +67,11 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
             //scanresult tripId-passengerId
         }
 
+        if (bundle !=null && bundle.containsKey("Trip")){
+            trip = bundle.getParcelable<Trip>("Trip")!!
+            draftTrip = trip
+        }
+
         return binding.root
     }
 
@@ -62,13 +83,16 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
         val tripIdTextview : TextView = view.findViewById(R.id.trip_details_id_textview)
         val tripBoardingStopHourTextview : TextView = view.findViewById(R.id.trip_origin_destination_hour_textview)
 
-        val trip = arguments?.getParcelable<Trip>("Trip")
         tripIdTextview.text = context?.getString(R.string.trip_id, trip!!.id)
         tripBoardingStopHourTextview.text = context?.getString(R.string.trip_origin_destination_hour, trip!!.origin, trip.destination, trip.departureTime)
 
         with(binding.tripStatusTextView) {
             setAdapter(tripStatesAdapter)
-            setText(tripStatesAdapter!!.getItem(0), false)
+            setText(trip.state.text, false)
+            setOnItemClickListener { _, _, position, _ ->
+                val newState : String = (adapter.getItem(position) ?: "") as String
+                draftTrip.state  = draftTrip.getStateByText(newState)
+            }
         }
 
         binding.qrButton.setOnClickListener(){
@@ -103,6 +127,9 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
 
     override fun onGetTicketsByTripOk(tickets: MutableList<Ticket>, passengers: MutableList<TripPassenger>) {
         currentTickets = tickets
+        draftTickets = tickets
+        currentPassengers = passengers
+        draftPassengers = passengers
         setRecyclerViewList(passengers)
     }
 

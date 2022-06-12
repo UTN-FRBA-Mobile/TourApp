@@ -17,7 +17,7 @@ class Trip(
     val busStops: MutableList<String>,
     val departureTime: String,
     val date: Date,
-    val state: TripState,
+    var state: TripState,
     val driver: User
 ) : Parcelable {
 
@@ -69,6 +69,18 @@ class Trip(
             TripState.CANCELLED.text -> "CANCELLED"
             else -> {
                 "PROCESSING"
+            }
+        }
+    }
+
+    fun getStateByText(value : String): TripState {
+        return return when (value) {
+            TripState.PROCESSING.text -> TripState.PROCESSING
+            TripState.DELAYED.text -> TripState.DELAYED
+            TripState.CONFIRMED.text -> TripState.CONFIRMED
+            TripState.CANCELLED.text -> TripState.CANCELLED
+            else -> {
+                TripState.PROCESSING
             }
         }
     }

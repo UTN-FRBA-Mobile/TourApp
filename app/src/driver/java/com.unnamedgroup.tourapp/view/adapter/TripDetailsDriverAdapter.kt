@@ -14,8 +14,14 @@ import com.unnamedgroup.tourapp.model.business.TripPassenger
 
 class TripDetailsDriverAdapter(
     private var mPassengers: MutableList<TripPassenger>,
-    private val mContext: Context?) :
+    private val mContext: Context?,
+    private val onItemToggleListener: OnItemToggleListener
+    ):
     RecyclerView.Adapter<TripDetailsDriverAdapter.ViewHolder>() {
+
+    interface OnItemToggleListener {
+        fun onToggle(passengerPosition: Int, newValue: Boolean)
+    }
 
     var passengersFilter : String = ""
     private var showingList = mPassengers.toMutableList()
@@ -28,18 +34,21 @@ class TripDetailsDriverAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val trip = showingList[position]
+        val passenger = showingList[position]
         val nameTextview : TextView = holder.view.findViewById(R.id.passenger_name_textview)
         val dniTextview : TextView = holder.view.findViewById(R.id.passenger_dni_textview)
         val busBoardingTextview : TextView = holder.view.findViewById(R.id.passenger_bus_boarding_textview)
         val busStopTextview : TextView = holder.view.findViewById(R.id.passenger_bus_stop_textview)
         val busBoarded : CheckBox = holder.view.findViewById(R.id.passenger_bus_boarded_checkBox)
 
-        nameTextview.text = trip.name
-        dniTextview.text = mContext?.getString(R.string.trip_details_dni, trip.dni)
-        busBoardingTextview.text = mContext?.getString(R.string.trip_details_bus_boarding, trip.busBoarding)
-        busStopTextview.text = mContext?.getString(R.string.trip_details_bus_stop, trip.busStop)
-        busBoarded.isChecked = trip.busBoarded
+        nameTextview.text = passenger.name
+        dniTextview.text = mContext?.getString(R.string.trip_details_dni, passenger.dni)
+        busBoardingTextview.text = mContext?.getString(R.string.trip_details_bus_boarding, passenger.busBoarding)
+        busStopTextview.text = mContext?.getString(R.string.trip_details_bus_stop, passenger.busStop)
+        busBoarded.isChecked = passenger.busBoarded
+        busBoarded.setOnCheckedChangeListener{ _, isChecked ->
+            onItemToggleListener.onToggle(holder.adapterPosition, isChecked )
+        }
     }
 
     override fun getItemCount() = showingList.size

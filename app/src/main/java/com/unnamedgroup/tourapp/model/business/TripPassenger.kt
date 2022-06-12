@@ -8,7 +8,7 @@ class TripPassenger(
     val dni: String,
     val busBoarding: String,
     val busStop: String,
-    val busBoarded: Boolean
+    var busBoarded: Boolean
 ): Parcelable {
 
     fun Boolean.toInt() = if (this) 1 else 0
