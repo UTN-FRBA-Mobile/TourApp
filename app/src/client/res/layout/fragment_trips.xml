@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="@string/last_trip"
         android:layout_gravity="right"
-        android:layout_marginRight="20dp"/>
+        android:layout_marginEnd="20dp"/>
 
     <EditText
         android:id="@+id/search_input"
@@ -23,13 +23,13 @@
         android:layout_marginHorizontal="@dimen/search_margin_horizontal"
         android:hint="@string/search_placeholder"
         android:importantForAutofill="no"
-        android:inputType="text" />
+        android:inputType="text"
+        android:layout_marginBottom="20dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/trips_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/search_input"
         android:layout_marginHorizontal="@dimen/recyclerview_margin_horizontal"
         android:layout_marginBottom="@dimen/recyclerview_margin_vertical" />
 
