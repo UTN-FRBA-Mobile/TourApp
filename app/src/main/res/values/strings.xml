@@ -7,6 +7,7 @@
     <string name="trip_qr_fragment_label">Certificados</string>
     <string name="new_trip_fragment_label">Nuevo Viaje</string>
     <string name="trips_fragment_label">Viajes</string>
+    <string name="qr_scanner_fragment_label">Escaneo de pasajero</string>
     <string name="next">Siguiente</string>
     <string name="previous">Previous</string>
     <string name="new_trip_button">Nuevo Viaje</string>
@@ -18,10 +19,10 @@
     <string name="trip_origin_destination_hour">%s - %s - %s hs</string>
 
     <string-array name="trip_state_list">
-        <item>CONFIRMED</item>
-        <item>DELAYED</item>
-        <item>PROCESSING</item>
-        <item>CANCELLED</item>
+        <item>Confirmado</item>
+        <item>Demorado</item>
+        <item>Procesando</item>
+        <item>Cancelado</item>
     </string-array>
 
     <!-- trip Details -->

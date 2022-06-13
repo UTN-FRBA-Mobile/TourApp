@@ -8,39 +8,46 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.unnamedgroup.tourapp.R
-import com.unnamedgroup.tourapp.model.business.Trip
 import com.unnamedgroup.tourapp.model.business.TripPassenger
 
 
 class TripDetailsDriverAdapter(
     private var mPassengers: MutableList<TripPassenger>,
-    private var mTrip: Trip,
-    private val mContext: Context?) :
+    private val mContext: Context?,
+    private val onItemToggleListener: OnItemToggleListener
+    ):
     RecyclerView.Adapter<TripDetailsDriverAdapter.ViewHolder>() {
+
+    interface OnItemToggleListener {
+        fun onToggle(passengerPosition: Int, newValue: Boolean)
+    }
 
     var passengersFilter : String = ""
     private var showingList = mPassengers.toMutableList()
 
     class ViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TripDetailsDriverAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.tripdetailsdriver_viewholder, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val trip = showingList[position]
+        val passenger = showingList[position]
         val nameTextview : TextView = holder.view.findViewById(R.id.passenger_name_textview)
         val dniTextview : TextView = holder.view.findViewById(R.id.passenger_dni_textview)
         val busBoardingTextview : TextView = holder.view.findViewById(R.id.passenger_bus_boarding_textview)
         val busStopTextview : TextView = holder.view.findViewById(R.id.passenger_bus_stop_textview)
         val busBoarded : CheckBox = holder.view.findViewById(R.id.passenger_bus_boarded_checkBox)
 
-        nameTextview.text = trip.name
-        dniTextview.text = mContext?.getString(R.string.trip_details_dni, trip.dni)
-        busBoardingTextview.text = mContext?.getString(R.string.trip_details_bus_boarding, trip.busBoarding)
-        busStopTextview.text = mContext?.getString(R.string.trip_details_bus_stop, trip.busStop)
-        busBoarded.isChecked = trip.busBoarded
+        nameTextview.text = passenger.name
+        dniTextview.text = mContext?.getString(R.string.trip_details_dni, passenger.dni)
+        busBoardingTextview.text = mContext?.getString(R.string.trip_details_bus_boarding, passenger.busBoarding)
+        busStopTextview.text = mContext?.getString(R.string.trip_details_bus_stop, passenger.busStop)
+        busBoarded.isChecked = passenger.busBoarded
+        busBoarded.setOnCheckedChangeListener{ _, isChecked ->
+            onItemToggleListener.onToggle(holder.adapterPosition, isChecked)
+        }
     }
 
     override fun getItemCount() = showingList.size
@@ -48,10 +55,10 @@ class TripDetailsDriverAdapter(
     fun setFilter(filterValue : String) {
         passengersFilter = filterValue
         showingList = mPassengers.filter {
-            it.dni!!.contains(filterValue, true) ||
-            it.name!!.contains(filterValue, true) ||
-            it.busBoarding!!.contains(filterValue, true) ||
-            it.busStop!!.contains(filterValue, true)
+            it.dni.contains(filterValue, true) ||
+            it.name.contains(filterValue, true) ||
+            it.busBoarding.contains(filterValue, true) ||
+            it.busStop.contains(filterValue, true)
         }.toMutableList()
         notifyDataSetChanged()
     }
@@ -61,4 +68,19 @@ class TripDetailsDriverAdapter(
         showingList = passengers
         notifyDataSetChanged()
     }
+
+    fun getPassengerById(passengerId: Int): TripPassenger? {
+        return mPassengers.find { tripPassenger -> tripPassenger.id == passengerId }
+    }
+
+    fun getPassengerPosition(passenger: TripPassenger): Int {
+        return mPassengers.indexOf(passenger)
+    }
+
+    fun togglePassenger(passengerPosition: Int, newValue: Boolean) {
+        val passenger = mPassengers[passengerPosition]
+        passenger.busBoarded = newValue
+        notifyItemChanged(passengerPosition)
+    }
+
 }

@@ -41,7 +41,7 @@ interface ApiService {
     fun modifyTicket(@Path("id") ticketId: Int , @Body newTicket: TicketREST): Call<TicketREST>
 
     @POST("tickets")
-    fun addTicket( @Body newTicket: TicketREST): Call<TicketREST>
+    fun addTicket(@Body newTicket: TicketREST): Call<TicketREST>
 
 
     @GET("tickets?_sort=trip.date,trip.departureTime&_order=desc,desc&_limit=1")

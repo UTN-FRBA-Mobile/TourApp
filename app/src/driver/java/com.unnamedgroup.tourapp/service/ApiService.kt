@@ -37,4 +37,19 @@ interface ApiService {
     @GET("tickets")
     fun getTicketsByTrip(@Query("trip.id") tripId: Int): Call<MutableList<TicketREST>>
 
+    @Headers(
+        "Content-Type: application/json",
+        "Accept: application/json"
+    )
+    @PUT("trips/{id}")
+    fun saveTrip(@Path("id") tripId: Int, @Body trip: TripREST): Call<Void>
+
+    @Headers(
+        "Content-Type: application/json",
+        "Accept: application/json"
+    )
+    @PUT("tickets/{id}")
+    fun saveTicket(@Path("id") ticketId: Int, @Body ticket: TicketREST): Call<Void>
+
+
 }

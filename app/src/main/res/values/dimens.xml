@@ -29,4 +29,6 @@
     <dimen name="screen_margin_vertical">20dp</dimen>
     <dimen name="passenger_right_margin">8dp</dimen>
 
+    <dimen name="button_width">150dp</dimen>
+
 </resources>

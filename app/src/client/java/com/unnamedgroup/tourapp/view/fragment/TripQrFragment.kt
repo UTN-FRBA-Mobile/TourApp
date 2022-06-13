@@ -92,7 +92,7 @@ class TripQrFragment : Fragment() {
         binding.shareButton.setOnClickListener(){
             try {
                 // get qr
-                var qrCodeData = "${currentTicket.id}-${currentPassenger.id}"
+                val qrCodeData = "${currentTicket.id}-${currentPassenger.id}"
                 val barcodeEncoder = BarcodeEncoder()
                 val bitmap = barcodeEncoder.encodeBitmap(qrCodeData, BarcodeFormat.QR_CODE, 600, 600)
 
@@ -101,12 +101,9 @@ class TripQrFragment : Fragment() {
                 val share = Intent(Intent.ACTION_SEND)
                 share.type = "image/jpeg"
 
-                var bmpUri : Uri = context?.let { c -> saveImage(bitmap, c.applicationContext) }!!
+                val bmpUri : Uri = context?.let { c -> saveImage(bitmap, c.applicationContext) }!!
                 share.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 share.putExtra(Intent.EXTRA_STREAM, bmpUri)
-                share.putExtra(Intent.EXTRA_STREAM, "New App")
-                startActivity(Intent.createChooser(share, "Share Content"))
-
                 startActivity(Intent.createChooser(share, "Share Image"))
             } catch (e: Exception) {
                 Toast.makeText(context, getString(R.string.generate_qr_error), Toast.LENGTH_LONG).show()
@@ -118,7 +115,7 @@ class TripQrFragment : Fragment() {
     private fun setQrImage(){
         with (binding.qrCode){
             try {
-                var qrCodeData = "${currentTicket.id}-${currentPassenger.id}"
+                val qrCodeData = "${currentTicket.id}-${currentPassenger.id}"
                 val barcodeEncoder = BarcodeEncoder()
                 val bitmap = barcodeEncoder.encodeBitmap(qrCodeData, BarcodeFormat.QR_CODE, 600, 600)
                 setImageBitmap(bitmap)
@@ -129,16 +126,16 @@ class TripQrFragment : Fragment() {
     }
 
     private fun saveImage(image: Bitmap, context: Context) : Uri? {
-        var imagesFolder = File(context.cacheDir, "images")
+        val imagesFolder = File(context.cacheDir, "images")
         var uri: Uri? = null
         try {
          imagesFolder.mkdirs()
-         var file = File(imagesFolder, "${currentPassenger.name}-${currentPassenger.dni}.jpg" )
+         val file = File(imagesFolder, "${currentPassenger.name}-${currentPassenger.dni}.jpg" )
 
-         var stream = FileOutputStream(file)
+         val stream = FileOutputStream(file)
          image.compress(Bitmap.CompressFormat.JPEG, 90, stream)
          stream.flush()
-         uri = FileProvider.getUriForFile(requireContext(), "com.unnamedgroup.tourapp" +".provider", file)
+         uri = FileProvider.getUriForFile(requireContext(), "com.unnamedgroup.tourapp.client" +".provider", file)
 
         } catch (e: Exception){
             Toast.makeText(context, getString(R.string.generate_qr_error), Toast.LENGTH_LONG).show()

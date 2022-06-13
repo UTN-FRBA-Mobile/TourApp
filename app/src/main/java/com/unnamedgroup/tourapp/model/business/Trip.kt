@@ -17,9 +17,9 @@ class Trip(
     val busStops: MutableList<String>,
     val departureTime: String,
     val date: Date,
-    val state: TripState,
+    var state: TripState,
     val driver: User
-    ): Parcelable {
+) : Parcelable {
 
     val dateStr = Utils.getDateWithFormat(date, "dd/MM/yyyy")
 
@@ -35,11 +35,23 @@ class Trip(
         Date(parcel.readLong()),
         TripState.valueOf(parcel.readString()!!),
         parcel.readParcelable(User::class.java.classLoader)!!,
-        )
+    )
 
-    fun toRest(): TripREST{
+    fun toRest(): TripREST {
         val restDate = Utils.getDateWithFormat(date, "dd-MM-yyyy")
-        return TripREST(id,origin, destination, passengersAmount, price, busBoardings, busStops, departureTime, restDate,  this.getRestTripState(), driver)
+        return TripREST(
+            id,
+            origin,
+            destination,
+            passengersAmount,
+            price,
+            busBoardings,
+            busStops,
+            departureTime,
+            restDate,
+            this.getRestTripState(),
+            driver
+        )
     }
 
     enum class TripState(val int: Int, val text: String) {
@@ -50,13 +62,25 @@ class Trip(
     }
 
     private fun getRestTripState(): String {
-        return when (state.text){
+        return when (state.text) {
             TripState.PROCESSING.text -> "PROCESSING"
             TripState.DELAYED.text -> "DELAYED"
             TripState.CONFIRMED.text -> "CONFIRMED"
             TripState.CANCELLED.text -> "CANCELLED"
             else -> {
                 "PROCESSING"
+            }
+        }
+    }
+
+    fun getStateByText(value : String): TripState {
+        return return when (value) {
+            TripState.PROCESSING.text -> TripState.PROCESSING
+            TripState.DELAYED.text -> TripState.DELAYED
+            TripState.CONFIRMED.text -> TripState.CONFIRMED
+            TripState.CANCELLED.text -> TripState.CANCELLED
+            else -> {
+                TripState.PROCESSING
             }
         }
     }

@@ -4,16 +4,18 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class TripPassenger(
+    var id: Int,
     val name: String,
     val dni: String,
     val busBoarding: String,
     val busStop: String,
-    val busBoarded: Boolean
+    var busBoarded: Boolean
 ): Parcelable {
 
     fun Boolean.toInt() = if (this) 1 else 0
 
     constructor(parcel: Parcel) : this(
+        parcel.readInt(),
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
@@ -23,6 +25,7 @@ class TripPassenger(
 
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(id)
         parcel.writeString(name)
         parcel.writeString(dni)
         parcel.writeString(busBoarding)

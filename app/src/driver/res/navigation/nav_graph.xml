@@ -19,5 +19,19 @@
         android:name="com.unnamedgroup.tourapp.view.fragment.TripDetailsDriverFragment"
         android:label="Detalle del Viaje"
         tools:layout="@layout/fragment_trip_details_driver">
+        <action
+            android:id="@+id/action_TripDetailsDriverFragment_to_QrScannerFragment"
+            app:destination="@id/QrScannerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/QrScannerFragment"
+        android:name="com.unnamedgroup.tourapp.view.fragment.QrScannerFragment"
+        android:label="@string/qr_scanner_fragment_label"
+        tools:layout="@layout/fragment_qr_scanner" >
+        <action
+            android:id="@+id/action_QrScannerFragment_to_TripDetailsDriverFragment"
+            app:destination="@id/TripDetailsDriverFragment"
+            app:popUpTo="@id/TripDetailsDriverFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>

@@ -1,112 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragment.TripDetailsDriverFragment"
-    android:orientation="vertical">
+    tools:context=".view.fragment.TripDetailsDriverFragment">
 
-    <TextView
-        android:id="@+id/trip_details_id_textview"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/info_margin_horizontal"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:text="@string/trip_id"
-        android:textSize="25dp"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/trip_origin_destination_hour_textview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/trip_details_id_textview"
-        android:layout_marginHorizontal="@dimen/info_margin_horizontal"
-        android:layout_marginTop="9dp"
-        android:layout_marginBottom="10dp"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:text="@string/trip_origin_destination_hour"
-        android:textSize="15dp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/trip_details_id_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/info_margin_horizontal"
+            android:layout_marginTop="@dimen/title_margin_vertical"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:text="@string/trip_id"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/trip_details_driver_search_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/trip_origin_destination_hour_textview"
-        android:layout_marginHorizontal="@dimen/search_margin_horizontal"
-        android:layout_marginVertical="@dimen/search_margin_vertical"
-        android:layout_marginTop="2dp"
-        android:hint="@string/search_placeholder"
-        android:importantForAutofill="no"
-        android:inputType="text" />
+        <TextView
+            android:id="@+id/trip_origin_destination_hour_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/trip_details_id_textview"
+            android:layout_marginHorizontal="@dimen/info_margin_horizontal"
+            android:layout_marginTop="@dimen/title_margin_vertical"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:text="@string/trip_origin_destination_hour"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/trip_details_passenger_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/trip_details_driver_search_input"
-        android:layout_marginHorizontal="@dimen/info_margin_horizontal"
-        android:layout_marginTop="9dp"
-        android:layout_marginBottom="10dp"
-        android:ellipsize="end"
-        android:text="@string/passenger_title"
-        android:textSize="15dp"
-        android:textStyle="bold" />
+        <EditText
+            android:id="@+id/trip_details_driver_search_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/trip_origin_destination_hour_textview"
+            android:layout_marginHorizontal="@dimen/search_margin_horizontal"
+            android:layout_marginTop="@dimen/search_margin_vertical"
+            android:layout_marginBottom="@dimen/title_margin_vertical"
+            android:hint="@string/search_placeholder"
+            android:importantForAutofill="no"
+            android:inputType="text" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/trip_details_driver_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/trip_details_passenger_title"
-        android:layout_marginHorizontal="@dimen/recyclerview_margin_horizontal"
-        android:layout_marginBottom="@dimen/recyclerview_margin_vertical" />
+        <TextView
+            android:id="@+id/trip_details_passenger_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/trip_details_driver_search_input"
+            android:layout_marginHorizontal="@dimen/info_margin_horizontal"
+            android:layout_marginVertical="@dimen/between_title_margin_vertical"
+            android:ellipsize="end"
+            android:text="@string/passenger_title"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/trip_status"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/search_margin_horizontal"
-        android:layout_marginVertical="@dimen/search_margin_vertical"
-        android:layout_marginTop="2dp"
-        android:layout_below="@+id/trip_details_driver_recyclerview"
-        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/trip_details_driver_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/trip_details_passenger_title"
+            android:layout_marginHorizontal="@dimen/recyclerview_margin_horizontal"
+            android:layout_marginVertical="@dimen/between_title_margin_vertical" />
 
-        <AutoCompleteTextView
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/trip_status"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/search_margin_horizontal"
+            android:layout_marginBottom="@dimen/between_title_margin_vertical"
+            android:layout_below="@+id/trip_details_driver_recyclerview"
+            >
+
+            <AutoCompleteTextView
                 android:id="@+id/trip_status_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/trip_state_content_destription"
                 android:inputType="none" />
-    </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <LinearLayout
-        android:id="@+id/buttons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/trip_status"
-        android:layout_marginVertical="@dimen/buttons_margin_Vertical"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/cancel_button"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/buttons"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/buttons_margin_between"
-            android:text="@string/trip_details_cancel_button" />
+            android:layout_below="@+id/trip_status"
+            android:layout_marginStart="@dimen/title_margin_vertical"
+            android:layout_marginTop="@dimen/title_margin_vertical"
+            android:layout_marginEnd="@dimen/title_margin_vertical"
+            android:layout_marginVertical="@dimen/title_margin_vertical"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/save_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/buttons_margin_between"
-            android:text="@string/trip_details_scan_qr" />
-    </LinearLayout>
+            <Button
+                android:id="@+id/qr_button"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/buttons_margin_between"
+                android:text="@string/trip_details_scan_qr"
+                tools:ignore="ButtonStyle" />
 
-</RelativeLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

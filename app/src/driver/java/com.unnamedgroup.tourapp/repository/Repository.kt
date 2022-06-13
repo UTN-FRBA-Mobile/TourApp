@@ -1,8 +1,8 @@
 package com.unnamedgroup.tourapp.repository
 
 import com.unnamedgroup.tourapp.BuildConfig
+import com.unnamedgroup.tourapp.model.business.Ticket
 import com.unnamedgroup.tourapp.model.business.Trip
-import com.unnamedgroup.tourapp.model.business.TripPassenger
 import com.unnamedgroup.tourapp.model.rest.NewUserREST
 import com.unnamedgroup.tourapp.model.rest.TicketREST
 import com.unnamedgroup.tourapp.model.rest.TripREST
@@ -43,6 +43,7 @@ class Repository() {
                     presenter.onGetTripsFailed(response.message())
                 }
             }
+
             override fun onFailure(call: Call<MutableList<TripREST>>, t: Throwable) {
                 presenter.onGetTripsFailed(t.toString())
             }
@@ -51,55 +52,91 @@ class Repository() {
 
     fun getLogin(presenter: LoginPresenterInt, email: String, password: String) {
         service.getLogin(email, password).enqueue(object : Callback<MutableList<UserREST>> {
-            override fun onResponse(call: Call<MutableList<UserREST>>, response: Response<MutableList<UserREST>>) {
+            override fun onResponse(
+                call: Call<MutableList<UserREST>>,
+                response: Response<MutableList<UserREST>>
+            ) {
                 if (response.isSuccessful && response.body()!!.isNotEmpty()) {
                     presenter.onGetLoginOk(response.body()!![0].toUser())
                 } else {
                     presenter.onGetLoginFailed("Credenciales incorrectas")
                 }
             }
+
             override fun onFailure(call: Call<MutableList<UserREST>>, t: Throwable) {
                 presenter.onGetLoginFailed(t.toString())
             }
         })
     }
 
-    fun registerUser(presenter: RegisterPresenterInt, name: String, email: String, password: String, dni: String) {
+    fun registerUser(
+        presenter: RegisterPresenterInt,
+        name: String,
+        email: String,
+        password: String,
+        dni: String
+    ) {
         checkUserDNI(presenter, name, email, password, dni)
     }
 
-    private fun checkUserDNI(presenter: RegisterPresenterInt, name: String, email: String, password: String, dni: String) {
+    private fun checkUserDNI(
+        presenter: RegisterPresenterInt,
+        name: String,
+        email: String,
+        password: String,
+        dni: String
+    ) {
         service.getUserByDNI(dni).enqueue(object : Callback<MutableList<UserREST>> {
-            override fun onResponse(call: Call<MutableList<UserREST>>, response: Response<MutableList<UserREST>>) {
+            override fun onResponse(
+                call: Call<MutableList<UserREST>>,
+                response: Response<MutableList<UserREST>>
+            ) {
                 if (response.isSuccessful && response.body()!!.size == 0) {
                     checkUserEmail(presenter, name, email, password, dni)
                 } else {
                     presenter.onRegisterUserFailed("Ya exite un usuario con ese DNI")
                 }
             }
+
             override fun onFailure(call: Call<MutableList<UserREST>>, t: Throwable) {
                 presenter.onRegisterUserFailed(t.toString())
             }
         })
     }
 
-    private fun checkUserEmail(presenter: RegisterPresenterInt, name: String, email: String, password: String, dni: String) {
+    private fun checkUserEmail(
+        presenter: RegisterPresenterInt,
+        name: String,
+        email: String,
+        password: String,
+        dni: String
+    ) {
         service.getUserByEmail(email).enqueue(object : Callback<MutableList<UserREST>> {
-            override fun onResponse(call: Call<MutableList<UserREST>>, response: Response<MutableList<UserREST>>) {
+            override fun onResponse(
+                call: Call<MutableList<UserREST>>,
+                response: Response<MutableList<UserREST>>
+            ) {
                 if (response.isSuccessful && response.body()!!.size == 0) {
                     registerUserAfterChecks(presenter, name, email, password, dni)
                 } else {
                     presenter.onRegisterUserFailed("Ya exite un usuario con ese email")
                 }
             }
+
             override fun onFailure(call: Call<MutableList<UserREST>>, t: Throwable) {
                 presenter.onRegisterUserFailed(t.toString())
             }
         })
     }
 
-    private fun registerUserAfterChecks(presenter: RegisterPresenterInt, name: String, email: String, password: String, dni: String) {
-        val newUser = NewUserREST(name, email, dni, password,"asdasdasd")
+    private fun registerUserAfterChecks(
+        presenter: RegisterPresenterInt,
+        name: String,
+        email: String,
+        password: String,
+        dni: String
+    ) {
+        val newUser = NewUserREST(name, email, dni, password, "asdasdasd")
         service.createUser(newUser).enqueue(object : Callback<UserREST> {
             override fun onResponse(call: Call<UserREST>, response: Response<UserREST>) {
                 if (response.isSuccessful) {
@@ -108,6 +145,7 @@ class Repository() {
                     presenter.onRegisterUserFailed("Credenciales incorrectas")
                 }
             }
+
             override fun onFailure(call: Call<UserREST>, t: Throwable) {
                 presenter.onRegisterUserFailed(t.toString())
             }
@@ -121,19 +159,52 @@ class Repository() {
                 response: Response<MutableList<TicketREST>>
             ) {
                 val respList: MutableList<TicketREST> = response.body()!!
-                val tripPassengers: MutableList<TripPassenger> = mutableListOf()
+                val tickets: MutableList<Ticket> = mutableListOf()
                 for (r in respList) {
-                    for (p in r.toTicket().passengers){
-                        tripPassengers.add(TripPassenger(p.name, p.dni, r.toTicket().busBoarding, r.toTicket().busStop, p.busBoarded))
-                    }
+                    tickets.add(r.toTicket())
                 }
-                presenter.onGetPassengersByTripOk(tripPassengers)
+                presenter.onGetTicketsByTripOk(tickets)
             }
 
             override fun onFailure(call: Call<MutableList<TicketREST>>, t: Throwable) {
-                presenter.onGetPassengersByTripFailed(t.toString())
+                presenter.onGetTicketsByTripFailed(t.toString())
             }
         })
     }
+
+    fun saveTrip(presenter: MyTripsPresenterInt, tripId: Int, trip: TripREST) {
+        service.saveTrip(tripId, trip).enqueue(object : Callback<Void> {
+            override fun onResponse(
+                call: Call<Void>,
+                response: Response<Void>
+            ) {
+                if (response.isSuccessful) {
+                    presenter.onSaveTripOk()
+                } else {
+                    presenter.onSaveTripError(response.message())
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                presenter.onSaveTripError(t.toString())
+            }
+        })
+    }
+
+    fun saveTicket(presenter: MyTripsPresenterInt, ticket: Ticket, passengerPosition: Int, newValue: Boolean) {
+        service.saveTicket(ticket.id!!, ticket.toRest()).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    presenter.onSaveTicketOk(passengerPosition, newValue)
+                } else {
+                    presenter.onSaveTicketError(response.message(), passengerPosition, newValue)
+                }
+            }
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                presenter.onSaveTicketError(t.toString(), passengerPosition, newValue)
+            }
+        })
+    }
+
 
 }
