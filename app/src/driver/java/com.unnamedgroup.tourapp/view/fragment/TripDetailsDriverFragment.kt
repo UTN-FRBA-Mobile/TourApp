@@ -45,6 +45,7 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
             object : TripDetailsDriverAdapter.OnItemToggleListener {
                 override fun onToggle(passengerPosition: Int, newValue: Boolean) {
                     val passenger = currentPassengers[passengerPosition]
+                    if (newValue == passenger.busBoarded) return
                     passenger.busBoarded = newValue
                     myTripsPresenter.saveTicket(currentTickets, passenger, passengerPosition, newValue)
                 }

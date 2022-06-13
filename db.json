@@ -27,7 +27,7 @@
       "origin": "Mercedes",
       "passengersAmount": 20,
       "price": 800,
-      "state": "CONFIRMED"
+      "state": "PROCESSING"
     },
     {
       "id": 2,
