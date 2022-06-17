@@ -1,16 +1,24 @@
 package com.unnamedgroup.tourapp.view.fragment
 
+import android.Manifest
+import android.app.Activity.RESULT_OK
 import android.content.ClipData
 import android.content.ClipboardManager
-import android.content.Context
 import android.content.Context.CLIPBOARD_SERVICE
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.checkSelfPermission
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +29,10 @@ import com.unnamedgroup.tourapp.presenter.implementation.TripDetailsPresenterImp
 import com.unnamedgroup.tourapp.presenter.interfaces.TripDetailsPresenterInt
 import com.unnamedgroup.tourapp.utils.Utils
 import com.unnamedgroup.tourapp.view.adapter.ConfirmTripPassengersAdapter
+import java.io.File
+import java.io.InputStream
 import java.util.*
+
 
 class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View {
 
@@ -34,6 +45,7 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View {
 
     private var ticket: Ticket? = null
     private var tripDetailsPresenterInt: TripDetailsPresenterInt = TripDetailsPresenterImpl(this)
+    private var file : Uri? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,6 +70,7 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View {
             binding.valueOriginStop.text = it.busBoarding
             binding.valueDestinationStop.text = it.busStop
             binding.valueNumberOfPassengers.text = it.passengers.size.toString()
+            binding.valueImport.text = (it.trip.price *it.passengers.size).toString()
         }
 
         // Complete recyclerView of passengers
@@ -91,6 +104,14 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View {
 
         }
 
+        binding.bankUploadReceipt.setEndIconOnClickListener {
+            val intent = Intent()
+                .setType("*/*")
+                .setAction(Intent.ACTION_GET_CONTENT)
+
+            startActivityForResult(Intent.createChooser(intent, "Select a file"), 111)
+        }
+
 
 
     }
@@ -103,12 +124,34 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View {
         Toast.makeText(context, "$data Copiado al portapapeles", Toast.LENGTH_SHORT).show()
     }
 
+    private fun procesFile(uri: Uri) : String{
+
+        return ""
+    }
+
+    private fun confirmPermision(){
+
+
+    }
+
     override fun onModifyTicketOk(ticket: Ticket) {
         findNavController().navigate(R.id.action_confirmTripFragment_to_resultScreenFragment)
     }
 
     override fun onModifyTicketFailed(error: String) {
         Toast.makeText(context, getString(R.string.get_trips_error), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 111 && resultCode == RESULT_OK) {
+            file = data?.data //The uri with the location of the file
+            binding.bankUploadReceiptTextfield.setText(file!!.pathSegments.last())
+            println(procesFile(file!!))
+            Toast.makeText(context, "Comprobante Seleccionado", Toast.LENGTH_SHORT).show()
+
+        }
     }
 
 }
