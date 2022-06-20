@@ -96,7 +96,7 @@ class TripsFragment : Fragment(), GetTripsPresenterInt.View, TripsPresenterInt.V
 
     override fun onGetLastTicketByUserOk(ticket: Ticket) {
         val bundle = Bundle()
-        bundle.putParcelable("Ticket", ticket)
+        bundle.putParcelable("LastTicket", ticket)
         findNavController().navigate(R.id.action_tripsFragment_to_NewTripFragment, bundle)
     }
 

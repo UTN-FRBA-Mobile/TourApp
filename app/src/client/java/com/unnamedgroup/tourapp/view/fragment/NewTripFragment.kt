@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
@@ -16,37 +17,61 @@ import com.unnamedgroup.tourapp.model.business.Passenger
 import com.unnamedgroup.tourapp.model.business.Ticket
 import com.unnamedgroup.tourapp.model.business.Trip
 import com.unnamedgroup.tourapp.model.business.User
+import com.unnamedgroup.tourapp.presenter.implementation.NewTripPresenterImpl
+import com.unnamedgroup.tourapp.presenter.implementation.TripsPresenterImpl
+import com.unnamedgroup.tourapp.presenter.interfaces.NewTripPresenterInt
+import com.unnamedgroup.tourapp.presenter.interfaces.TripsPresenterInt
+import com.unnamedgroup.tourapp.utils.Utils
+import java.text.SimpleDateFormat
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
-class NewTripFragment : Fragment() {
+class NewTripFragment : Fragment(), NewTripPresenterInt.View {
 
     private var _binding: FragmentNewTripBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private var newTripPresenter : NewTripPresenterInt = NewTripPresenterImpl(this)
     private var lastTicket : Ticket? = null
+    private var firstTicket : Ticket? = null
+    private var firstTicketPrice : Float = 0f
     private var trip : Trip? = null
+    private var departureDatesList : List<String>? = null
+    private var departureTimesList : List<String>? = null
+    private var departureDateAdapter: ArrayAdapter<String>? = null
+    private var departureTimeAdapter: ArrayAdapter<String>? = null
     private var boardingsAdapter: ArrayAdapter<String>? = null
     private var stopsAdapter: ArrayAdapter<String>? = null
     private var numberOfTicketsAdapter: ArrayAdapter<Int>? = null
     private var passengersLayouts: MutableList<LinearLayout> = ArrayList()
+    private var roundTrip: Boolean = false
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
-        lastTicket = arguments?.getParcelable<Ticket>("Ticket")
-        lastTicket?.let {
-            trip = it.trip
+        firstTicket = arguments?.getParcelable<Ticket>("Ticket")
+        firstTicket?.let {
+            //TODO: buscar un trip de vuelta
+            trip = Trip(it.trip.id,it.trip.destination, it.trip.origin, it.trip.passengersAmount, it.trip.price, it.trip.busStops, it.trip.busBoardings, it.trip.departureTime, it.trip.date, it.trip.state, it.trip!!.driver)
+            roundTrip = true
+            lastTicket = Ticket(null, it.user, it.passengers, trip!!, it.busStop, it.busBoarding)
+            firstTicketPrice = it.passengers.size * it.trip.price
         } ?: run {
-            trip = arguments?.getParcelable<Trip>("Trip")
+            lastTicket = arguments?.getParcelable<Ticket>("LastTicket")
+            lastTicket?.let {
+                trip = it.trip
+            } ?: run {
+                trip = arguments?.getParcelable<Trip>("Trip")
+            }
         }
         trip?.busBoardings?.let { boardingsAdapter = ArrayAdapter(requireContext(), R.layout.list_item, it) }
         trip?.busStops?.let { stopsAdapter = ArrayAdapter(requireContext(), R.layout.list_item, it) }
         trip?.passengersAmount?.let { numberOfTicketsAdapter = ArrayAdapter(requireContext(), R.layout.list_item, (1..it).toList())}
+        trip?.let { newTripPresenter.getTripsByOriginAndDestination(it.origin,it.destination) }
         _binding = FragmentNewTripBinding.inflate(inflater, container, false)
         return binding.root
 
@@ -61,6 +86,14 @@ class NewTripFragment : Fragment() {
         binding.tilDestination.editText?.setText(trip?.destination)
         binding.tilDepartureDate.editText?.setText(trip?.dateStr)
         binding.tilDepartureHour.editText?.setText(trip?.departureTime)
+        binding.actvDepartureDate.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+            trip!!.date = Utils.parseDateWithFormat(departureDatesList!!.get(position), "dd-MM-yyyy")
+            newTripPresenter.getTripsByOriginAndDestinationAndDate(trip!!.origin, trip!!.destination, departureDatesList!!.get(position))
+        }
+        binding.actvDepartureTime.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+            //TODO: Recargar lugar de subida y bajada
+            trip!!.departureTime = departureTimesList!!.get(position)
+        }
         with(binding.actvBoarding) {
             setAdapter(boardingsAdapter)
             lastTicket?.let {
@@ -99,6 +132,9 @@ class NewTripFragment : Fragment() {
             }
         }
         refreshPrice(binding.actvNumberOfTickets.text.toString().toInt())
+        if (roundTrip) {
+            binding.smRoundTrip.visibility = View.GONE
+        }
     }
 
     override fun onDestroyView() {
@@ -107,7 +143,13 @@ class NewTripFragment : Fragment() {
     }
 
     private fun refreshPrice(numberOfTickets : Int) {
-        binding.mtvPrice.text = getString(R.string.price) + (numberOfTickets) * trip!!.price
+        var price : Float = 0f
+        if (roundTrip) {
+            price =  firstTicketPrice + numberOfTickets * trip!!.price
+        } else {
+            price =  numberOfTickets * trip!!.price
+        }
+        binding.mtvPrice.text = getString(R.string.price) + price
     }
 
     private fun onChangeNumberOfTickets(numberOfTickets : Int) {
@@ -151,6 +193,58 @@ class NewTripFragment : Fragment() {
         var ticket = Ticket(null, User(1, "", "", "", ""), passengers, trip!!, busBoarding, busStop)
         val bundle = Bundle()
         bundle.putParcelable("Ticket", ticket)
-        findNavController().navigate(R.id.action_NewTripFragment_to_confirmTripFragment, bundle)
+        if (binding.smRoundTrip.isChecked) {
+            findNavController().navigate(R.id.action_NewTripFragment_self, bundle)
+        } else {
+            if (roundTrip) {
+                bundle.putParcelable("Ticket", firstTicket)
+                bundle.putParcelable("Ticket2", ticket)
+            }
+            findNavController().navigate(R.id.action_NewTripFragment_to_confirmTripFragment, bundle)
+        }
+    }
+
+    private fun getDatesArray(trips: MutableList<Trip>) : List<String> {
+        return trips.map { Utils.getDateWithFormat(it.date, "dd-MM-yyyy") } .distinct()
+    }
+
+    private fun getTimesArray(trips: MutableList<Trip>) : List<String> {
+        return trips.map { it.departureTime } .distinct()
+    }
+
+    override fun onGetTripsByOriginAndDestinationOk(trips: MutableList<Trip>) {
+        departureDatesList = getDatesArray(trips)
+        departureDateAdapter = ArrayAdapter(requireContext(), R.layout.list_item, departureDatesList!!)
+        with(binding.actvDepartureDate) {
+            setAdapter(departureDateAdapter)
+            lastTicket?.let {
+                setText(Utils.getDateWithFormat(it.trip.date, "dd-MM-yyyy"), false)
+                newTripPresenter.getTripsByOriginAndDestinationAndDate(it.trip.origin, it.trip.destination, Utils.getDateWithFormat(it.trip.date, "dd-MM-yyyy"))
+            } ?: run {
+                setText(Utils.getDateWithFormat(trip!!.date, "dd-MM-yyyy"), false)
+                newTripPresenter.getTripsByOriginAndDestinationAndDate(trip!!.origin, trip!!.destination, Utils.getDateWithFormat(trip!!.date, "dd-MM-yyyy"))
+            }
+        }
+    }
+
+    override fun onGetTripsByOriginAndDestinationFailed(error: String) {
+        Toast.makeText(context, getString(R.string.get_trips_error), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onGetTripsByOriginAndDestinationAndDateOk(trips: MutableList<Trip>) {
+        departureTimesList = getTimesArray(trips)
+        departureTimeAdapter = ArrayAdapter(requireContext(), R.layout.list_item, departureTimesList!!)
+        with(binding.actvDepartureTime) {
+            setAdapter(departureTimeAdapter)
+            lastTicket?.let {
+                setText(it.trip.departureTime, false)
+            } ?: run {
+                setText(trip?.departureTime, false)
+            }
+        }
+    }
+
+    override fun onGetTripsByOriginAndDestinationAndDateFailed(error: String) {
+        Toast.makeText(context, getString(R.string.get_trips_error), Toast.LENGTH_SHORT).show()
     }
 }

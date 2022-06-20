@@ -15,8 +15,8 @@ class Trip(
     val price: Float,
     val busBoardings: MutableList<String>,
     val busStops: MutableList<String>,
-    val departureTime: String,
-    val date: Date,
+    var departureTime: String,
+    var date: Date,
     var state: TripState,
     val driver: User
 ) : Parcelable {

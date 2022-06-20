@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_NewTripFragment_to_tripsFragment"
             app:destination="@id/tripsFragment" />
+        <action
+            android:id="@+id/action_NewTripFragment_self"
+            app:destination="@id/NewTripFragment" />
     </fragment>
     <fragment
         android:id="@+id/confirmTripFragment"
