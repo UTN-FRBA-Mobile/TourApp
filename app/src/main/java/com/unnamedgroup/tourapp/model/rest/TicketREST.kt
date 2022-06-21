@@ -8,6 +8,7 @@ data class TicketREST(
     val passengers: MutableList<PassengerREST>,
     val user: UserREST,
     val trip: TripREST,
+    var receipt: String?,
     val busBoarding: String,
     val busStop: String
 ) {
@@ -21,6 +22,7 @@ data class TicketREST(
             user.toUser(),
             passengers,
             trip.toTrip(),
+            receipt,
             busBoarding,
             busStop
         )

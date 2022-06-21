@@ -60,7 +60,7 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
             //TODO: buscar un trip de vuelta
             trip = Trip(it.trip.id,it.trip.destination, it.trip.origin, it.trip.passengersAmount, it.trip.price, it.trip.busStops, it.trip.busBoardings, it.trip.departureTime, it.trip.date, it.trip.state, it.trip!!.driver)
             roundTrip = true
-            lastTicket = Ticket(null, it.user, it.passengers, trip!!, it.busStop, it.busBoarding)
+            lastTicket = Ticket(null, it.user, it.passengers, trip!!,"", it.busStop, it.busBoarding)
             firstTicketPrice = it.passengers.size * it.trip.price
         } ?: run {
             lastTicket = arguments?.getParcelable<Ticket>("LastTicket")
@@ -201,7 +201,7 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
 
         val busBoarding = binding.tilBoarding.editText?.text.toString()
         val busStop = binding.tilStop.editText?.text.toString()
-        var ticket = Ticket(null, user!!, passengers, trip!!, busBoarding, busStop)
+        var ticket = Ticket(null, user!!, passengers, trip!!,"", busBoarding, busStop)
         val bundle = Bundle()
         bundle.putParcelable("Ticket", ticket)
         if (binding.smRoundTrip.isChecked) {

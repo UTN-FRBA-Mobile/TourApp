@@ -1,5 +1,6 @@
 package com.unnamedgroup.tourapp.model.business
 
+import android.os.IBinder
 import android.os.Parcel
 import android.os.Parcelable
 import com.unnamedgroup.tourapp.model.rest.PassengerREST
@@ -10,6 +11,7 @@ class Ticket(
     val user: User,
     var passengers: MutableList<Passenger>,
     val trip: Trip,
+    var receipt: String?,
     var busBoarding: String,
     var busStop: String,
 ): Parcelable {
@@ -20,6 +22,7 @@ class Ticket(
         mutableListOf<Passenger>().apply {  parcel.readParcelable(Passenger::class.java.classLoader)!! },
         parcel.readParcelable(Trip::class.java.classLoader)!!,
         parcel.readString()!!,
+        parcel.readString()!!,
         parcel.readString()!!
     )
 
@@ -28,7 +31,7 @@ class Ticket(
         for (p in passengers) {
                 restPassengers.add(p.toRest())
         }
-        return TicketREST(id, restPassengers, user.toRest(), trip.toRest(), busBoarding, busStop)
+        return TicketREST(id, restPassengers, user.toRest(), trip.toRest(),receipt, busBoarding, busStop)
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
