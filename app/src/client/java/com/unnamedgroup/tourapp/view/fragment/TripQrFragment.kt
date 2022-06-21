@@ -51,7 +51,6 @@ class TripQrFragment : Fragment() {
         currentPassenger = currentTicket.passengers[0]
         initAdapters()
         return binding.root
-
     }
 
     private fun initAdapters() {

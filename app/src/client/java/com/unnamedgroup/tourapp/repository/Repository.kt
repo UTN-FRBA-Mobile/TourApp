@@ -14,6 +14,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 
 class Repository() {
 
@@ -134,6 +135,21 @@ class Repository() {
         })
     }
 
+    fun getUserById(presenter: NewTripPresenterInt,id: Int) {
+        service.getUser(id).enqueue(object : Callback<UserREST> {
+            override fun onResponse(call: Call<UserREST>, response: Response<UserREST>) {
+                if (response.isSuccessful) {
+                    presenter.onGetUserByIdOk(response.body()!!.toUser())
+                } else {
+                    presenter.onGetUserByIdFailed("Credenciales incorrectas")
+                }
+            }
+            override fun onFailure(call: Call<UserREST>, t: Throwable) {
+                presenter.onGetUserByIdFailed(t.toString())
+            }
+        })
+    }
+
     fun modifyTicket(presenter: TripDetailsPresenterInt, ticketId :Int, newTicket: TicketREST) {
         service.modifyTicket(ticketId, newTicket).enqueue(object : Callback<TicketREST> {
             override fun onResponse(call: Call<TicketREST>, response: Response<TicketREST>) {
@@ -180,4 +196,49 @@ class Repository() {
         })
     }
 
+    fun getTripsByOriginAndDestination(presenter: NewTripPresenterInt, origin: String, destination: String) {
+        service.getTrips(origin, destination).enqueue(object : Callback<MutableList<TripREST>> {
+            override fun onResponse(
+                call: Call<MutableList<TripREST>>,
+                response: Response<MutableList<TripREST>>
+            ) {
+                if (response.isSuccessful) {
+                    val respList: MutableList<TripREST> = response.body()!!
+                    val trips: MutableList<Trip> = mutableListOf()
+                    for (r in respList) {
+                        trips.add(r.toTrip())
+                    }
+                    presenter.onGetTripsByOriginAndDestinationOk(trips)
+                } else {
+                    presenter.onGetTripsByOriginAndDestinationFailed(response.message())
+                }
+            }
+            override fun onFailure(call: Call<MutableList<TripREST>>, t: Throwable) {
+                presenter.onGetTripsByOriginAndDestinationFailed(t.toString())
+            }
+        })
+    }
+
+    fun getTripsByOriginAndDestinationAndDate(presenter: NewTripPresenterInt, origin: String, destination: String, date: String) {
+        service.getTrips(origin, destination, date).enqueue(object : Callback<MutableList<TripREST>> {
+            override fun onResponse(
+                call: Call<MutableList<TripREST>>,
+                response: Response<MutableList<TripREST>>
+            ) {
+                if (response.isSuccessful) {
+                    val respList: MutableList<TripREST> = response.body()!!
+                    val trips: MutableList<Trip> = mutableListOf()
+                    for (r in respList) {
+                        trips.add(r.toTrip())
+                    }
+                    presenter.onGetTripsByOriginAndDestinationAndDateOk(trips)
+                } else {
+                    presenter.onGetTripsByOriginAndDestinationAndDateFailed(response.message())
+                }
+            }
+            override fun onFailure(call: Call<MutableList<TripREST>>, t: Throwable) {
+                presenter.onGetTripsByOriginAndDestinationAndDateFailed(t.toString())
+            }
+        })
+    }
 }

@@ -30,6 +30,9 @@ interface ApiService {
         @Query("email") email: String
     ): Call<MutableList<UserREST>>
 
+    @GET("users/{id}")
+    fun getUser(@Path("id") id: Int): Call<UserREST>
+
     @Headers(
         "Content-Type: application/json",
         "Accept: application/json"
@@ -47,4 +50,9 @@ interface ApiService {
     @GET("tickets?_sort=trip.date,trip.departureTime&_order=desc,desc&_limit=1")
     fun getLastTicketByUser(@Query("user.id") userId: Int): Call<MutableList<TicketREST>>
 
+    @GET("trips")
+    fun getTrips(@Query("origin") origin: String, @Query("destination") destination: String): Call<MutableList<TripREST>>
+
+    @GET("trips")
+    fun getTrips(@Query("origin") origin: String, @Query("destination") destination: String, @Query("date") date: String): Call<MutableList<TripREST>>
 }
