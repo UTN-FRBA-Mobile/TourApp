@@ -165,6 +165,22 @@ class Repository() {
         })
     }
 
+
+    fun modifyTrip(presenter: ConfirmPresenterInt, tripId :Int, newTrip: TripREST) {
+        service.modifyTrip(tripId, newTrip).enqueue(object : Callback<TripREST> {
+            override fun onResponse(call: Call<TripREST>, response: Response<TripREST>) {
+                val resp: TripREST = response.body()!!
+                val trip: Trip = resp.toTrip()
+                presenter.onModifyTripOk(trip)
+            }
+
+            override fun onFailure(call: Call<TripREST>, t: Throwable) {
+                presenter.onModifyTripFailed(t.toString())
+
+            }
+        })
+    }
+    
     fun getLastTicketByUser(presenter: TripsPresenterInt, userId: Int) {
         service.getLastTicketByUser(userId).enqueue(object : Callback<MutableList<TicketREST>> {
             override fun onResponse(

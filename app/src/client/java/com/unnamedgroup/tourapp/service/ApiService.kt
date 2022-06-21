@@ -1,5 +1,6 @@
 package com.unnamedgroup.tourapp.service
 
+import com.unnamedgroup.tourapp.model.business.Trip
 import com.unnamedgroup.tourapp.model.rest.NewUserREST
 import com.unnamedgroup.tourapp.model.rest.TicketREST
 import com.unnamedgroup.tourapp.model.rest.TripREST
@@ -46,6 +47,8 @@ interface ApiService {
     @POST("tickets")
     fun addTicket(@Body newTicket: TicketREST): Call<TicketREST>
 
+    @PUT("trips/{id}")
+    fun modifyTrip(@Path("id") tripId: Int , @Body trip: TripREST): Call<TripREST>
 
     @GET("tickets?_sort=trip.date,trip.departureTime&_order=desc,desc&_limit=1")
     fun getLastTicketByUser(@Query("user.id") userId: Int): Call<MutableList<TicketREST>>
