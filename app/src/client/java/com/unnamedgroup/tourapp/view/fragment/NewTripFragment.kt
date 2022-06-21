@@ -148,7 +148,7 @@ class NewTripFragment : Fragment() {
         val busStop = binding.tilStop.editText?.text.toString()
         //TODO: Falta el campo ida y vuelta
         //TODO: Falta el usuario
-        var ticket = Ticket(null, User(1, "", "", "", ""), passengers, trip!!, busBoarding, busStop)
+        var ticket = Ticket(null, User(1, "", "", "", ""), passengers, trip!!,"", busBoarding, busStop)
         val bundle = Bundle()
         bundle.putParcelable("Ticket", ticket)
         findNavController().navigate(R.id.action_NewTripFragment_to_confirmTripFragment, bundle)
