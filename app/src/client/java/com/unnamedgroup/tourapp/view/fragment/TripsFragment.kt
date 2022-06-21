@@ -18,7 +18,9 @@ import com.unnamedgroup.tourapp.presenter.implementation.GetTripsPresenterImpl
 import com.unnamedgroup.tourapp.presenter.implementation.TripsPresenterImpl
 import com.unnamedgroup.tourapp.presenter.interfaces.GetTripsPresenterInt
 import com.unnamedgroup.tourapp.presenter.interfaces.TripsPresenterInt
+import com.unnamedgroup.tourapp.utils.MyPreferences
 import com.unnamedgroup.tourapp.view.adapter.TripAdapter
+import java.util.*
 
 /**
  * A simple [Fragment] subclass.
@@ -43,12 +45,18 @@ class TripsFragment : Fragment(), GetTripsPresenterInt.View, TripsPresenterInt.V
     ): View? {
         viewAdapter = TripAdapter(mutableListOf(), context, object: TripAdapter.OnItemClickListener {
             override fun onClick(view: View, trip: Trip) {
-                val bundle = Bundle()
-                bundle.putParcelable("Trip", trip)
-                findNavController().navigate(R.id.action_tripsFragment_to_NewTripFragment, bundle)
+                if (trip.passengersAmount > 0) {
+                    val bundle = Bundle()
+                    bundle.putParcelable("Trip", trip)
+                    findNavController().navigate(
+                        R.id.action_tripsFragment_to_NewTripFragment,
+                        bundle
+                    )
+                } else {
+                    Toast.makeText(context, getString(R.string.full_trip), Toast.LENGTH_SHORT).show()
+                }
             }
         })
-        //TODO: Traer solo los viajes validos
         getTripPresenter.getTrips()
         _binding = FragmentTripsBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
@@ -78,7 +86,7 @@ class TripsFragment : Fragment(), GetTripsPresenterInt.View, TripsPresenterInt.V
         }
 
         binding.bCopyLastTrip.setOnClickListener {
-            tripsPresenter.getLastTicketByUser(1)//TODO: Asignar usuario real
+            tripsPresenter.getLastTicketByUser(MyPreferences.getUserId(requireContext()))
         }
     }
 
@@ -87,7 +95,7 @@ class TripsFragment : Fragment(), GetTripsPresenterInt.View, TripsPresenterInt.V
     }
 
     override fun onGetTripsOk(trips: MutableList<Trip>) {
-        setRecyclerViewList(trips)
+        setRecyclerViewList(trips.filter { t -> t.date >= Date() } as MutableList<Trip>)
     }
 
     override fun onGetTripsError(error: String) {

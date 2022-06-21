@@ -135,6 +135,21 @@ class Repository() {
         })
     }
 
+    fun getUserById(presenter: NewTripPresenterInt,id: Int) {
+        service.getUser(id).enqueue(object : Callback<UserREST> {
+            override fun onResponse(call: Call<UserREST>, response: Response<UserREST>) {
+                if (response.isSuccessful) {
+                    presenter.onGetUserByIdOk(response.body()!!.toUser())
+                } else {
+                    presenter.onGetUserByIdFailed("Credenciales incorrectas")
+                }
+            }
+            override fun onFailure(call: Call<UserREST>, t: Throwable) {
+                presenter.onGetUserByIdFailed(t.toString())
+            }
+        })
+    }
+
     fun modifyTicket(presenter: TripDetailsPresenterInt, ticketId :Int, newTicket: TicketREST) {
         service.modifyTicket(ticketId, newTicket).enqueue(object : Callback<TicketREST> {
             override fun onResponse(call: Call<TicketREST>, response: Response<TicketREST>) {

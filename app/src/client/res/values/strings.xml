@@ -52,13 +52,13 @@
     <string name="get_trips_error">Error obteniendo viajes</string>
     <string name="modify_ticket_error">Error al guardar, intente de nuevo mas tarde</string>
     <string name="get_login_error">Error intentando loguear al usuario</string>
+    <string name="get_user_error">Error obteniendo usuario</string>
 
     <!--Nuevo viaje-->
+    <string name="full_trip">Viaje completo</string>
     <string name="last_trip">Copiar ultimo viaje</string>
     <string name="from">Desde</string>
-
     <string name="to">Hasta</string>
-
     <string name="departure_date">Fecha</string>
     <string name="calendar_icon_description">Calendario</string>
     <string name="departure_hour">Hora</string>
@@ -69,6 +69,8 @@
     <string name="passenger_dni">DNI pasajero</string>
     <string name="round_trip">Ida y vuelta</string>
     <string name="price">Precio: $</string>
+    <string name="empty_name_error">Debe completar el nombre del pasajero</string>
+    <string name="empty_dni_error">Debe completar el dni del pasajero</string>
     <!---->
 
     <!--Confirmar viaje-->

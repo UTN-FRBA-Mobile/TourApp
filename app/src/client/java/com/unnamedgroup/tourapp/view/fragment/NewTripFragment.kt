@@ -21,6 +21,7 @@ import com.unnamedgroup.tourapp.presenter.implementation.NewTripPresenterImpl
 import com.unnamedgroup.tourapp.presenter.implementation.TripsPresenterImpl
 import com.unnamedgroup.tourapp.presenter.interfaces.NewTripPresenterInt
 import com.unnamedgroup.tourapp.presenter.interfaces.TripsPresenterInt
+import com.unnamedgroup.tourapp.utils.MyPreferences
 import com.unnamedgroup.tourapp.utils.Utils
 import java.text.SimpleDateFormat
 
@@ -48,6 +49,7 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
     private var numberOfTicketsAdapter: ArrayAdapter<Int>? = null
     private var passengersLayouts: MutableList<LinearLayout> = ArrayList()
     private var roundTrip: Boolean = false
+    private var user: User? = null
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -68,10 +70,12 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
                 trip = arguments?.getParcelable<Trip>("Trip")
             }
         }
-        trip?.busBoardings?.let { boardingsAdapter = ArrayAdapter(requireContext(), R.layout.list_item, it) }
+        boardingsAdapter?.clear()
+        trip?.busBoardings?.let { boardingsAdapter = ArrayAdapter(requireContext(), R.layout.list_item, it ) }
         trip?.busStops?.let { stopsAdapter = ArrayAdapter(requireContext(), R.layout.list_item, it) }
         trip?.passengersAmount?.let { numberOfTicketsAdapter = ArrayAdapter(requireContext(), R.layout.list_item, (1..it).toList())}
         trip?.let { newTripPresenter.getTripsByOriginAndDestination(it.origin,it.destination) }
+        newTripPresenter.getUserById(MyPreferences.getUserId(requireContext()))
         _binding = FragmentNewTripBinding.inflate(inflater, container, false)
         return binding.root
 
@@ -104,6 +108,7 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
         }
         with(binding.actvStop) {
             setAdapter(stopsAdapter)
+            stopsAdapter!!.notifyDataSetChanged()
             lastTicket?.let {
                 setText(it.busStop, false)
             } ?: run {
@@ -177,20 +182,26 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
     }
 
     private fun next() {
-        //TODO: Validar campos?
+        //TODO: Reserva de pasajes
         var passengers = mutableListOf<Passenger>()
+        var i: Int = 1
         passengersLayouts.take(binding.tilNumberOfTickets.editText?.text.toString().toInt()).forEach {
             val name = it.findViewById<TextInputLayout>(R.id.til_passenger_name).editText?.text.toString()
+            if (name.isEmpty()) {
+                Toast.makeText(context, getString(R.string.empty_name_error), Toast.LENGTH_SHORT).show()
+                return;
+            }
             val dni = it.findViewById<TextInputLayout>(R.id.til_passenger_dni).editText?.text.toString()
-            //TODO: Generar id del pasajero?
-            passengers.add(Passenger(1, name, dni, false))
+            if (dni.isEmpty()) {
+                Toast.makeText(context, getString(R.string.empty_dni_error), Toast.LENGTH_SHORT).show()
+                return;
+            }
+            passengers.add(Passenger(i++, name, dni, false))
         }
 
         val busBoarding = binding.tilBoarding.editText?.text.toString()
         val busStop = binding.tilStop.editText?.text.toString()
-        //TODO: Falta el campo ida y vuelta
-        //TODO: Falta el usuario
-        var ticket = Ticket(null, User(1, "", "", "", ""), passengers, trip!!, busBoarding, busStop)
+        var ticket = Ticket(null, user!!, passengers, trip!!, busBoarding, busStop)
         val bundle = Bundle()
         bundle.putParcelable("Ticket", ticket)
         if (binding.smRoundTrip.isChecked) {
@@ -210,6 +221,14 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
 
     private fun getTimesArray(trips: MutableList<Trip>) : List<String> {
         return trips.map { it.departureTime } .distinct()
+    }
+
+    override fun onGetUserByIdOk(user: User) {
+        this.user = user
+    }
+
+    override fun onGetUserByIdFailed(error: String) {
+        Toast.makeText(context, getString(R.string.get_user_error), Toast.LENGTH_SHORT).show()
     }
 
     override fun onGetTripsByOriginAndDestinationOk(trips: MutableList<Trip>) {

@@ -30,6 +30,9 @@ interface ApiService {
         @Query("email") email: String
     ): Call<MutableList<UserREST>>
 
+    @GET("users/{id}")
+    fun getUser(@Path("id") id: Int): Call<UserREST>
+
     @Headers(
         "Content-Type: application/json",
         "Accept: application/json"

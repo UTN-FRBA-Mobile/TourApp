@@ -2,6 +2,7 @@ package com.unnamedgroup.tourapp.presenter.implementation
 
 import com.unnamedgroup.tourapp.model.business.Ticket
 import com.unnamedgroup.tourapp.model.business.Trip
+import com.unnamedgroup.tourapp.model.business.User
 import com.unnamedgroup.tourapp.presenter.interfaces.NewTripPresenterInt
 import com.unnamedgroup.tourapp.presenter.interfaces.TripsPresenterInt
 import com.unnamedgroup.tourapp.repository.Repository
@@ -10,6 +11,17 @@ import com.unnamedgroup.tourapp.utils.AbstractPresenter
 class NewTripPresenterImpl(private val mView: NewTripPresenterInt.View) : NewTripPresenterInt, AbstractPresenter<NewTripPresenterInt.View>(
     mView
 ) {
+    override fun getUserById(id: Int) {
+        Repository().getUserById(this, id)
+    }
+
+    override fun onGetUserByIdOk(user: User) {
+        mView.onGetUserByIdOk(user)
+    }
+
+    override fun onGetUserByIdFailed(error: String) {
+        mView.onGetUserByIdFailed(error)
+    }
 
     override fun getTripsByOriginAndDestination(origin: String, destination: String) {
         Repository().getTripsByOriginAndDestination(this, origin, destination)
