@@ -13,6 +13,7 @@ interface TripDetailsPresenterInt {
     interface View: BaseView {
         fun onModifyTicketOk(ticket: Ticket)
         fun onModifyTicketFailed(error: String)
+
     }
 
 }

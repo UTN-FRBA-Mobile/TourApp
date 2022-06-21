@@ -22,7 +22,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.unnamedgroup.tourapp.R
 import com.unnamedgroup.tourapp.databinding.FragmentConfirmTripBinding
 import com.unnamedgroup.tourapp.model.business.Ticket
+import com.unnamedgroup.tourapp.model.business.Trip
+import com.unnamedgroup.tourapp.presenter.implementation.ConfirmPresenterImpl
 import com.unnamedgroup.tourapp.presenter.implementation.TripDetailsPresenterImpl
+import com.unnamedgroup.tourapp.presenter.interfaces.ConfirmPresenterInt
 import com.unnamedgroup.tourapp.presenter.interfaces.TripDetailsPresenterInt
 import com.unnamedgroup.tourapp.utils.Utils
 import com.unnamedgroup.tourapp.view.adapter.ConfirmTripPassengersAdapter
@@ -30,7 +33,7 @@ import org.apache.commons.io.FileUtils
 import java.io.File
 
 
-class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View {
+class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View, ConfirmPresenterInt.View {
 
     private lateinit var recyclerView: RecyclerView
 
@@ -42,15 +45,16 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View {
     private var ticket: Ticket? = null
     private var ticket2: Ticket? = null
 
-    private var tripDetailsPresenterInt: TripDetailsPresenterInt = TripDetailsPresenterImpl(this)
+    private var tripDetailsPresenterInt = TripDetailsPresenterImpl(this)
+    private var confirmPresenterInt = ConfirmPresenterImpl(this)
     private var file : Uri? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        ticket = arguments?.getParcelable<Ticket>("Ticket")!!
-        //ticket2 = arguments?.getParcelable<Ticket>("Ticket2")!!
+        ticket = arguments?.getParcelable<Ticket>("Ticket")
+        ticket2 = arguments?.getParcelable<Ticket>("Ticket2")
 
     }
 
@@ -88,7 +92,10 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View {
         super.onViewCreated(view, savedInstanceState)
 
         binding.confirmButton.setOnClickListener {
-            tripDetailsPresenterInt.addTicket(ticket!!)
+            ticket?.let {
+                it.trip.passengersAmount    -= it.passengers.size
+                confirmPresenterInt.modifyTrip(it.trip)
+            }
         }
 
         binding.bankCbu.setEndIconOnClickListener {
@@ -107,9 +114,6 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View {
                 .setAction(Intent.ACTION_GET_CONTENT)
             startActivityForResult(Intent.createChooser(intent, "Select a file"), 111)
         }
-
-
-
     }
 
     override fun onModifyTicketOk(ticket: Ticket) {
@@ -117,6 +121,15 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View {
     }
 
     override fun onModifyTicketFailed(error: String) {
+        Toast.makeText(context, getString(R.string.get_trips_error), Toast.LENGTH_SHORT).show()
+    }
+
+
+    override fun onModifyTripOk(trip: Trip) {
+        tripDetailsPresenterInt.addTicket(ticket!!)
+    }
+
+    override fun onModifyTripFailed(error: String) {
         Toast.makeText(context, getString(R.string.get_trips_error), Toast.LENGTH_SHORT).show()
     }
 
@@ -171,5 +184,4 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View {
     private fun convertToBase64(attachment: File): String {
         return Base64.encodeToString(attachment.readBytes(), Base64.NO_WRAP)
     }
-
 }

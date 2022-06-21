@@ -11,7 +11,7 @@ class Trip(
     val id: Int,
     val origin: String,
     val destination: String,
-    val passengersAmount: Int,
+    var passengersAmount: Int,
     val price: Float,
     val busBoardings: MutableList<String>,
     val busStops: MutableList<String>,
