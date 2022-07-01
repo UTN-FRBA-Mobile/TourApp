@@ -107,6 +107,7 @@
     <string name="login_email">Email</string>
     <string name="login_password">Password</string>
     <string name="login_text">Ingresar</string>
+    <string name="invalidReciep">Debe ingresar un comprobante de pago</string>
     <!---->
 
 </resources>

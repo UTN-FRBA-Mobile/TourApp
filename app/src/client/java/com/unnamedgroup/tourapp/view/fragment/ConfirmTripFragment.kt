@@ -14,21 +14,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.unnamedgroup.tourapp.R
 import com.unnamedgroup.tourapp.databinding.FragmentConfirmTripBinding
+import com.unnamedgroup.tourapp.model.business.Passenger
 import com.unnamedgroup.tourapp.model.business.Ticket
 import com.unnamedgroup.tourapp.model.business.Trip
 import com.unnamedgroup.tourapp.presenter.implementation.ConfirmPresenterImpl
 import com.unnamedgroup.tourapp.presenter.implementation.TripDetailsPresenterImpl
 import com.unnamedgroup.tourapp.presenter.interfaces.ConfirmPresenterInt
 import com.unnamedgroup.tourapp.presenter.interfaces.TripDetailsPresenterInt
-import com.unnamedgroup.tourapp.utils.Utils
 import com.unnamedgroup.tourapp.view.adapter.ConfirmTripPassengersAdapter
+import com.unnamedgroup.tourapp.view.adapter.ConfirmTripTicketsAdapter
 import org.apache.commons.io.FileUtils
 import java.io.File
 
@@ -42,8 +42,12 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View, ConfirmPre
 
     private val binding get() = _binding!!
 
+    private var tickets = mutableListOf<Ticket>()
     private var ticket: Ticket? = null
     private var ticket2: Ticket? = null
+    private var numberOfTicketsOk = 0
+    private var numberOfTripsOk = 0
+
 
     private var tripDetailsPresenterInt = TripDetailsPresenterImpl(this)
     private var confirmPresenterInt = ConfirmPresenterImpl(this)
@@ -54,7 +58,15 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View, ConfirmPre
         super.onCreate(savedInstanceState)
 
         ticket = arguments?.getParcelable<Ticket>("Ticket")
+
+        ticket?.let {
+            tickets.add(it)
+        }
+
         ticket2 = arguments?.getParcelable<Ticket>("Ticket2")
+        ticket2?.let {
+            tickets.add(it)
+        }
 
     }
 
@@ -62,28 +74,34 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View, ConfirmPre
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        // Complete recyclerView of tickets
         _binding = FragmentConfirmTripBinding.inflate(inflater, container, false)
 
-        // Complete textview
-        ticket?.let {
-            binding.valueOrigin.text = it.trip.origin
-            binding.valueDestination.text = it.trip.destination
-            binding.valueDate.text = Utils.getDateWithFormat(it.trip.date, "dd/MM/yyyy")
-            binding.valueTime.text = it.trip.departureTime
-            binding.valueOriginStop.text = it.busBoarding
-            binding.valueDestinationStop.text = it.busStop
-            binding.valueNumberOfPassengers.text = it.passengers.size.toString()
-            binding.valueImport.text = (it.trip.price *it.passengers.size).toString()
+        var viewManager = LinearLayoutManager(this.context)
+        val viewAdapterTickets = ConfirmTripTicketsAdapter(tickets,this.context)
+
+        recyclerView = binding.confirmTripTicketsReciclerView.apply {
+            layoutManager = viewManager
+            adapter = viewAdapterTickets
         }
 
         // Complete recyclerView of passengers
-        val viewManager = LinearLayoutManager(this.context)
-        val viewAdapter = ConfirmTripPassengersAdapter(ticket!!.passengers)
-
-        recyclerView = binding.confirmTripReciclerView.apply {
-            layoutManager = viewManager
-            adapter = viewAdapter
+        var value = 0F
+        val passengers : MutableList<Passenger> = mutableListOf()
+        tickets.forEach{
+            value += it.passengers.size * it.trip.price
+            passengers.addAll(it.passengers)
         }
+
+        viewManager = LinearLayoutManager(this.context)
+        val viewAdapterPassengers = ConfirmTripPassengersAdapter(passengers)
+        recyclerView = binding.confirmTripPassengersReciclerView.apply {
+            layoutManager = viewManager
+            adapter = viewAdapterPassengers
+        }
+
+        binding.valueImport.text = value.toString()
 
         return binding.root
     }
@@ -92,10 +110,14 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View, ConfirmPre
         super.onViewCreated(view, savedInstanceState)
 
         binding.confirmButton.setOnClickListener {
-            ticket?.let {
-                it.trip.passengersAmount    -= it.passengers.size
-                confirmPresenterInt.modifyTrip(it.trip)
+            if(tickets[0].isPaid()){
+                tickets[0].trip.passengersAmount    -=  tickets[0].passengers.size
+                confirmPresenterInt.modifyTrip(tickets[0].trip)
             }
+            else{
+                Toast.makeText(context, getString(R.string.invalidReciep), Toast.LENGTH_SHORT).show()
+            }
+
         }
 
         binding.bankCbu.setEndIconOnClickListener {
@@ -117,20 +139,37 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View, ConfirmPre
     }
 
     override fun onModifyTicketOk(ticket: Ticket) {
-        findNavController().navigate(R.id.action_confirmTripFragment_to_resultScreenFragment)
-    }
+        numberOfTicketsOk++
+        if (numberOfTripsOk == 2 && numberOfTicketsOk == 1){
+            //TODO Cambiar el it.trip.id == ticket.trip.id por it.trip.id != ticket.trip.id cuando cambien en el generar viaja
+            tripDetailsPresenterInt.addTicket( tickets[1])
+        }
 
+        when (tickets.size){
+            1 -> findNavController().navigate(R.id.action_confirmTripFragment_to_resultScreenFragment)
+            2 -> if (numberOfTicketsOk == 2) findNavController().navigate(R.id.action_confirmTripFragment_to_resultScreenFragment)
+            else -> findNavController().navigate(R.id.action_confirmTripFragment_to_resultScreenFragment)
+        }
+
+    }
     override fun onModifyTicketFailed(error: String) {
-        Toast.makeText(context, getString(R.string.get_trips_error), Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Error al insertar Viaje", Toast.LENGTH_SHORT).show()
     }
 
 
     override fun onModifyTripOk(trip: Trip) {
-        tripDetailsPresenterInt.addTicket(ticket!!)
+        numberOfTripsOk++
+        //TODO Cambiar el trip.id == it.trip.id && trip.origin == it.trip.origin por trip.id == it.trip.id cuando cambien en el generar viaja
+        if (numberOfTripsOk == 1) tripDetailsPresenterInt.addTicket( tickets.filter { trip.id == it.trip.id && trip.origin == it.trip.origin }.first())
+
+        if(tickets.size == 2 && numberOfTripsOk == 1){
+            tickets[1].trip.passengersAmount    -=  tickets[1].passengers.size
+            confirmPresenterInt.modifyTrip(tickets[1].trip)
+        }
     }
 
     override fun onModifyTripFailed(error: String) {
-        Toast.makeText(context, getString(R.string.get_trips_error), Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Error al modificar Viaje", Toast.LENGTH_SHORT).show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -141,7 +180,8 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View, ConfirmPre
             val fileName = getFileNameFromUri(requireContext(),file!!)
             binding.bankUploadReceiptTextfield.setText(fileName)
             val fileToWork = createFileFromUri(fileName!!,file!!)
-            ticket?.receipt = fileToWork?.let { convertToBase64(it) }
+            val receipt = fileToWork?.let { convertToBase64(it) }
+            tickets.forEach{it.receipt = receipt}
             Toast.makeText(context, "Comprobante Seleccionado", Toast.LENGTH_SHORT).show()
 
         }

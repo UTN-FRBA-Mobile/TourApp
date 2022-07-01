@@ -12,186 +12,16 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:id="@+id/trip_information"
+         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/confirm_trip_tickets_recicler_view"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="25dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp">
-            <!-- TODO Ver si no lo sacamos afuera en otro fragment (no seria necesario por el momento)-->
-
-            <TextView
-                android:id="@+id/description_origin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/from_colon"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/description_destination"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/description_origin"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="2dp"
-                android:text="@string/to_colon"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/description_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/description_destination"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="2dp"
-                android:text="@string/departure_date_colon"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/description_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/description_date"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="2dp"
-                android:text="@string/departure_hour_colon"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/description_origin_stop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/description_time"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="2dp"
-                android:text="@string/departure_stop"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/description_destination_stop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/description_origin_stop"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="2dp"
-                android:text="@string/arrival_stop_colon"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/description_number_of_passengers"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/description_destination_stop"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="2dp"
-                android:text="@string/number_of_tickets_colon"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textStyle="bold" />
-
-
-            <TextView
-                android:id="@+id/value_origin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/description_origin"
-                android:layout_alignTop="@id/description_origin"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="20dp"
-                android:layout_toEndOf="@id/description_origin"
-                android:ems="10"
-                android:text="Mercedes"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-
-            <TextView
-                android:id="@+id/value_destination"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/description_destination"
-                android:layout_alignTop="@id/description_destination"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="2dp"
-                android:layout_toEndOf="@id/description_destination"
-                android:ems="10"
-                android:text="Capital Federal "
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-            <TextView
-                android:id="@+id/value_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/description_date"
-                android:layout_alignTop="@id/description_date"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="2dp"
-                android:layout_toEndOf="@id/description_date"
-                android:ems="10"
-                android:text="15-05-2022"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-            <TextView
-                android:id="@+id/value_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/description_time"
-                android:layout_alignTop="@id/description_time"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="2dp"
-                android:layout_toEndOf="@id/description_time"
-                android:ems="10"
-                android:text="16:00 Hs"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-            <TextView
-                android:id="@+id/value_origin_stop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/description_origin_stop"
-                android:layout_alignTop="@id/description_origin_stop"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="2dp"
-                android:layout_toEndOf="@id/description_origin_stop"
-                android:ems="10"
-                android:text="Hotel Mercedes"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-            <TextView
-                android:id="@+id/value_destination_stop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/description_destination_stop"
-                android:layout_alignTop="@id/description_destination_stop"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="2dp"
-                android:layout_toEndOf="@id/description_destination_stop"
-                android:ems="10"
-                android:text="9 de Julio y Venezuela"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-            <TextView
-                android:id="@+id/value_number_of_passengers"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/description_number_of_passengers"
-                android:layout_alignTop="@id/description_number_of_passengers"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="2dp"
-                android:layout_toEndOf="@id/description_number_of_passengers"
-                android:ems="10"
-                android:text="2"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-        </RelativeLayout>
+            android:layout_height="match_parent"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/confirm_trip_recicler_view"
-            android:layout_marginTop="2dp"
+            android:id="@+id/confirm_trip_passengers_recicler_view"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="25dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
@@ -317,6 +147,8 @@
             android:layout_marginLeft="25dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="25dp"
+            android:focusable="false"
+            android:enabled="false"
             android:hint="@string/upload_receipt"
             app:endIconContentDescription="@string/calendar_icon_description"
             app:endIconDrawable="@drawable/ic_upload"
@@ -326,7 +158,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/bank_upload_receipt_textfield"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="#000000" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
