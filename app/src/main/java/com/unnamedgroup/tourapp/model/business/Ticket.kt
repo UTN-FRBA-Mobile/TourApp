@@ -34,6 +34,10 @@ class Ticket(
         return TicketREST(id, restPassengers, user.toRest(), trip.toRest(),receipt, busBoarding, busStop)
     }
 
+    fun isPaid(): Boolean{
+        return receipt?.let { it.length > 1024  } ?: false
+    }
+
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         id?.let { parcel.writeInt(it) }
         parcel.writeParcelable(user, flags)
