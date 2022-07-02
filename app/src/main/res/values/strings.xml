@@ -109,5 +109,7 @@
     <string name="login_text">Ingresar</string>
     <string name="invalidReciep">Debe ingresar un comprobante de pago</string>
     <!---->
+    
+    <string name="msg_token_fmt">Firebase token: %s</string>
 
 </resources>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1011554157437",
+    "project_id": "tourappdriver",
+    "storage_bucket": "tourappdriver.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1011554157437:android:cc184ac5b629d82324c214",
+        "android_client_info": {
+          "package_name": "com.unnamedgroup.tourapp.driver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1011554157437-jg4bqqifnvs1d9fkjr0np2g2odu0as3b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAW0IB5raWKy8hNn3xVcn_kRop0_zl08Cw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1011554157437-jg4bqqifnvs1d9fkjr0np2g2odu0as3b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
