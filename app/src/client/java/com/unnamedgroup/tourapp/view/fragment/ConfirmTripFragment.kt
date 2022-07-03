@@ -18,6 +18,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.ktx.messaging
 import com.unnamedgroup.tourapp.R
 import com.unnamedgroup.tourapp.databinding.FragmentConfirmTripBinding
 import com.unnamedgroup.tourapp.model.business.Passenger
@@ -73,7 +75,7 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View, ConfirmPre
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         // Complete recyclerView of tickets
         _binding = FragmentConfirmTripBinding.inflate(inflater, container, false)
@@ -150,6 +152,15 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View, ConfirmPre
             2 -> if (numberOfTicketsOk == 2) findNavController().navigate(R.id.action_confirmTripFragment_to_resultScreenFragment)
             else -> findNavController().navigate(R.id.action_confirmTripFragment_to_resultScreenFragment)
         }
+
+        Firebase.messaging.subscribeToTopic("trip" + ticket.trip.id.toString())
+            .addOnCompleteListener { task ->
+                var msg = "Subscribed"
+                if (!task.isSuccessful) {
+                    msg = "Subscribe failed"
+                }
+                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+            }
 
     }
     override fun onModifyTicketFailed(error: String) {

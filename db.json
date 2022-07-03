@@ -291,11 +291,6 @@
       }
     },
     {
-      "id": 11,
-      "origin": "Capital Federal",
-      "destination": "Mercedes",
-      "passengersAmount": 20,
-      "price": 800,
       "busBoardings": [
         "Irigoyen y Estados Unidos",
         "Irigoyen y Venezuela",
@@ -309,15 +304,20 @@
         "1 y 2",
         "Rotonda Mercedes"
       ],
-      "departureTime": "20:00",
       "date": "19-07-2022",
-      "state": "PROCESSING",
+      "departureTime": "20:00",
+      "destination": "Mercedes",
       "driver": {
-        "id": 101,
-        "name": "test",
+        "dni": "39184443",
         "email": "fbevilacqua@frba.utn.edu.ar",
-        "dni": "39184443"
-      }
+        "id": 101,
+        "name": "test"
+      },
+      "id": 11,
+      "origin": "Capital Federal",
+      "passengersAmount": 19,
+      "price": 800,
+      "state": "PROCESSING"
     },
     {
       "id": 12,
@@ -1269,6 +1269,56 @@
         "token": ""
       },
       "id": 16
+    },
+    {
+      "busBoarding": "Irigoyen y Estados Unidos",
+      "busStop": "Hotel Mercedes",
+      "passengers": [
+        {
+          "busBoarded": false,
+          "dni": "2040255931",
+          "id": 1,
+          "name": "test"
+        }
+      ],
+      "receipt": "",
+      "trip": {
+        "busBoardings": [
+          "Irigoyen y Estados Unidos",
+          "Irigoyen y Venezuela",
+          "Cerrito y Paraguay",
+          "Alto Palermo"
+        ],
+        "busStops": [
+          "Hotel Mercedes",
+          "29 y 40",
+          "1 y 40",
+          "1 y 2",
+          "Rotonda Mercedes"
+        ],
+        "date": "19-07-2022",
+        "departureTime": "20:00",
+        "destination": "Mercedes",
+        "driver": {
+          "dni": "39184443",
+          "email": "fbevilacqua@frba.utn.edu.ar",
+          "id": 101,
+          "name": "test"
+        },
+        "id": 11,
+        "origin": "Capital Federal",
+        "passengersAmount": 19,
+        "price": 800,
+        "state": "PROCESSING"
+      },
+      "user": {
+        "dni": "40255931",
+        "email": "benjaenriquez@frba.utn.edu.ar",
+        "id": 1,
+        "name": "Benjamín Enríquez",
+        "token": "asdasdasdasdasd"
+      },
+      "id": 17
     }
   ],
   "users": [

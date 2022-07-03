@@ -11,7 +11,7 @@ class ConfirmPresenterImpl(private val mView: ConfirmPresenterInt.View) : Confir
 ) {
 
     override fun modifyTrip(newTrip: Trip) {
-        Repository().modifyTrip(this, newTrip.id!!, newTrip.toRest())
+        Repository().modifyTrip(this, newTrip.id, newTrip.toRest())
     }
 
 
