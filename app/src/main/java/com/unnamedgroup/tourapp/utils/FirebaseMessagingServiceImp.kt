@@ -39,7 +39,7 @@ class FirebaseMessagingServiceImp: FirebaseMessagingService() {
 
             if (remoteMessage.data["notificationType"] == "1") {
                 title = getString(R.string.notification_trip_state_change_title)
-                text = getString(R.string.notification_trip_state_change, remoteMessage.data["tripId"])
+                text = getString(R.string.notification_trip_state_change, remoteMessage.data["tripId"], remoteMessage.data["newState"])
                 val bundle = Bundle()
                 bundle.putInt("tripId", remoteMessage.data["tripId"]!!.toInt())
                 bundle.putBoolean("fromNotification", true)

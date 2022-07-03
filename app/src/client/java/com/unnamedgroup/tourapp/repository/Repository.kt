@@ -266,6 +266,10 @@ class Repository() {
             ) {
                 if (response.isSuccessful) {
                     val respList: MutableList<TicketREST> = response.body()!!
+                    if (respList.isEmpty()) {
+                        presenter.onGetTicketByTripIdFailed("No se encontro el viaje")
+                        return
+                    }
                     presenter.onGetTicketByTripIdOk(respList[0].toTicket())
                 } else {
                     presenter.onGetTicketByTripIdFailed(response.message())
