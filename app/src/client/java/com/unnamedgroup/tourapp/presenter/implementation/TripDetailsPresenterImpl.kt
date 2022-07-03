@@ -25,4 +25,16 @@ class TripDetailsPresenterImpl(private val mView: TripDetailsPresenterInt.View) 
         mView.onModifyTicketFailed(error)
     }
 
+    override fun getTicketByTripId(tripId: Int) {
+        Repository().getTicketByTrip(this, tripId)
+    }
+
+    override fun onGetTicketByTripIdOk(ticket: Ticket) {
+        mView.getTicketByTripIdOk(ticket)
+    }
+
+    override fun onGetTicketByTripIdFailed(error: String) {
+        mView.getTicketByTripIdFailed(error)
+    }
+
 }

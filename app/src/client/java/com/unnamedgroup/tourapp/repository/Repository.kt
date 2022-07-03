@@ -257,4 +257,24 @@ class Repository() {
             }
         })
     }
+
+    fun getTicketByTrip(presenter: TripDetailsPresenterInt, tripId: Int) {
+        service.getTripByTicket(tripId).enqueue(object : Callback<MutableList<TicketREST>> {
+            override fun onResponse(
+                call: Call<MutableList<TicketREST>>,
+                response: Response<MutableList<TicketREST>>
+            ) {
+                if (response.isSuccessful) {
+                    val respList: MutableList<TicketREST> = response.body()!!
+                    presenter.onGetTicketByTripIdOk(respList[0].toTicket())
+                } else {
+                    presenter.onGetTicketByTripIdFailed(response.message())
+                }
+            }
+            override fun onFailure(call: Call<MutableList<TicketREST>>, t: Throwable) {
+                presenter.onGetTicketByTripIdFailed(t.toString())
+            }
+        })
+    }
+
 }

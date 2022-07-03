@@ -111,5 +111,10 @@
     <!---->
     
     <string name="msg_token_fmt">Firebase token: %s</string>
+    <string name="default_notifications_channel">default_channel</string>
+    <string name="default_notifications_channel_desc">Notificaciones Generales</string>
+
+    <string name="notification_trip_state_change">Cambio de estado en el viaje %s</string>
+    <string name="notification_trip_state_change_title">Cambio en viaje</string>
 
 </resources>

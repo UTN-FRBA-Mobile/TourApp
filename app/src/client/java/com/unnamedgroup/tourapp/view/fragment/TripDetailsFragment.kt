@@ -32,8 +32,7 @@ class TripDetailsFragment : Fragment(),
     private val binding get() = _binding!!
     private var departureStopsAdapter: ArrayAdapter<String>? = null
     private var arrivalStopsAdapter: ArrayAdapter<String>? = null
-    private lateinit var currentTicket : Ticket
-    private lateinit var draftTicket : Ticket
+    private var currentTicket : Ticket? = null
     private var isEditing : Boolean = false
     private var viewAdapter : TripDetailsAdapter? = null
     private var tripDetailsPresenter : TripDetailsPresenterInt = TripDetailsPresenterImpl(this)
@@ -44,14 +43,19 @@ class TripDetailsFragment : Fragment(),
     ): View {
         _binding = FragmentTripDetailsBinding.inflate(inflater, container, false)
         val bundle  = this.arguments
-        currentTicket = bundle!!.getParcelable("Ticket")!!
-        draftTicket = bundle!!.getParcelable("Ticket")!!
-        initAdapters()
-        return binding.root
+        if (bundle!!.containsKey("fromNotification") && bundle.getBoolean("fromNotification")) {
+            tripDetailsPresenter.getTicketByTripId(bundle.getInt("tripId"))
+        } else {
+            currentTicket = bundle.getParcelable("Ticket")!!
+            initAdapters()
+        }
 
+        return binding.root
     }
 
     private fun initAdapters() {
+        val currentTicket = currentTicket!!
+
         val passengers = currentTicket.passengers
         val departureLocations = currentTicket.trip.busBoardings
         val arrivalLocations = currentTicket.trip.busStops
@@ -63,15 +67,15 @@ class TripDetailsFragment : Fragment(),
 
         viewAdapter = TripDetailsAdapter(passengers, object: TripDetailsAdapter.OnItemEditListener{
             override fun onEdit(passengerPosition: Int, newValue: String, isName: Boolean) {
-                var newPassengers = draftTicket.passengers
-                var newPassenger = draftTicket.passengers[passengerPosition]
+                val newPassengers = currentTicket.passengers
+                val newPassenger = currentTicket.passengers[passengerPosition]
                 if(isName){
                     newPassenger.name = newValue
                 } else {
                     newPassenger.dni = newValue
                 }
                 newPassengers[passengerPosition] = newPassenger
-                draftTicket.passengers = newPassengers
+                currentTicket.passengers = newPassengers
                 onEditTrip()
             }
 
@@ -81,6 +85,18 @@ class TripDetailsFragment : Fragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (currentTicket != null) {
+            setViewWithTicketInfo()
+        }
+    }
+
+    private fun setViewWithTicketInfo() {
+        if (currentTicket == null) {
+            Toast.makeText(context, getString(R.string.get_trips_error), Toast.LENGTH_LONG).show()
+            findNavController().navigate(R.id.action_tripDetailsFragment_to_MyTripsFragment)
+        }
+
+        val currentTicket = currentTicket!!
 
         binding.trip.text = currentTicket.trip.getName()
         binding.tripTime.text = currentTicket.trip.getFormattedDepartureTime()
@@ -90,7 +106,7 @@ class TripDetailsFragment : Fragment(),
             setText(currentTicket.busBoarding, false)
             setOnItemClickListener { _, _, position, _ ->
                 val newStop = adapter.getItem(position) ?: ""
-                draftTicket.busBoarding = newStop.toString()
+                currentTicket.busBoarding = newStop.toString()
                 onEditTrip()
             }
         }
@@ -99,21 +115,21 @@ class TripDetailsFragment : Fragment(),
             setText(currentTicket.busStop, false)
             setOnItemClickListener { _, _, position, _ ->
                 val newStop = adapter.getItem(position) ?: ""
-                draftTicket.busStop= newStop.toString()
+                currentTicket.busStop= newStop.toString()
                 onEditTrip()
             }
         }
 
         binding.cancelButton.setOnClickListener() {
             if(isEditing){
-            val builder = AlertDialog.Builder(activity)
-            builder.setTitle(R.string.details_alert_title)
-            builder.setMessage(R.string.details_alert_message)
-            builder.setPositiveButton(R.string.details_alert_yes) { _: DialogInterface, _: Int ->
-                findNavController().navigate(R.id.action_tripDetailsFragment_to_MyTripsFragment)
-            }
-            builder.setNegativeButton(R.string.details_alert_no) { _: DialogInterface, _: Int ->
-            }
+                val builder = AlertDialog.Builder(activity)
+                builder.setTitle(R.string.details_alert_title)
+                builder.setMessage(R.string.details_alert_message)
+                builder.setPositiveButton(R.string.details_alert_yes) { _: DialogInterface, _: Int ->
+                    findNavController().navigate(R.id.action_tripDetailsFragment_to_MyTripsFragment)
+                }
+                builder.setNegativeButton(R.string.details_alert_no) { _: DialogInterface, _: Int ->
+                }
                 builder.show()
             }
             else {
@@ -122,14 +138,14 @@ class TripDetailsFragment : Fragment(),
         }
 
         with(binding.saveButton){
-            setOnClickListener() {
-                tripDetailsPresenter.modifyTicket(draftTicket)
+            setOnClickListener {
+                tripDetailsPresenter.modifyTicket(currentTicket)
             }
             isEnabled = false
         }
 
         binding.saveButton.setOnClickListener() {
-            tripDetailsPresenter.modifyTicket(draftTicket)
+            tripDetailsPresenter.modifyTicket(currentTicket)
         }
 
         binding.qrButton.setOnClickListener(){
@@ -144,7 +160,6 @@ class TripDetailsFragment : Fragment(),
             layoutManager = viewManager
             adapter = viewAdapter
         }
-
     }
 
     fun onEditTrip(){
@@ -166,5 +181,16 @@ class TripDetailsFragment : Fragment(),
 
     override fun onModifyTicketFailed(error: String) {
         Toast.makeText(context, getString(R.string.modify_ticket_error), Toast.LENGTH_LONG).show()
+    }
+
+    override fun getTicketByTripIdOk(ticket: Ticket) {
+        currentTicket = ticket
+        initAdapters()
+        setViewWithTicketInfo()
+    }
+
+    override fun getTicketByTripIdFailed(error: String) {
+        Toast.makeText(context, getString(R.string.get_trips_error), Toast.LENGTH_LONG).show()
+        findNavController().navigate(R.id.action_tripDetailsFragment_to_MyTripsFragment)
     }
 }

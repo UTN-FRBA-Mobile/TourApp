@@ -156,6 +156,14 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View, ConfirmPre
         Toast.makeText(context, "Error al insertar Viaje", Toast.LENGTH_SHORT).show()
     }
 
+    override fun getTicketByTripIdOk(ticket: Ticket) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getTicketByTripIdFailed(error: String) {
+        TODO("Not yet implemented")
+    }
+
 
     override fun onModifyTripOk(trip: Trip) {
         numberOfTripsOk++

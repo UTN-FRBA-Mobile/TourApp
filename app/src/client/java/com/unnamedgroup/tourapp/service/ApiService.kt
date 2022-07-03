@@ -58,4 +58,7 @@ interface ApiService {
 
     @GET("trips")
     fun getTrips(@Query("origin") origin: String, @Query("destination") destination: String, @Query("date") date: String): Call<MutableList<TripREST>>
+
+    @GET("tickets")
+    fun getTripByTicket(@Query("trip.id") tripId: Int): Call<MutableList<TicketREST>>
 }
