@@ -148,6 +148,10 @@ class TripDetailsFragment : Fragment(),
             tripDetailsPresenter.modifyTicket(currentTicket)
         }
 
+        with(binding.tripStateText){
+            setText(currentTicket.trip.state.text)
+        }
+
         binding.qrButton.setOnClickListener(){
             val bundle = Bundle()
             bundle.putParcelable("Ticket", currentTicket)

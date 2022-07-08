@@ -66,6 +66,7 @@
     <string name="arrival_stop">Lugar de bajada</string>
     <string name="number_of_tickets">Cantidad de pasajes</string>
     <string name="passenger_name">Nombre de pasajero</string>
+    <string name="trip_state">Estado</string>
     <string name="passenger_dni">DNI pasajero</string>
     <string name="round_trip">Ida y vuelta</string>
     <string name="price">Precio: $</string>

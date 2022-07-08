@@ -36,11 +36,31 @@
             android:textStyle="normal" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/trip_state"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dropdowns_margin_Horizontal"
+            android:layout_marginVertical="@dimen/dropdowns_margin_vertical"
+            android:hint="@string/trip_state"
+            android:layout_below="@+id/trip_time">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:id="@+id/trip_state_text"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:focusable="false"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/departure_stop"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/trip_time"
+            android:layout_below="@+id/trip_state"
             android:layout_marginHorizontal="@dimen/dropdowns_margin_Horizontal"
             android:layout_marginVertical="@dimen/dropdowns_margin_vertical">
 
