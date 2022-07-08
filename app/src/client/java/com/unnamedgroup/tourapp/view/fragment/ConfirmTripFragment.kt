@@ -155,11 +155,9 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View, ConfirmPre
 
         Firebase.messaging.subscribeToTopic("trip" + ticket.trip.id.toString())
             .addOnCompleteListener { task ->
-                var msg = "Subscribed"
                 if (!task.isSuccessful) {
-                    msg = "Subscribe failed"
+                    Toast.makeText(context, "No se pudo suscribir al viaje. No recibirá alertas ante cambios de estado.", Toast.LENGTH_SHORT).show()
                 }
-                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
             }
 
     }

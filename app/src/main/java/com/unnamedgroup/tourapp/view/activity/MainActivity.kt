@@ -43,16 +43,6 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         createNotificationChannel()
         getFirebaseToken()
-
-        Firebase.messaging.subscribeToTopic("trip1")
-            .addOnCompleteListener { task ->
-                var msg = "Subscribed"
-                if (!task.isSuccessful) {
-                    msg = "Subscribe failed"
-                }
-                Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
-            }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -98,7 +88,7 @@ class MainActivity : AppCompatActivity() {
             // Log and toast
             val msg = getString(R.string.msg_token_fmt, token)
             Log.d("MainActivity", msg)
-            Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+            // Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
         })
     }
 
