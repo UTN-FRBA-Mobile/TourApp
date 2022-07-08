@@ -86,8 +86,9 @@ class TripDetailsDriverFragment : Fragment(), MyTripsPresenterInt.View {
             setText(trip.state.text, false)
             setOnItemClickListener { _, _, position, _ ->
                 val newState: String = (adapter.getItem(position) ?: "") as String
+                val oldState = trip.state
                 trip.state = trip.getStateByText(newState)
-                myTripsPresenter.saveTrip(trip)
+                myTripsPresenter.saveTrip(trip, oldState)
             }
         }
 

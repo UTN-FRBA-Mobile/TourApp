@@ -1,30 +1,32 @@
 package com.unnamedgroup.tourapp.repository
 
+import android.util.Log
 import com.unnamedgroup.tourapp.BuildConfig
 import com.unnamedgroup.tourapp.model.business.Ticket
 import com.unnamedgroup.tourapp.model.business.Trip
-import com.unnamedgroup.tourapp.model.rest.NewUserREST
-import com.unnamedgroup.tourapp.model.rest.TicketREST
-import com.unnamedgroup.tourapp.model.rest.TripREST
-import com.unnamedgroup.tourapp.model.rest.UserREST
+import com.unnamedgroup.tourapp.model.rest.*
 import com.unnamedgroup.tourapp.presenter.interfaces.GetTripsPresenterInt
 import com.unnamedgroup.tourapp.presenter.interfaces.LoginPresenterInt
 import com.unnamedgroup.tourapp.presenter.interfaces.MyTripsPresenterInt
 import com.unnamedgroup.tourapp.presenter.interfaces.RegisterPresenterInt
 import com.unnamedgroup.tourapp.service.ApiService
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
+import com.unnamedgroup.tourapp.service.PNService
+import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
-class Repository() {
+class Repository {
 
     private val service = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
         .baseUrl(BuildConfig.API_URL)
         .build()
         .create(ApiService::class.java)
+
+    private val pnService = Retrofit.Builder()
+        .addConverterFactory(GsonConverterFactory.create())
+        .baseUrl(BuildConfig.PN_URL)
+        .build()
+        .create(PNService::class.java)
 
     fun getTrips(presenter: GetTripsPresenterInt) {
         service.getTrips().enqueue(object : Callback<MutableList<TripREST>> {
@@ -202,6 +204,20 @@ class Repository() {
             }
             override fun onFailure(call: Call<Void>, t: Throwable) {
                 presenter.onSaveTicketError(t.toString(), passengerPosition, newValue)
+            }
+        })
+    }
+
+    fun generatePushNotification(presenter: MyTripsPresenterInt, tripId: Int, newState: String) {
+        val pnBody = PushNotificationREST("/topics/trip$tripId", PushNotificationDataREST(1, tripId, newState))
+        pnService.createTripStateChangePN(pnBody).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (!response.isSuccessful) {
+                    Log.d("PN", "Cannot create PN with Trip Change. Error: " + response.message())
+                }
+            }
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.d("PN", "Cannot create PN with Trip Change")
             }
         })
     }

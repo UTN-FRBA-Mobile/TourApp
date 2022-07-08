@@ -29,8 +29,11 @@ class MyTripsPresenterImpl(private val mView: MyTripsPresenterInt.View) : MyTrip
         mView.onGetTicketsByTripFailed(error)
     }
 
-    override fun saveTrip(trip: Trip) {
+    override fun saveTrip(trip: Trip, oldState: Trip.TripState) {
         Repository().saveTrip(this, trip.id, trip.toRest())
+        if (trip.state != oldState) {
+            Repository().generatePushNotification(this, trip.id, trip.state.text)
+        }
     }
 
     override fun onSaveTripOk() {

@@ -74,7 +74,7 @@ class Trip(
     }
 
     fun getStateByText(value : String): TripState {
-        return return when (value) {
+        return when (value) {
             TripState.PROCESSING.text -> TripState.PROCESSING
             TripState.DELAYED.text -> TripState.DELAYED
             TripState.CONFIRMED.text -> TripState.CONFIRMED
