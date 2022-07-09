@@ -31,6 +31,14 @@ class NewTripPresenterImpl(private val mView: NewTripPresenterInt.View) : NewTri
         Repository().getTripsByOriginAndDestinationAndDate(this, origin, destination, date)
     }
 
+    override fun getTripsByOriginAndDestinationAndDateAndTime(origin: String, destination: String, date: String, departureTime: String) {
+        Repository().getTripsByOriginAndDestinationAndDateAndTime(this, origin, destination, date, departureTime)
+    }
+
+    override fun getRoundTrip(origin: String, destination: String) {
+        Repository().getRoundTrip(this, origin, destination)
+    }
+
     override fun onGetTripsByOriginAndDestinationOk(trips: MutableList<Trip>) {
         mView.onGetTripsByOriginAndDestinationOk(trips)
     }
@@ -45,6 +53,22 @@ class NewTripPresenterImpl(private val mView: NewTripPresenterInt.View) : NewTri
 
     override fun onGetTripsByOriginAndDestinationAndDateFailed(error: String) {
         mView.onGetTripsByOriginAndDestinationAndDateFailed(error)
+    }
+
+    override fun onGetTripsByOriginAndDestinationAndDateAndTimeOk(trips: MutableList<Trip>) {
+        mView.onGetTripsByOriginAndDestinationAndDateAndTimeOk(trips)
+    }
+
+    override fun onGetTripsByOriginAndDestinationAndDateAndTimeFailed(error: String) {
+        mView.onGetTripsByOriginAndDestinationAndDateAndTimeFailed(error)
+    }
+
+    override fun onGetRoundTripOk(trips: MutableList<Trip>) {
+        mView.onGetRoundTripOk(trips)
+    }
+
+    override fun onGetRoundTripFailed(error: String) {
+        mView.onGetRoundTripFailed(error)
     }
 
 }
