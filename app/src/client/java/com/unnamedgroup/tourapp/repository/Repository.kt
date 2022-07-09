@@ -281,4 +281,50 @@ class Repository() {
         })
     }
 
+    fun getTripsByOriginAndDestinationAndDateAndTime(presenter: NewTripPresenterInt, origin: String, destination: String, date: String, departureTime: String) {
+        service.getTrips(origin, destination, date, departureTime).enqueue(object : Callback<MutableList<TripREST>> {
+            override fun onResponse(
+                call: Call<MutableList<TripREST>>,
+                response: Response<MutableList<TripREST>>
+            ) {
+                if (response.isSuccessful) {
+                    val respList: MutableList<TripREST> = response.body()!!
+                    val trips: MutableList<Trip> = mutableListOf()
+                    for (r in respList) {
+                        trips.add(r.toTrip())
+                    }
+                    presenter.onGetTripsByOriginAndDestinationAndDateAndTimeOk(trips)
+                } else {
+                    presenter.onGetTripsByOriginAndDestinationAndDateAndTimeFailed(response.message())
+                }
+            }
+            override fun onFailure(call: Call<MutableList<TripREST>>, t: Throwable) {
+                presenter.onGetTripsByOriginAndDestinationAndDateAndTimeFailed(t.toString())
+            }
+        })
+    }
+
+    fun getRoundTrip(presenter: NewTripPresenterInt, origin: String, destination: String) {
+        service.getTrips(origin, destination).enqueue(object : Callback<MutableList<TripREST>> {
+            override fun onResponse(
+                call: Call<MutableList<TripREST>>,
+                response: Response<MutableList<TripREST>>
+            ) {
+                if (response.isSuccessful) {
+                    val respList: MutableList<TripREST> = response.body()!!
+                    val trips: MutableList<Trip> = mutableListOf()
+                    for (r in respList) {
+                        trips.add(r.toTrip())
+                    }
+                    presenter.onGetRoundTripOk(trips)
+                } else {
+                    presenter.onGetRoundTripFailed(response.message())
+                }
+            }
+            override fun onFailure(call: Call<MutableList<TripREST>>, t: Throwable) {
+                presenter.onGetRoundTripFailed(t.toString())
+            }
+        })
+    }
+
 }
