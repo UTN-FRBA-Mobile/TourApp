@@ -1,5 +1,6 @@
 package com.unnamedgroup.tourapp.presenter.implementation
 
+import android.text.format.DateUtils
 import com.unnamedgroup.tourapp.model.business.Ticket
 import com.unnamedgroup.tourapp.presenter.interfaces.MyTripsPresenterInt
 import com.unnamedgroup.tourapp.repository.Repository
@@ -17,7 +18,7 @@ class MyTripsPresenterImpl(private val mView: MyTripsPresenterInt.View) : MyTrip
 
     override fun onGetTicketsByUserOk(tickets: MutableList<Ticket>) {
         val currentDate = Date()
-        var filteredTickets: MutableList<Ticket> = tickets.filter { t -> t.trip.date.after(currentDate) || t.trip.date == currentDate } as MutableList<Ticket>
+        val filteredTickets: MutableList<Ticket> = tickets.filter { t -> t.trip.date.after(currentDate) || DateUtils.isToday(t.trip.date.time) } as MutableList<Ticket>
         mView.onGetTicketsByUserOk(filteredTickets)
     }
 
