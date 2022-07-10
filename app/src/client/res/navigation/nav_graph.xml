@@ -44,7 +44,8 @@
             app:destination="@id/NewTripFragment" />
         <action
             android:id="@+id/action_confirmTripFragment_to_resultScreenFragment"
-            app:destination="@id/resultScreenFragment" />
+            app:destination="@id/resultScreenFragment"
+            app:popUpTo="@id/MyTripsFragment" />
     </fragment>
     <fragment
         android:id="@+id/resultScreenFragment"
@@ -53,7 +54,8 @@
         tools:layout="@layout/fragment_result_screen" >
         <action
             android:id="@+id/action_resultScreenFragment_to_MyTripsFragment"
-            app:destination="@id/MyTripsFragment" />
+            app:destination="@id/MyTripsFragment"
+            app:popUpTo="@id/MyTripsFragment" />
     </fragment>
 
     <fragment
