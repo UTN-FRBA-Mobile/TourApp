@@ -21,7 +21,7 @@ class ConfirmTripPassengersAdapter(private val myDataset: List<Passenger>) :
     }
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
-        holder.view.findViewById<TextView>(R.id.passengerNumber).text = (position + 1).toString()
+        holder.view.findViewById<TextView>(R.id.passengerNumber).text = ((position + 1).toString() + ": ")
         holder.view.findViewById<TextView>(R.id.passengerName).text = myDataset[position].name
         holder.view.findViewById<TextView>(R.id.passengerDNI).text = myDataset[position].dni
     }

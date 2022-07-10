@@ -61,8 +61,8 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onResume() {
+        super.onResume()
 
         firstTicket = arguments?.getParcelable("Ticket")
         firstTicket?.let {
@@ -145,6 +145,7 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
         if (roundTrip) {
             binding.smRoundTrip.visibility = View.GONE
         }
+
     }
 
     override fun onDestroyView() {
@@ -199,6 +200,10 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
             val dni = it.findViewById<TextInputLayout>(R.id.til_passenger_dni).editText?.text.toString()
             if (dni.isEmpty()) {
                 Toast.makeText(context, getString(R.string.empty_dni_error), Toast.LENGTH_SHORT).show()
+                return;
+            }
+            if (dni.length != 7 && dni.length != 8) {
+                Toast.makeText(context, getString(R.string.invalid_dni), Toast.LENGTH_SHORT).show()
                 return;
             }
             passengers.add(Passenger(i++, name, dni, false))

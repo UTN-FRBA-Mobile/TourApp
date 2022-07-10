@@ -21,7 +21,6 @@ class ConfirmTripTicketsAdapter (private val myDataset: List<Ticket>, private va
         return MyViewHolder(view)
     }
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-
         holder.view.findViewById<TextView>(R.id.value_origin).text = myDataset[position].trip.origin
         holder.view.findViewById<TextView>(R.id.value_destination).text = myDataset[position].trip.destination
         holder.view.findViewById<TextView>(R.id.value_date).text = Utils.getDateWithFormat(myDataset[position].trip.date, "dd/MM/yyyy")

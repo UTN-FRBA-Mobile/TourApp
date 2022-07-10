@@ -71,7 +71,8 @@
     <string name="round_trip">Ida y vuelta</string>
     <string name="price">Precio: $</string>
     <string name="empty_name_error">Debe completar el nombre del pasajero</string>
-    <string name="empty_dni_error">Debe completar el dni del pasajero</string>
+    <string name="empty_dni_error">Debe completar el DNI del pasajero</string>
+    <string name="invalid_dni">DNI Inválido</string>
     <!---->
 
     <!--Confirmar viaje-->

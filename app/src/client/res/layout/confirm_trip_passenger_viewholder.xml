@@ -10,7 +10,7 @@
         android:id="@+id/passengerDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pasajero: "
+        android:text="Pasajero"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textStyle="bold" />
 
@@ -20,10 +20,10 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/passengerDescription"
         android:layout_alignTop="@id/passengerDescription"
-        android:layout_toEndOf="@id/passengerDescription"
-        android:layout_marginLeft="2dp"
+        android:layout_marginStart="2dp"
         android:layout_marginTop="2dp"
-        android:text="1"
+        android:layout_toEndOf="@id/passengerDescription"
+        android:text="1: "
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textStyle="bold" />
 
@@ -34,19 +34,30 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/passengerNumber"
         android:layout_alignTop="@id/passengerNumber"
+        android:layout_marginStart="2dp"
         android:layout_toEndOf="@id/passengerNumber"
-        android:layout_marginLeft="2dp"
-        android:ems="10"
         android:text="Jose Machado"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+    <TextView
+        android:id="@+id/dash"
+        android:layout_toEndOf="@id/passengerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/passengerNumber"
+        android:layout_alignTop="@id/passengerNumber"
+        android:layout_marginStart="2dp"
+        android:text=" - "
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
     <TextView
         android:id="@+id/passengerDNI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/passengerName"
         android:layout_alignTop="@id/passengerName"
-        android:layout_toEndOf="@id/passengerName"
-        android:layout_marginLeft="2dp"
+        android:layout_marginStart="2dp"
+        android:layout_toEndOf="@id/dash"
         android:ems="10"
         android:text="20.444.222"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />

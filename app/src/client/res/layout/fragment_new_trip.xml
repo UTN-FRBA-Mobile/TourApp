@@ -149,9 +149,9 @@
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
                     android:id="@+id/sm_round_trip"
-                    android:layout_width="0dp"
+                    android:layout_width="10dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".50"
+                    android:layout_weight=".3"
                     android:checked="false"
                     android:text="@string/round_trip" />
 
@@ -170,7 +170,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/next"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="45dp"
             android:layout_gravity="center"/>
     </LinearLayout>
 </ScrollView>
