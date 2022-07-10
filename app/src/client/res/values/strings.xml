@@ -44,6 +44,7 @@
     <string name="details_back_button">Volver</string>
     <string name="details_share_button">Compartir</string>
     <string name="details_info">* Los viajes se pueden editar hasta 24 hs antes de la partida</string>
+    <string name="trip_state">Estado</string>
 
     <!-- trip Qr -->
     <string name="generate_qr_error">Error al generar el Qr, intente de nuevo mas tarde</string>
@@ -66,13 +67,13 @@
     <string name="arrival_stop">Lugar de bajada</string>
     <string name="number_of_tickets">Cantidad de pasajes</string>
     <string name="passenger_name">Nombre de pasajero</string>
-    <string name="trip_state">Estado</string>
     <string name="passenger_dni">DNI pasajero</string>
     <string name="round_trip">Ida y vuelta</string>
     <string name="price">Precio: $</string>
     <string name="empty_name_error">Debe completar el nombre del pasajero</string>
     <string name="empty_dni_error">Debe completar el DNI del pasajero</string>
     <string name="invalid_dni">DNI Inválido</string>
+    <string name="remaining_tickets_text">Tickets restantes</string>
     <!---->
 
     <!--Confirmar viaje-->

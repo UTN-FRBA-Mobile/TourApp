@@ -12,6 +12,7 @@ class Trip(
     val origin: String,
     val destination: String,
     var passengersAmount: Int,
+    var totalPassengers: Int,
     val price: Float,
     val busBoardings: MutableList<String>,
     val busStops: MutableList<String>,
@@ -27,6 +28,7 @@ class Trip(
         parcel.readInt(),
         parcel.readString()!!,
         parcel.readString()!!,
+        parcel.readInt(),
         parcel.readInt(),
         parcel.readFloat(),
         mutableListOf<String>().apply { parcel.readArray(String::class.java.classLoader) },
@@ -44,6 +46,7 @@ class Trip(
             origin,
             destination,
             passengersAmount,
+            totalPassengers,
             price,
             busBoardings,
             busStops,
@@ -98,6 +101,7 @@ class Trip(
         parcel.writeString(origin)
         parcel.writeString(destination)
         parcel.writeInt(passengersAmount)
+        parcel.writeInt(totalPassengers)
         parcel.writeFloat(price)
         parcel.writeStringArray(busBoardings.toTypedArray())
         parcel.writeStringArray(busStops.toTypedArray())

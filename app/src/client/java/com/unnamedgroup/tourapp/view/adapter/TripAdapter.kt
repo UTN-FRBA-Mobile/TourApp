@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.unnamedgroup.tourapp.R
 import com.unnamedgroup.tourapp.model.business.Trip
@@ -43,6 +44,7 @@ class TripAdapter(
             holder.view.findViewById(R.id.trip_origin_destination_textview)
         val dateHourTextView: TextView = holder.view.findViewById(R.id.trip_date_hour_textview)
         val priceTextView: TextView = holder.view.findViewById(R.id.trip_price_textview)
+        val soldOutTextView: TextView = holder.view.findViewById(R.id.trip_sold_out_text)
 
         stateTextView.text = trip.state.text
         stateImageView.setColorFilter(
@@ -59,6 +61,10 @@ class TripAdapter(
             trip.departureTime
         )
         tripLinearLayout.setOnClickListener { view -> onClickListener.onClick(view, trip) }
+        if(trip.passengersAmount == 0){
+            soldOutTextView.text = "Agotado"
+            soldOutTextView.visibility = android.view.View.VISIBLE
+        }
     }
 
     private fun getColorByState(state: Int): Int {

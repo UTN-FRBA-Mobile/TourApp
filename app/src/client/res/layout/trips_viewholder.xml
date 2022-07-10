@@ -35,7 +35,8 @@
                     android:id="@+id/trip_state_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Procesado"/>
+                    android:text="Procesado"
+                    android:maxLines="1"/>
 
             </LinearLayout>
             <LinearLayout
@@ -62,6 +63,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Lunes 02/05/22 - 16hs"/>
+
+                    <TextView
+                        android:id="@+id/trip_sold_out_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/red"
+                        android:visibility="gone"/>
 
                 </LinearLayout>
                 <TextView

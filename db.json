@@ -26,6 +26,7 @@
       "id": 1,
       "origin": "Mercedes",
       "passengersAmount": 0,
+      "totalPassengers": 30,
       "price": 800,
       "state": "DELAYED"
     },
@@ -55,6 +56,7 @@
       "id": 2,
       "origin": "Capital Federal",
       "passengersAmount": 18,
+      "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
     },
@@ -63,6 +65,7 @@
       "origin": "Mercedes",
       "destination": "Capital Federal",
       "passengersAmount": 20,
+      "totalPassengers": 30,
       "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
@@ -92,6 +95,7 @@
       "origin": "Mercedes",
       "destination": "Capital Federal",
       "passengersAmount": 20,
+      "totalPassengers": 30,
       "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
@@ -121,6 +125,7 @@
       "origin": "Mercedes",
       "destination": "Capital Federal",
       "passengersAmount": 20,
+      "totalPassengers": 30,
       "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
@@ -150,6 +155,7 @@
       "origin": "Mercedes",
       "destination": "Capital Federal",
       "passengersAmount": 20,
+      "totalPassengers": 30,
       "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
@@ -179,6 +185,7 @@
       "origin": "Mercedes",
       "destination": "Capital Federal",
       "passengersAmount": 20,
+      "totalPassengers": 30,
       "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
@@ -208,6 +215,7 @@
       "origin": "Mercedes",
       "destination": "Capital Federal",
       "passengersAmount": 20,
+      "totalPassengers": 30,
       "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
@@ -237,6 +245,7 @@
       "origin": "Mercedes",
       "destination": "Capital Federal",
       "passengersAmount": 20,
+      "totalPassengers": 30,
       "price": 800,
       "busBoardings": [
         "Hotel Mercedes",
@@ -266,6 +275,7 @@
       "origin": "Capital Federal",
       "destination": "Mercedes",
       "passengersAmount": 20,
+      "totalPassengers": 30,
       "price": 800,
       "busBoardings": [
         "Irigoyen y Estados Unidos",
@@ -316,6 +326,7 @@
       "id": 11,
       "origin": "Capital Federal",
       "passengersAmount": 19,
+      "totalPassengers": 30,
       "price": 800,
       "state": "PROCESSING"
     },
@@ -324,6 +335,7 @@
       "origin": "Capital Federal",
       "destination": "Mercedes",
       "passengersAmount": 20,
+      "totalPassengers": 30,
       "price": 800,
       "busBoardings": [
         "Irigoyen y Estados Unidos",
@@ -353,6 +365,7 @@
       "origin": "Capital Federal",
       "destination": "Mercedes",
       "passengersAmount": 20,
+      "totalPassengers": 30,
       "price": 800,
       "busBoardings": [
         "Irigoyen y Estados Unidos",
@@ -380,8 +393,8 @@
   ],
   "tickets": [
     {
-      "busBoarding": "29 y 40",
-      "busStop": "Irigoyen y Venezuela",
+      "busBoarding": "Hotel Mercedes",
+      "busStop": "Alto Palermo",
       "id": 1,
       "passengers": [
         {
@@ -423,6 +436,7 @@
         "id": 1,
         "origin": "Mercedes",
         "passengersAmount": 20,
+        "totalPassengers": 30,
         "price": 800,
         "state": "PROCESSING"
       },
@@ -435,24 +449,34 @@
       }
     },
     {
-      "busBoarding": "29 y 40",
-      "busStop": "Irigoyen y Estados Unidos",
       "id": 2,
+      "user": {
+        "id": 1,
+        "name": "Benjamín Enríquez",
+        "email": "benjaenriquez@frba.utn.edu.ar",
+        "dni": "40255931",
+        "password": "Norberto10",
+        "token": "asdasdasdasdasd"
+      },
       "passengers": [
         {
-          "busBoarded": false,
+          "name": "Jose López",
           "dni": "402559315",
-          "id": 0,
-          "name": "Jose López"
+          "id": 0
         },
         {
-          "busBoarded": false,
+          "name": "Pedro López",
           "dni": "402559316",
-          "id": 1,
-          "name": "Pedro López"
+          "id": 1
         }
       ],
       "trip": {
+        "id": 2,
+        "origin": "Mercedes",
+        "destination": "Capital Federal",
+        "passengersAmount": 20,
+        "totalPassengers": 30,
+        "price": 800,
         "busBoardings": [
           "Hotel Mercedes",
           "29 y 40",
@@ -466,28 +490,18 @@
           "Cerrito y Paraguay",
           "Alto Palermo"
         ],
-        "date": "18-07-2022",
         "departureTime": "05:35",
-        "destination": "Capital Federal",
+        "date": "18-07-2022",
+        "state": "CONFIRMED",
         "driver": {
-          "dni": "39184443",
-          "email": "fbevilacqua@frba.utn.edu.ar",
           "id": 101,
-          "name": "test"
-        },
-        "id": 2,
-        "origin": "Mercedes",
-        "passengersAmount": 20,
-        "price": 800,
-        "state": "CONFIRMED"
+          "name": "test",
+          "email": "fbevilacqua@frba.utn.edu.ar",
+          "dni": "39184443"
+        }
       },
-      "user": {
-        "dni": "40255931",
-        "email": "benjaenriquez@frba.utn.edu.ar",
-        "id": 1,
-        "name": "Benjamín Enríquez",
-        "token": "asdasdasdasdasd"
-      }
+      "busBoarding": "Hotel Mercedes",
+      "busStop": "Alto Palermo"
     },
     {
       "busBoarding": "Hotel Mercedes",
@@ -538,6 +552,7 @@
         "id": 2,
         "origin": "Mercedes",
         "passengersAmount": 20,
+        "totalPassengers": 30,
         "price": 800,
         "state": "CONFIRMED"
       },
@@ -593,6 +608,7 @@
         "id": 2,
         "origin": "Mercedes",
         "passengersAmount": 20,
+        "totalPassengers": 30,
         "price": 800,
         "state": "CONFIRMED"
       },
@@ -648,6 +664,7 @@
         "id": 2,
         "origin": "Mercedes",
         "passengersAmount": 20,
+        "totalPassengers": 30,
         "price": 800,
         "state": "CONFIRMED"
       },
@@ -703,6 +720,7 @@
         "id": 2,
         "origin": "Mercedes",
         "passengersAmount": 20,
+        "totalPassengers": 30,
         "price": 800,
         "state": "CONFIRMED"
       },
@@ -758,6 +776,7 @@
         "id": 2,
         "origin": "Mercedes",
         "passengersAmount": 20,
+        "totalPassengers": 30,
         "price": 800,
         "state": "CONFIRMED"
       },
@@ -813,6 +832,7 @@
         "id": 2,
         "origin": "Mercedes",
         "passengersAmount": 20,
+        "totalPassengers": 30,
         "price": 800,
         "state": "CONFIRMED"
       },
@@ -874,6 +894,7 @@
         "id": 2,
         "origin": "Mercedes",
         "passengersAmount": 20,
+        "totalPassengers": 30,
         "price": 800,
         "state": "CONFIRMED"
       },
@@ -929,6 +950,7 @@
         "id": 2,
         "origin": "Mercedes",
         "passengersAmount": 20,
+        "totalPassengers": 30,
         "price": 800,
         "state": "CONFIRMED"
       },
@@ -984,6 +1006,7 @@
         "id": 2,
         "origin": "Mercedes",
         "passengersAmount": 20,
+        "totalPassengers": 30,
         "price": 800,
         "state": "CONFIRMED"
       },
@@ -1039,6 +1062,7 @@
         "id": 2,
         "origin": "Mercedes",
         "passengersAmount": 20,
+        "totalPassengers": 30,
         "price": 800,
         "state": "CONFIRMED"
       },
@@ -1094,6 +1118,7 @@
         "id": 2,
         "origin": "Mercedes",
         "passengersAmount": 20,
+        "totalPassengers": 30,
         "price": 800,
         "state": "CONFIRMED"
       },
@@ -1149,6 +1174,7 @@
         "id": 2,
         "origin": "Mercedes",
         "passengersAmount": 20,
+        "totalPassengers": 30,
         "price": 800,
         "state": "CONFIRMED"
       },
@@ -1204,6 +1230,7 @@
         "id": 2,
         "origin": "Mercedes",
         "passengersAmount": 20,
+        "totalPassengers": 30,
         "price": 800,
         "state": "CONFIRMED"
       },
@@ -1259,6 +1286,7 @@
         "id": 2,
         "origin": "Mercedes",
         "passengersAmount": 20,
+        "totalPassengers": 30,
         "price": 800,
         "state": "CONFIRMED"
       },
@@ -1309,6 +1337,7 @@
         "id": 11,
         "origin": "Capital Federal",
         "passengersAmount": 19,
+        "totalPassengers": 30,
         "price": 800,
         "state": "PROCESSING"
       },

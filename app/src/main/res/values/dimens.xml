@@ -6,7 +6,7 @@
     <dimen name="recyclerview_margin_vertical">20dp</dimen>
     <dimen name="card_padding">10dp</dimen>
     <dimen name="card_corner_radius">10dp</dimen>
-    <dimen name="trip_state_width">75dp</dimen>
+    <dimen name="trip_state_width">80dp</dimen>
     <dimen name="trip_card_icon_and_text_separation">20dp</dimen>
     <dimen name="card_separation">15dp</dimen>
     <dimen name="title_string_size">40sp</dimen>
@@ -28,6 +28,9 @@
     <dimen name="info_margin_horizontal">20dp</dimen>
     <dimen name="screen_margin_vertical">20dp</dimen>
     <dimen name="passenger_right_margin">8dp</dimen>
+
+    <!-- new Trip -->
+    <dimen name="text_input_margin_vertical">20dp</dimen>
 
     <dimen name="button_width">150dp</dimen>
 
