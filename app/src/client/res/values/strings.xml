@@ -73,7 +73,7 @@
     <string name="empty_name_error">Debe completar el nombre del pasajero</string>
     <string name="empty_dni_error">Debe completar el DNI del pasajero</string>
     <string name="invalid_dni">DNI Inválido</string>
-    <string name="remaining_tickets_text">Tickets restantes</string>
+    <string name="remaining_tickets_text">Pasajes restantes</string>
     <!---->
 
     <!--Confirmar viaje-->

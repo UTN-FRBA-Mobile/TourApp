@@ -51,6 +51,7 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
     private var passengersLayouts: MutableList<LinearLayout> = ArrayList()
     private var roundTrip: Boolean = false
     private var user: User? = null
+    private var numberOfTickets = 0
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -152,6 +153,8 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
             binding.smRoundTrip.visibility = View.GONE
         }
 
+        onChangeNumberOfTickets(this.numberOfTickets)
+
     }
 
     override fun onDestroyView() {
@@ -172,14 +175,20 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
     private fun onChangeNumberOfTickets(numberOfTickets : Int) {
         refreshPrice(numberOfTickets + 1)
         binding.llPassengers.removeAllViews()
+        this.numberOfTickets = numberOfTickets
 
         for(i in 0 .. numberOfTickets){
             if (i > passengersLayouts.count()-1) {
                 addPassengerLayout()
             } else {
-                binding.llPassengers.addView(passengersLayouts.get(i))
+                binding.llPassengers.addView(passengersLayouts[i])
             }
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        binding.llPassengers.removeAllViews()
     }
 
     private fun addPassengerLayout() : LinearLayout {
