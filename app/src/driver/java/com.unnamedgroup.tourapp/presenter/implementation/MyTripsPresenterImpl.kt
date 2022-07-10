@@ -32,7 +32,7 @@ class MyTripsPresenterImpl(private val mView: MyTripsPresenterInt.View) : MyTrip
     override fun saveTrip(trip: Trip, oldState: Trip.TripState) {
         Repository().saveTrip(this, trip.id, trip.toRest())
         if (trip.state != oldState) {
-            Repository().generatePushNotification(this, trip.id, trip.state.text)
+            Repository().generatePushNotification(this, trip.id, trip.state.text, trip.origin + " - " + trip.destination)
         }
     }
 

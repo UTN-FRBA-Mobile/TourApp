@@ -77,11 +77,13 @@ class MyTripsAdapter(
     fun setFilter(filterValue: String) {
         tripsFilter = filterValue
         showingList = mTickets.filter {
+            val tripIdText = "Viaje " + it.id.toString()
             it.trip.state.text.contains(filterValue, true) ||
                     it.trip.origin.contains(filterValue, true) ||
                     it.trip.destination.contains(filterValue, true) ||
                     it.trip.dateStr.contains(filterValue, true) ||
-                    it.trip.departureTime.contains(filterValue, true)
+                    it.trip.departureTime.contains(filterValue, true) ||
+                    tripIdText.contains(filterValue, true)
         }.toMutableList()
         notifyDataSetChanged()
     }

@@ -47,11 +47,13 @@ class MyTripsDriverAdapter(
     fun setFilter(filterValue : String) {
         tripsFilter = filterValue
         showingList = mTrips.filter {
+            val tripIdText = "Viaje " + it.id.toString()
             it.state.text.contains(filterValue, true) ||
                     it.id.toString().contains(filterValue, true) ||
-                    it.origin!!.contains(filterValue, true) ||
-                    it.destination!!.contains(filterValue, true) ||
-                    it.departureTime!!.contains(filterValue, true)
+                    it.origin.contains(filterValue, true) ||
+                    it.destination.contains(filterValue, true) ||
+                    it.departureTime.contains(filterValue, true) ||
+                    tripIdText.contains(filterValue, true)
         }.toMutableList()
         notifyDataSetChanged()
     }

@@ -14,7 +14,7 @@ import com.unnamedgroup.tourapp.view.activity.MainActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
-class FirebaseMessagingServiceImp: FirebaseMessagingService() {
+class FirebaseMessagingServiceImp : FirebaseMessagingService() {
 
     private fun createID(): Int {
         val now = Date()
@@ -29,7 +29,6 @@ class FirebaseMessagingServiceImp: FirebaseMessagingService() {
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
         Log.d("FirebaseMessaging", "From: ${remoteMessage.from}")
 
-        var title: String? = null
         var text: String? = null
         var pendingIntent: PendingIntent? = null
 
@@ -38,8 +37,12 @@ class FirebaseMessagingServiceImp: FirebaseMessagingService() {
             Log.d("FirebaseMessaging", "Message data payload: ${remoteMessage.data}")
 
             if (remoteMessage.data["notificationType"] == "1") {
-                title = getString(R.string.notification_trip_state_change_title)
-                text = getString(R.string.notification_trip_state_change, remoteMessage.data["tripId"], remoteMessage.data["newState"])
+                text = getString(
+                    R.string.notification_trip_state_change,
+                    remoteMessage.data["tripId"],
+                    remoteMessage.data["tripName"],
+                    remoteMessage.data["newState"]
+                )
                 val bundle = Bundle()
                 bundle.putInt("tripId", remoteMessage.data["tripId"]!!.toInt())
                 bundle.putBoolean("fromNotification", true)
@@ -62,13 +65,13 @@ class FirebaseMessagingServiceImp: FirebaseMessagingService() {
 
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
-        val builder = NotificationCompat.Builder(this, getString(R.string.default_notifications_channel))
-            .setSmallIcon(R.mipmap.ic_launcher)
-            .setContentTitle(text)
-            .setContentText(title)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .setContentIntent(pendingIntent)
-            .setAutoCancel(true)
+        val builder =
+            NotificationCompat.Builder(this, getString(R.string.default_notifications_channel))
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .setStyle(NotificationCompat.BigTextStyle().bigText(text))
 
         with(NotificationManagerCompat.from(this)) {
             notify(createID(), builder.build())

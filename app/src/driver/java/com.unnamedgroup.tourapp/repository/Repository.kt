@@ -208,8 +208,8 @@ class Repository {
         })
     }
 
-    fun generatePushNotification(presenter: MyTripsPresenterInt, tripId: Int, newState: String) {
-        val pnBody = PushNotificationREST("/topics/trip$tripId", PushNotificationDataREST(1, tripId, newState))
+    fun generatePushNotification(presenter: MyTripsPresenterInt, tripId: Int, newState: String, tripName: String) {
+        val pnBody = PushNotificationREST("/topics/trip$tripId", PushNotificationDataREST(1, tripId, newState, tripName))
         pnService.createTripStateChangePN(pnBody).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (!response.isSuccessful) {

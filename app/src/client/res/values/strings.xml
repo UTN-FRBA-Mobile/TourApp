@@ -14,7 +14,7 @@
     <string name="trip_state_content_destription">Estado del viaje</string>
     <string name="trip_name_text">%s - %s</string>
     <string name="trip_date_hour">%s - %shs</string>
-    <string name="trip_id">Viaje - %d</string>
+    <string name="trip_id">Viaje %d</string>
     <string name="trip_origin_destination_hour">%s - %s - %s hs</string>
 
     <string-array name="trip_state_list">
