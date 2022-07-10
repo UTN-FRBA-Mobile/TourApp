@@ -143,8 +143,7 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View, ConfirmPre
     override fun onModifyTicketOk(ticket: Ticket) {
         numberOfTicketsOk++
         if (numberOfTripsOk == 2 && numberOfTicketsOk == 1){
-            //TODO Cambiar el it.trip.id == ticket.trip.id por it.trip.id != ticket.trip.id cuando cambien en el generar viaja
-            tripDetailsPresenterInt.addTicket( tickets[1])
+            tripDetailsPresenterInt.addTicket( tickets.filter { it.trip.id == ticket.trip.id }.first())
         }
 
         when (tickets.size){
@@ -166,18 +165,17 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View, ConfirmPre
     }
 
     override fun getTicketByTripIdOk(ticket: Ticket) {
-        TODO("Not yet implemented")
+        Toast.makeText(context, "Ticket obtenido", Toast.LENGTH_SHORT).show()
     }
 
     override fun getTicketByTripIdFailed(error: String) {
-        TODO("Not yet implemented")
+        Toast.makeText(context, "Error al al buscar ticket por id de Viaje", Toast.LENGTH_SHORT).show()
     }
 
 
     override fun onModifyTripOk(trip: Trip) {
         numberOfTripsOk++
-        //TODO Cambiar el trip.id == it.trip.id && trip.origin == it.trip.origin por trip.id == it.trip.id cuando cambien en el generar viaja
-        if (numberOfTripsOk == 1) tripDetailsPresenterInt.addTicket( tickets.filter { trip.id == it.trip.id && trip.origin == it.trip.origin }.first())
+        if (numberOfTripsOk == 1) tripDetailsPresenterInt.addTicket( tickets.filter { trip.id == it.trip.id}.first())
 
         if(tickets.size == 2 && numberOfTripsOk == 1){
             tickets[1].trip.passengersAmount    -=  tickets[1].passengers.size
