@@ -111,4 +111,10 @@ class TripsFragment : Fragment(), GetTripsPresenterInt.View, TripsPresenterInt.V
     override fun onGetLastTicketByUserFailed(error: String) {
         Toast.makeText(context, getString(R.string.get_trips_error), Toast.LENGTH_SHORT).show()
     }
+
+    override fun onResume() {
+        super.onResume()
+        binding.searchInput.setText("")
+    }
+
 }

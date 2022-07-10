@@ -69,6 +69,11 @@ class MyTripsDriverFragment : Fragment(), GetTripsPresenterInt.View {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.driverSearchInput.setText("")
+    }
+
     private fun setRecyclerViewList(trips: MutableList<Trip>) {
         viewAdapter!!.setList(trips)
     }
