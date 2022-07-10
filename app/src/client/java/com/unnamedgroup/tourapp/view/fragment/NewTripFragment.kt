@@ -92,6 +92,7 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
             }
         }
         binding.tilOrigin.editText?.setText(trip?.origin)
+
         binding.tilDestination.editText?.setText(trip?.destination)
         binding.tilDepartureDate.editText?.setText(trip?.dateStr)
         binding.tilDepartureHour.editText?.setText(trip?.departureTime)
@@ -103,6 +104,11 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
             trip!!.departureTime = departureTimesList!!.get(position)
             newTripPresenter.getTripsByOriginAndDestinationAndDateAndTime(trip!!.origin, trip!!.destination, Utils.getDateWithFormat(trip!!.date, "dd-MM-yyyy"), trip!!.departureTime)
         }
+
+        with(binding.tripRemainingTicketsText){
+            setText(trip!!.passengersAmount.toString())
+        }
+
         with(binding.actvBoarding) {
             setAdapter(boardingsAdapter)
             lastTicket?.let {

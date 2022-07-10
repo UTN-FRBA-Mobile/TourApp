@@ -32,9 +32,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_input_add"
-        android:contentDescription="@string/new_trip_button"
         android:backgroundTint="@color/orange"
-        app:backgroundTint="@color/orange"/>
+        android:contentDescription="@string/new_trip_button"
+        app:backgroundTint="@color/orange"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 </RelativeLayout>
