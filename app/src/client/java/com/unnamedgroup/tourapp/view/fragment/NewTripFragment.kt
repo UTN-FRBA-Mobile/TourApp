@@ -56,25 +56,6 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
-        firstTicket = arguments?.getParcelable<Ticket>("Ticket")
-        firstTicket?.let {
-            trip = arguments?.getParcelable<Trip>("LastTrip")
-            roundTrip = true
-            lastTicket = Ticket(null, it.user, it.passengers, trip!!,"", it.busStop, it.busBoarding)
-            firstTicketPrice = it.passengers.size * it.trip.price
-        } ?: run {
-            lastTicket = arguments?.getParcelable<Ticket>("LastTicket")
-            lastTicket?.let {
-                trip = it.trip
-            } ?: run {
-                trip = arguments?.getParcelable<Trip>("Trip")
-            }
-        }
-        trip?.busBoardings?.let { boardingsAdapter = ArrayAdapter(requireContext(), R.layout.list_item, it ) }
-        trip?.busStops?.let { stopsAdapter = ArrayAdapter(requireContext(), R.layout.list_item, it) }
-        trip?.passengersAmount?.let { numberOfTicketsAdapter = ArrayAdapter(requireContext(), R.layout.list_item, (1..it).toList())}
-        trip?.let { newTripPresenter.getTripsByOriginAndDestination(it.origin,it.destination) }
-        newTripPresenter.getUserById(MyPreferences.getUserId(requireContext()))
         _binding = FragmentNewTripBinding.inflate(inflater, container, false)
         return binding.root
 
@@ -82,6 +63,27 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        firstTicket = arguments?.getParcelable("Ticket")
+        firstTicket?.let {
+            trip = arguments?.getParcelable("LastTrip")
+            roundTrip = true
+            lastTicket = Ticket(null, it.user, it.passengers, trip!!,"", it.busStop, it.busBoarding)
+            firstTicketPrice = it.passengers.size * it.trip.price
+        } ?: run {
+            lastTicket = arguments?.getParcelable("LastTicket")
+            lastTicket?.let {
+                trip = it.trip
+            } ?: run {
+                trip = arguments?.getParcelable("Trip")
+            }
+        }
+        trip?.busBoardings?.let { boardingsAdapter = ArrayAdapter(requireContext(), R.layout.list_item, it ) }
+        trip?.busStops?.let { stopsAdapter = ArrayAdapter(requireContext(), R.layout.list_item, it) }
+        trip?.passengersAmount?.let { numberOfTicketsAdapter = ArrayAdapter(requireContext(), R.layout.list_item, (1..it).toList())}
+        trip?.let { newTripPresenter.getTripsByOriginAndDestination(it.origin,it.destination) }
+        newTripPresenter.getUserById(MyPreferences.getUserId(requireContext()))
+
         binding.bNext.setOnClickListener {
             if (binding.smRoundTrip.isChecked) {
                 newTripPresenter.getRoundTrip(trip!!.destination, trip!!.origin)
@@ -255,7 +257,7 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
     }
 
     override fun onGetTripsByOriginAndDestinationAndDateOk(trips: MutableList<Trip>) {
-        trips?.let { trip = it.get(0) }
+        trips.let { trip = it[0] }
         departureTimesList = getTimesArray(trips)
         departureTimeAdapter = ArrayAdapter(requireContext(), R.layout.list_item, departureTimesList!!)
         with(binding.actvDepartureTime) {
@@ -274,7 +276,7 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
 
     override fun onGetTripsByOriginAndDestinationAndDateAndTimeOk(trips: MutableList<Trip>) {
         //TODO: Recargar lugar de subida y bajada
-        trips?.let { trip = it.get(0) }
+        trips.let { trip = it[0] }
     }
 
     override fun onGetTripsByOriginAndDestinationAndDateAndTimeFailed(error: String) {
@@ -282,7 +284,7 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
     }
 
     override fun onGetRoundTripOk(trips: MutableList<Trip>) {
-        trips?.let{ lastTrip = it.get(0)}
+        trips.let{ lastTrip = it[0] }
         next()
     }
 

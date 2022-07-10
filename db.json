@@ -380,8 +380,8 @@
   ],
   "tickets": [
     {
-      "busBoarding": "Hotel Mercedes",
-      "busStop": "Alto Palermo",
+      "busBoarding": "29 y 40",
+      "busStop": "Irigoyen y Venezuela",
       "id": 1,
       "passengers": [
         {
@@ -435,33 +435,24 @@
       }
     },
     {
+      "busBoarding": "29 y 40",
+      "busStop": "Irigoyen y Estados Unidos",
       "id": 2,
-      "user": {
-        "id": 1,
-        "name": "Benjamín Enríquez",
-        "email": "benjaenriquez@frba.utn.edu.ar",
-        "dni": "40255931",
-        "password": "Norberto10",
-        "token": "asdasdasdasdasd"
-      },
       "passengers": [
         {
-          "name": "Jose López",
+          "busBoarded": false,
           "dni": "402559315",
-          "id": 0
+          "id": 0,
+          "name": "Jose López"
         },
         {
-          "name": "Pedro López",
+          "busBoarded": false,
           "dni": "402559316",
-          "id": 1
+          "id": 1,
+          "name": "Pedro López"
         }
       ],
       "trip": {
-        "id": 2,
-        "origin": "Mercedes",
-        "destination": "Capital Federal",
-        "passengersAmount": 20,
-        "price": 800,
         "busBoardings": [
           "Hotel Mercedes",
           "29 y 40",
@@ -475,18 +466,28 @@
           "Cerrito y Paraguay",
           "Alto Palermo"
         ],
-        "departureTime": "05:35",
         "date": "18-07-2022",
-        "state": "CONFIRMED",
+        "departureTime": "05:35",
+        "destination": "Capital Federal",
         "driver": {
-          "id": 101,
-          "name": "test",
+          "dni": "39184443",
           "email": "fbevilacqua@frba.utn.edu.ar",
-          "dni": "39184443"
-        }
+          "id": 101,
+          "name": "test"
+        },
+        "id": 2,
+        "origin": "Mercedes",
+        "passengersAmount": 20,
+        "price": 800,
+        "state": "CONFIRMED"
       },
-      "busBoarding": "Hotel Mercedes",
-      "busStop": "Alto Palermo"
+      "user": {
+        "dni": "40255931",
+        "email": "benjaenriquez@frba.utn.edu.ar",
+        "id": 1,
+        "name": "Benjamín Enríquez",
+        "token": "asdasdasdasdasd"
+      }
     },
     {
       "busBoarding": "Hotel Mercedes",
