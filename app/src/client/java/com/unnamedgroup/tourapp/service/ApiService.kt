@@ -12,7 +12,7 @@ interface ApiService {
     @GET("trips")
     fun getTrips(): Call<MutableList<TripREST>>
 
-    @GET("tickets?_sort=trip.date,trip.departureTime&_order=desc,desc&_limit=1")
+    @GET("tickets")
     fun getTicketsByUser(@Query("user.id") userId: Int): Call<MutableList<TicketREST>>
 
     @GET("users")
