@@ -188,7 +188,11 @@ class Repository() {
                 response: Response<MutableList<TicketREST>>
             ) {
                 val resp: MutableList<TicketREST> = response.body()!!
-                presenter.onGetLastTicketByUserOk(resp.get(0).toTicket())
+                if (resp.size == 0 ) {
+                    presenter.onNotLastTrip()
+                } else {
+                    presenter.onGetLastTicketByUserOk(resp.get(0).toTicket())
+                }
             }
 
             override fun onFailure(call: Call<MutableList<TicketREST>>, t: Throwable) {

@@ -103,13 +103,21 @@ class TripsFragment : Fragment(), GetTripsPresenterInt.View, TripsPresenterInt.V
     }
 
     override fun onGetLastTicketByUserOk(ticket: Ticket) {
-        val bundle = Bundle()
-        bundle.putParcelable("LastTicket", ticket)
-        findNavController().navigate(R.id.action_tripsFragment_to_NewTripFragment, bundle)
+        if (ticket != null) {
+            val bundle = Bundle()
+            bundle.putParcelable("LastTicket", ticket)
+            findNavController().navigate(R.id.action_tripsFragment_to_NewTripFragment, bundle)
+        } else {
+            Toast.makeText(context, getString(R.string.not_last_trip_error), Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onGetLastTicketByUserFailed(error: String) {
         Toast.makeText(context, getString(R.string.get_trips_error), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onNotLastTrip() {
+        Toast.makeText(context, getString(R.string.not_last_trip_error), Toast.LENGTH_LONG).show()
     }
 
     override fun onResume() {

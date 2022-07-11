@@ -21,4 +21,8 @@ class TripsPresenterImpl(private val mView: TripsPresenterInt.View) : TripsPrese
         mView.onGetLastTicketByUserFailed(error)
     }
 
+    override fun onNotLastTrip() {
+        mView.onNotLastTrip()
+    }
+
 }
