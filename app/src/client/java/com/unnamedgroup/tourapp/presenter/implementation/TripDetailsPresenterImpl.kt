@@ -1,6 +1,7 @@
 package com.unnamedgroup.tourapp.presenter.implementation
 
 import com.unnamedgroup.tourapp.model.business.Ticket
+import com.unnamedgroup.tourapp.model.business.Trip
 import com.unnamedgroup.tourapp.presenter.interfaces.TripDetailsPresenterInt
 import com.unnamedgroup.tourapp.repository.Repository
 import com.unnamedgroup.tourapp.utils.AbstractPresenter
@@ -35,6 +36,18 @@ class TripDetailsPresenterImpl(private val mView: TripDetailsPresenterInt.View) 
 
     override fun onGetTicketByTripIdFailed(error: String) {
         mView.getTicketByTripIdFailed(error)
+    }
+
+    override fun getTrip(tripId: Int) {
+        Repository().getTrip(this, tripId)
+    }
+
+    override fun onGetTripOk(trip: Trip) {
+        mView.onGetTripOk(trip)
+    }
+
+    override fun onGetTripFailed(error: String) {
+        mView.onGetTripFailed(error)
     }
 
 }

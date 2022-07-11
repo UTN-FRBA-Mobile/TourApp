@@ -51,7 +51,4 @@ interface ApiService {
     @PUT("tickets/{id}")
     fun saveTicket(@Path("id") ticketId: Int, @Body ticket: TicketREST): Call<Void>
 
-
-
-
 }

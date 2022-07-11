@@ -97,7 +97,7 @@ class TripsFragment : Fragment(), GetTripsPresenterInt.View, TripsPresenterInt.V
 
     override fun onGetTripsOk(trips: MutableList<Trip>) {
         val currentDate = Date()
-        setRecyclerViewList(trips.filter { t -> t.date.after(currentDate) || DateUtils.isToday(t.date.time) } as MutableList<Trip>)
+        setRecyclerViewList(trips.filter { t -> (t.date.after(currentDate) || DateUtils.isToday(t.date.time)) && t.state != Trip.TripState.CANCELLED  } as MutableList<Trip>)
     }
 
     override fun onGetTripsError(error: String) {

@@ -177,6 +177,15 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View, ConfirmPre
             .show()
     }
 
+    override fun onGetTripOk(trip: Trip) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetTripFailed(error: String) {
+        Toast.makeText(context, "Error al al buscar el viaje. Intente nuevamente en unos minutos.", Toast.LENGTH_SHORT)
+            .show()
+    }
+
 
     override fun onModifyTripOk(trip: Trip) {
         numberOfTripsOk++

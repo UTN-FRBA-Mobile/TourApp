@@ -331,4 +331,26 @@ class Repository() {
         })
     }
 
+    fun getTrip(presenter: TripDetailsPresenterInt, tripId: Int) {
+        service.getTrip(tripId).enqueue(object : Callback<MutableList<TripREST>> {
+            override fun onResponse(
+                call: Call<MutableList<TripREST>>,
+                response: Response<MutableList<TripREST>>
+            ) {
+                if (response.isSuccessful) {
+                    val tripRest: MutableList<TripREST> = response.body()!!
+                    if (tripRest.size == 0) {
+                        presenter.onGetTripFailed("No se pudo encontrar el viaje. Intente nuevamente en unos minutos.")
+                    }
+                    presenter.onGetTripOk(tripRest[0].toTrip())
+                } else {
+                    presenter.onGetTripFailed(response.message())
+                }
+            }
+            override fun onFailure(call: Call<MutableList<TripREST>>, t: Throwable) {
+                presenter.onGetTripFailed(t.toString())
+            }
+        })
+    }
+
 }

@@ -15,6 +15,7 @@ import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.unnamedgroup.tourapp.R
 import com.unnamedgroup.tourapp.databinding.FragmentTripDetailsBinding
 import com.unnamedgroup.tourapp.model.business.Ticket
+import com.unnamedgroup.tourapp.model.business.Trip
 import com.unnamedgroup.tourapp.presenter.implementation.TripDetailsPresenterImpl
 import com.unnamedgroup.tourapp.presenter.interfaces.TripDetailsPresenterInt
 import com.unnamedgroup.tourapp.view.adapter.TripDetailsAdapter
@@ -33,6 +34,7 @@ class TripDetailsFragment : Fragment(),
     private var departureStopsAdapter: ArrayAdapter<String>? = null
     private var arrivalStopsAdapter: ArrayAdapter<String>? = null
     private var currentTicket : Ticket? = null
+    private var currentTrip : Trip? = null
     private var isEditing : Boolean = false
     private var viewAdapter : TripDetailsAdapter? = null
     private var tripDetailsPresenter : TripDetailsPresenterInt = TripDetailsPresenterImpl(this)
@@ -47,9 +49,10 @@ class TripDetailsFragment : Fragment(),
             tripDetailsPresenter.getTicketByTripId(bundle.getInt("tripId"))
         } else {
             currentTicket = bundle.getParcelable("Ticket")!!
-            initAdapters()
+            if (currentTicket != null) {
+                tripDetailsPresenter.getTrip(currentTicket!!.trip.id)
+            }
         }
-
         return binding.root
     }
 
@@ -81,13 +84,6 @@ class TripDetailsFragment : Fragment(),
 
         })
 
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        if (currentTicket != null) {
-            setViewWithTicketInfo()
-        }
     }
 
     private fun setViewWithTicketInfo() {
@@ -149,7 +145,7 @@ class TripDetailsFragment : Fragment(),
         }
 
         with(binding.tripStateText){
-            setText(currentTicket.trip.state.text)
+            setText(currentTrip?.state?.text)
         }
 
         binding.qrButton.setOnClickListener(){
@@ -189,12 +185,21 @@ class TripDetailsFragment : Fragment(),
 
     override fun getTicketByTripIdOk(ticket: Ticket) {
         currentTicket = ticket
-        initAdapters()
-        setViewWithTicketInfo()
+        tripDetailsPresenter.getTrip(ticket.trip.id)
     }
 
     override fun getTicketByTripIdFailed(error: String) {
         Toast.makeText(context, getString(R.string.get_trips_error), Toast.LENGTH_LONG).show()
         findNavController().navigate(R.id.action_tripDetailsFragment_to_MyTripsFragment)
+    }
+
+    override fun onGetTripOk(trip: Trip) {
+        currentTrip = trip
+        initAdapters()
+        setViewWithTicketInfo()
+    }
+
+    override fun onGetTripFailed(error: String) {
+        Toast.makeText(context, "Error al al buscar el viaje. Intente nuevamente en unos minutos.", Toast.LENGTH_SHORT).show()
     }
 }

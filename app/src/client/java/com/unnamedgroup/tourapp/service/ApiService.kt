@@ -12,6 +12,9 @@ interface ApiService {
     @GET("trips")
     fun getTrips(): Call<MutableList<TripREST>>
 
+    @GET("trips")
+    fun getTrip(@Query("id") tripId: Int): Call<MutableList<TripREST>>
+
     @GET("tickets")
     fun getTicketsByUser(@Query("user.id") userId: Int): Call<MutableList<TicketREST>>
 
