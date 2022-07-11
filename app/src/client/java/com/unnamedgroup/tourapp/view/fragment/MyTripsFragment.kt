@@ -5,6 +5,8 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -81,6 +83,8 @@ class MyTripsFragment : Fragment(),
 
     private fun setRecyclerViewList(tickets: MutableList<Ticket>) {
         viewAdapter!!.setList(tickets)
+        binding.noTripsLayout.visibility = if (tickets.size > 0) GONE else VISIBLE
+        binding.tripsRecyclerview.visibility = if (tickets.size > 0) VISIBLE else GONE
     }
 
     override fun onDestroyView() {

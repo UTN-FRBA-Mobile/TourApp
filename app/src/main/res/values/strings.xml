@@ -116,5 +116,6 @@
 
     <string name="notification_trip_state_change">El Viaje %s: %s pasó a estado %s</string>
     <string name="notification_trip_state_change_title">Cambio en viaje</string>
+    <string name="no_trips">No tenés viajes. Apretá el botón de abajo para comprar uno.</string>
 
 </resources>
