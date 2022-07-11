@@ -8,10 +8,12 @@ interface TripsPresenterInt {
     fun getLastTicketByUser(userId: Int)
     fun onGetLastTicketByUserOk(ticket: Ticket)
     fun onGetLastTicketByUserFailed(error: String)
+    fun onNotLastTrip()
 
     interface View: BaseView {
         fun onGetLastTicketByUserOk(ticket: Ticket)
         fun onGetLastTicketByUserFailed(error: String)
+        fun onNotLastTrip()
     }
 
 }
