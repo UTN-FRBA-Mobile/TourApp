@@ -26,6 +26,7 @@ import com.unnamedgroup.tourapp.presenter.interfaces.TripsPresenterInt
 import com.unnamedgroup.tourapp.utils.MyPreferences
 import com.unnamedgroup.tourapp.utils.Utils
 import java.text.SimpleDateFormat
+import kotlin.math.round
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -54,7 +55,8 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
     private var roundTrip: Boolean = false
     private var user: User? = null
     private var numberOfTickets = 0
-    private var searchedTrips: MutableList<Trip> = mutableListOf<Trip>()
+    private var searchedTrips: MutableList<Trip> = mutableListOf()
+    private lateinit var currentTrip: Trip
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,7 +69,6 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
 
     override fun onResume() {
         super.onResume()
-
         firstTicket = arguments?.getParcelable("Ticket")
         firstTicket?.let {
             trip = arguments?.getParcelable("LastTrip")
@@ -93,7 +94,11 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
             numberOfTicketsAdapter =
                 ArrayAdapter(requireContext(), R.layout.list_item, (1..it).toList())
         }
-        trip?.let { newTripPresenter.getTripsByOriginAndDestination(it.origin, it.destination) }
+        if (roundTrip){
+            trip?.let { newTripPresenter.getTripsByOriginAndDestination(it.destination, it.origin) }
+        } else {
+            trip?.let { newTripPresenter.getTripsByOriginAndDestination(it.origin, it.destination) }
+        }
         newTripPresenter.getUserById(MyPreferences.getUserId(requireContext()))
 
         binding.bNext.setOnClickListener {
@@ -187,6 +192,7 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
         binding.tripRemainingTicketsText.setText(amount.toString())
         numberOfTicketsAdapter?.clear()
         numberOfTicketsAdapter?.addAll((1..amount).toList())
+        currentTrip = searchedTrips[ticketPosition]
         //numberOfTicketsAdapter?.notifyDataSetChanged()
     }
 
@@ -269,7 +275,7 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
 
         val busBoarding = binding.tilBoarding.editText?.text.toString()
         val busStop = binding.tilStop.editText?.text.toString()
-        var ticket = Ticket(null, user!!, passengers, trip!!, "", busBoarding, busStop)
+        var ticket = Ticket(null, user!!, passengers, currentTrip, "", busBoarding, busStop)
         val bundle = Bundle()
         bundle.putParcelable("Ticket", ticket)
         if (binding.smRoundTrip.isChecked) {
@@ -308,6 +314,7 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
             trips.filter { t -> t.passengersAmount > numberOfTickets } as MutableList<Trip>
         }
         searchedTrips = filteredTrips
+        currentTrip = searchedTrips[0]
         departureDatesList = getDatesArray(filteredTrips)
         departureDateAdapter =
             ArrayAdapter(requireContext(), R.layout.list_item, departureDatesList!!)
