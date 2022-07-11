@@ -64,6 +64,9 @@ class TripAdapter(
         if(trip.passengersAmount == 0){
             soldOutTextView.text = "Agotado"
             soldOutTextView.visibility = android.view.View.VISIBLE
+        }else{
+            soldOutTextView.text = ""
+            soldOutTextView.visibility = android.view.View.GONE
         }
     }
 
