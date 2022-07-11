@@ -79,6 +79,7 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
             lastTicket = arguments?.getParcelable("LastTicket")
             lastTicket?.let {
                 trip = it.trip
+                this.numberOfTickets = it.passengers.size - 1
             } ?: run {
                 trip = arguments?.getParcelable("Trip")
             }
