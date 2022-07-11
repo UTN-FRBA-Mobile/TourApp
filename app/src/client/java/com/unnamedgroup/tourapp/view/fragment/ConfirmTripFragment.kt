@@ -53,14 +53,13 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View, ConfirmPre
 
     private var tripDetailsPresenterInt = TripDetailsPresenterImpl(this)
     private var confirmPresenterInt = ConfirmPresenterImpl(this)
-    private var file : Uri? = null
+    private var file: Uri? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         ticket = arguments?.getParcelable<Ticket>("Ticket")
-
         ticket?.let {
             tickets.add(it)
         }
@@ -81,7 +80,7 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View, ConfirmPre
         _binding = FragmentConfirmTripBinding.inflate(inflater, container, false)
 
         var viewManager = LinearLayoutManager(this.context)
-        val viewAdapterTickets = ConfirmTripTicketsAdapter(tickets,this.context)
+        val viewAdapterTickets = ConfirmTripTicketsAdapter(tickets, this.context)
 
         recyclerView = binding.confirmTripTicketsReciclerView.apply {
             layoutManager = viewManager
@@ -90,8 +89,8 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View, ConfirmPre
 
         // Complete recyclerView of passengers
         var value = 0F
-        val passengers : MutableList<Passenger> = mutableListOf()
-        tickets.forEach{
+        val passengers: MutableList<Passenger> = mutableListOf()
+        tickets.forEach {
             value += it.passengers.size * it.trip.price
             passengers.addAll(it.passengers)
         }
@@ -112,12 +111,12 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View, ConfirmPre
         super.onViewCreated(view, savedInstanceState)
 
         binding.confirmButton.setOnClickListener {
-            if(tickets[0].isPaid()){
-                tickets[0].trip.passengersAmount    -=  tickets[0].passengers.size
+            if (tickets[0].isPaid()) {
+                tickets[0].trip.passengersAmount -= tickets[0].passengers.size
                 confirmPresenterInt.modifyTrip(tickets[0].trip)
-            }
-            else{
-                Toast.makeText(context, getString(R.string.invalidReciep), Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, getString(R.string.invalidReciep), Toast.LENGTH_SHORT)
+                    .show()
             }
 
         }
@@ -142,11 +141,11 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View, ConfirmPre
 
     override fun onModifyTicketOk(ticket: Ticket) {
         numberOfTicketsOk++
-        if (numberOfTripsOk == 2 && numberOfTicketsOk == 1){
-            tripDetailsPresenterInt.addTicket( tickets.filter { it.trip.id == ticket.trip.id }.first())
+        if (numberOfTripsOk == 2 && numberOfTicketsOk == 1) {
+            tripDetailsPresenterInt.addTicket(this.ticket2!!)
         }
 
-        when (tickets.size){
+        when (tickets.size) {
             1 -> findNavController().navigate(R.id.action_confirmTripFragment_to_resultScreenFragment)
             2 -> if (numberOfTicketsOk == 2) findNavController().navigate(R.id.action_confirmTripFragment_to_resultScreenFragment)
             else -> findNavController().navigate(R.id.action_confirmTripFragment_to_resultScreenFragment)
@@ -155,11 +154,16 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View, ConfirmPre
         Firebase.messaging.subscribeToTopic("trip" + ticket.trip.id.toString())
             .addOnCompleteListener { task ->
                 if (!task.isSuccessful) {
-                    Toast.makeText(context, "No se pudo suscribir al viaje. No recibirá alertas ante cambios de estado.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        "No se pudo suscribir al viaje. No recibirá alertas ante cambios de estado.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 
     }
+
     override fun onModifyTicketFailed(error: String) {
         Toast.makeText(context, "Error al insertar Viaje", Toast.LENGTH_SHORT).show()
     }
@@ -169,16 +173,18 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View, ConfirmPre
     }
 
     override fun getTicketByTripIdFailed(error: String) {
-        Toast.makeText(context, "Error al al buscar ticket por id de Viaje", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Error al al buscar ticket por id de Viaje", Toast.LENGTH_SHORT)
+            .show()
     }
 
 
     override fun onModifyTripOk(trip: Trip) {
         numberOfTripsOk++
-        if (numberOfTripsOk == 1) tripDetailsPresenterInt.addTicket( tickets.filter { trip.id == it.trip.id}.first())
+        if (numberOfTripsOk == 1) tripDetailsPresenterInt.addTicket(tickets.filter { trip.id == it.trip.id }
+            .first())
 
-        if(tickets.size == 2 && numberOfTripsOk == 1){
-            tickets[1].trip.passengersAmount    -=  tickets[1].passengers.size
+        if (tickets.size == 2 && numberOfTripsOk == 1) {
+            tickets[1].trip.passengersAmount -= tickets[1].passengers.size
             confirmPresenterInt.modifyTrip(tickets[1].trip)
         }
     }
@@ -192,11 +198,11 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View, ConfirmPre
 
         if (requestCode == 111 && resultCode == RESULT_OK) {
             file = data?.data //The uri with the location of the file
-            val fileName = getFileNameFromUri(requireContext(),file!!)
+            val fileName = getFileNameFromUri(requireContext(), file!!)
             binding.bankUploadReceiptTextfield.setText(fileName)
-            val fileToWork = createFileFromUri(fileName!!,file!!)
+            val fileToWork = createFileFromUri(fileName!!, file!!)
             val receipt = fileToWork?.let { convertToBase64(it) }
-            tickets.forEach{it.receipt = receipt}
+            tickets.forEach { it.receipt = receipt }
             Toast.makeText(context, "Comprobante Seleccionado", Toast.LENGTH_SHORT).show()
 
         }
@@ -219,7 +225,7 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View, ConfirmPre
         return fileName
     }
 
-    private fun  createFileFromUri(name: String, uri: Uri): File? {
+    private fun createFileFromUri(name: String, uri: Uri): File? {
         return try {
             val stream = context?.contentResolver?.openInputStream(uri)
             val file =
@@ -228,7 +234,10 @@ class ConfirmTripFragment : Fragment(), TripDetailsPresenterInt.View, ConfirmPre
                     ".png",
                     context?.cacheDir
                 )
-            FileUtils.copyInputStreamToFile(stream, file)  // Use this one import org.apache.commons.io.FileUtils
+            FileUtils.copyInputStreamToFile(
+                stream,
+                file
+            )  // Use this one import org.apache.commons.io.FileUtils
             file
         } catch (e: Exception) {
             e.printStackTrace()
