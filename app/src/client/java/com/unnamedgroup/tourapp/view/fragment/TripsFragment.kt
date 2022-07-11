@@ -3,6 +3,7 @@ package com.unnamedgroup.tourapp.view.fragment
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.text.format.DateUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -95,7 +96,8 @@ class TripsFragment : Fragment(), GetTripsPresenterInt.View, TripsPresenterInt.V
     }
 
     override fun onGetTripsOk(trips: MutableList<Trip>) {
-        setRecyclerViewList(trips.filter { t -> t.date >= Date() } as MutableList<Trip>)
+        val currentDate = Date()
+        setRecyclerViewList(trips.filter { t -> t.date.after(currentDate) || DateUtils.isToday(t.date.time) } as MutableList<Trip>)
     }
 
     override fun onGetTripsError(error: String) {
@@ -103,13 +105,9 @@ class TripsFragment : Fragment(), GetTripsPresenterInt.View, TripsPresenterInt.V
     }
 
     override fun onGetLastTicketByUserOk(ticket: Ticket) {
-        if (ticket != null) {
-            val bundle = Bundle()
-            bundle.putParcelable("LastTicket", ticket)
-            findNavController().navigate(R.id.action_tripsFragment_to_NewTripFragment, bundle)
-        } else {
-            Toast.makeText(context, getString(R.string.not_last_trip_error), Toast.LENGTH_SHORT).show()
-        }
+        val bundle = Bundle()
+        bundle.putParcelable("LastTicket", ticket)
+        findNavController().navigate(R.id.action_tripsFragment_to_NewTripFragment, bundle)
     }
 
     override fun onGetLastTicketByUserFailed(error: String) {

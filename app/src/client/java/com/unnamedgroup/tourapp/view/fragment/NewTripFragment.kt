@@ -10,6 +10,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.view.allViews
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
@@ -20,12 +21,9 @@ import com.unnamedgroup.tourapp.model.business.Ticket
 import com.unnamedgroup.tourapp.model.business.Trip
 import com.unnamedgroup.tourapp.model.business.User
 import com.unnamedgroup.tourapp.presenter.implementation.NewTripPresenterImpl
-import com.unnamedgroup.tourapp.presenter.implementation.TripsPresenterImpl
 import com.unnamedgroup.tourapp.presenter.interfaces.NewTripPresenterInt
-import com.unnamedgroup.tourapp.presenter.interfaces.TripsPresenterInt
 import com.unnamedgroup.tourapp.utils.MyPreferences
 import com.unnamedgroup.tourapp.utils.Utils
-import java.text.SimpleDateFormat
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -61,8 +59,10 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentNewTripBinding.inflate(inflater, container, false)
+        if (requireArguments().containsKey("NumberOfTickets")) {
+            this.numberOfTickets = requireArguments().getInt("NumberOfTickets")
+        }
         return binding.root
-
     }
 
     override fun onResume() {
@@ -168,7 +168,7 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
                 }
             } ?: run {
                 addPassengerLayout()
-                setText(numberOfTicketsAdapter!!.getItem(0).toString(), false)
+                setText(numberOfTicketsAdapter!!.getItem(numberOfTickets).toString(), false)
             }
             onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
                 onChangeNumberOfTickets(position)
@@ -177,8 +177,8 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
         refreshPrice(binding.actvNumberOfTickets.text.toString().toInt())
         if (roundTrip) {
             binding.smRoundTrip.visibility = View.GONE
+            binding.tilNumberOfTickets.isEnabled = false
         }
-
         onChangeNumberOfTickets(this.numberOfTickets)
     }
 
@@ -216,6 +216,11 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
             } else {
                 binding.llPassengers.addView(passengersLayouts[i])
             }
+            if (roundTrip) {
+                for (v in binding.llPassengers.allViews) {
+                    v.isEnabled = false
+                }
+            }
         }
         trip?.let { newTripPresenter.getTripsByOriginAndDestination(it.origin, it.destination) }
     }
@@ -238,8 +243,8 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
     }
 
     private fun next() {
-        var passengers = mutableListOf<Passenger>()
-        var i: Int = 1
+        val passengers = mutableListOf<Passenger>()
+        var i = 1
         passengersLayouts.take(binding.tilNumberOfTickets.editText?.text.toString().toInt())
             .forEach {
                 val name =
@@ -269,11 +274,14 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
 
         val busBoarding = binding.tilBoarding.editText?.text.toString()
         val busStop = binding.tilStop.editText?.text.toString()
-        var ticket = Ticket(null, user!!, passengers, trip!!, "", busBoarding, busStop)
+        val ticket = Ticket(null, user!!, passengers, trip!!, "", busBoarding, busStop)
         val bundle = Bundle()
         bundle.putParcelable("Ticket", ticket)
         if (binding.smRoundTrip.isChecked) {
-            lastTrip?.let { bundle.putParcelable("LastTrip", lastTrip) }
+            lastTrip?.let {
+                bundle.putParcelable("LastTrip", lastTrip)
+                bundle.putInt("NumberOfTickets", this.numberOfTickets)
+            }
             findNavController().navigate(R.id.action_NewTripFragment_self, bundle)
         } else {
             if (roundTrip) {
