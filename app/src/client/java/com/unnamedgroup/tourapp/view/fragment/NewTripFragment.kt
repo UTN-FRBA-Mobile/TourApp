@@ -3,6 +3,8 @@ package com.unnamedgroup.tourapp.view.fragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -50,6 +52,7 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
     private var roundTrip: Boolean = false
     private var user: User? = null
     private var numberOfTickets = 0
+    private var searchedTrips: MutableList<Trip> = mutableListOf<Trip>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -109,6 +112,7 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
             AdapterView.OnItemClickListener { parent, view, position, id ->
                 trip!!.date =
                     Utils.parseDateWithFormat(departureDatesList!!.get(position), "dd-MM-yyyy")
+                setRemainingTickets(position)
                 newTripPresenter.getTripsByOriginAndDestinationAndDate(
                     trip!!.origin,
                     trip!!.destination,
@@ -118,6 +122,7 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
         binding.actvDepartureTime.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id ->
                 trip!!.departureTime = departureTimesList!!.get(position)
+                setRemainingTickets(position)
                 newTripPresenter.getTripsByOriginAndDestinationAndDateAndTime(
                     trip!!.origin,
                     trip!!.destination,
@@ -162,7 +167,6 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
                     textInputLayoutDni.editText?.setText(it.dni)
                 }
             } ?: run {
-                //TODO: Corregir error al volver del confirmar
                 addPassengerLayout()
                 setText(numberOfTicketsAdapter!!.getItem(numberOfTickets).toString(), false)
             }
@@ -176,6 +180,14 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
             binding.tilNumberOfTickets.isEnabled = false
         }
         onChangeNumberOfTickets(this.numberOfTickets)
+    }
+
+    private fun setRemainingTickets(ticketPosition: Int) {
+        val amount = searchedTrips[ticketPosition].passengersAmount
+        binding.tripRemainingTicketsText.setText(amount.toString())
+        numberOfTicketsAdapter?.clear()
+        numberOfTicketsAdapter?.addAll((1..amount).toList())
+        //numberOfTicketsAdapter?.notifyDataSetChanged()
     }
 
     override fun onDestroyView() {
@@ -210,6 +222,7 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
                 }
             }
         }
+        trip?.let { newTripPresenter.getTripsByOriginAndDestination(it.origin, it.destination) }
     }
 
     override fun onStop() {
@@ -230,7 +243,6 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
     }
 
     private fun next() {
-        //TODO: Reserva de pasajes
         val passengers = mutableListOf<Passenger>()
         var i = 1
         passengersLayouts.take(binding.tilNumberOfTickets.editText?.text.toString().toInt())
@@ -297,7 +309,14 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
     }
 
     override fun onGetTripsByOriginAndDestinationOk(trips: MutableList<Trip>) {
-        departureDatesList = getDatesArray(trips)
+        val filteredTrips = if (roundTrip) {
+            val passengersNeeded = firstTicket?.passengers?.size
+            trips.filter { t -> t.passengersAmount > passengersNeeded!! } as MutableList<Trip>
+        } else {
+            trips.filter { t -> t.passengersAmount > numberOfTickets } as MutableList<Trip>
+        }
+        searchedTrips = filteredTrips
+        departureDatesList = getDatesArray(filteredTrips)
         departureDateAdapter =
             ArrayAdapter(requireContext(), R.layout.list_item, departureDatesList!!)
         with(binding.actvDepartureDate) {
@@ -325,8 +344,20 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
     }
 
     override fun onGetTripsByOriginAndDestinationAndDateOk(trips: MutableList<Trip>) {
-        trips.let { trip = it[0] }
-        departureTimesList = getTimesArray(trips)
+        val filteredTrips = if (roundTrip) {
+            val passengersNeeded = firstTicket?.passengers?.size
+            trips.filter { t -> t.passengersAmount > passengersNeeded!! } as MutableList<Trip>
+        } else {
+            trips.filter { t -> t.passengersAmount > numberOfTickets } as MutableList<Trip>
+        }
+        if (filteredTrips.size == 0) {
+            binding.constraintLayout.visibility = GONE
+            binding.bNext.visibility = GONE
+            binding.noTripsLayout.visibility = VISIBLE
+            return
+        }
+        filteredTrips.let { trip = it[0] }
+        departureTimesList = getTimesArray(filteredTrips)
         departureTimeAdapter =
             ArrayAdapter(requireContext(), R.layout.list_item, departureTimesList!!)
         with(binding.actvDepartureTime) {
