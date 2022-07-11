@@ -1,7 +1,6 @@
 {
   "trips": [
     {
-      "id": 1,
       "busBoardings": [
         "Hotel Mercedes",
         "29 y 40",
@@ -15,20 +14,21 @@
         "Cerrito y Paraguay",
         "Alto Palermo"
       ],
+      "date": "11-07-2022",
+      "departureTime": "05:00",
+      "destination": "Capital Federal",
       "driver": {
         "dni": "12345678",
         "email": "test@frba.utn.edu.ar",
         "id": 1,
         "name": "Test Driver"
       },
-      "date": "11-07-2022",
-      "departureTime": "05:00",
+      "id": 1,
       "origin": "Mercedes",
-      "destination": "Capital Federal",
-      "passengersAmount": 30,
-      "totalPassengers": 30,
+      "passengersAmount": 28,
       "price": 800,
-      "state": "CONFIRMED"
+      "state": "CONFIRMED",
+      "totalPassengers": 30
     },
     {
       "id": 2,
@@ -151,7 +151,12 @@
       "state": "CONFIRMED"
     },
     {
-      "id": 6,
+      "busBoardings": [
+        "Irigoyen y Estados Unidos",
+        "Irigoyen y Venezuela",
+        "Cerrito y Paraguay",
+        "Alto Palermo"
+      ],
       "busStops": [
         "Hotel Mercedes",
         "29 y 40",
@@ -159,26 +164,21 @@
         "1 y 2",
         "Rotonda Mercedes"
       ],
-      "busBoardings": [
-        "Irigoyen y Estados Unidos",
-        "Irigoyen y Venezuela",
-        "Cerrito y Paraguay",
-        "Alto Palermo"
-      ],
+      "date": "11-07-2022",
+      "departureTime": "10:00",
+      "destination": "Mercedes",
       "driver": {
         "dni": "12345678",
         "email": "test@frba.utn.edu.ar",
         "id": 1,
         "name": "Test Driver"
       },
-      "date": "11-07-2022",
-      "departureTime": "10:00",
+      "id": 6,
       "origin": "Capital Federal",
-      "destination": "Mercedes",
-      "passengersAmount": 30,
-      "totalPassengers": 30,
+      "passengersAmount": 28,
       "price": 800,
-      "state": "CONFIRMED"
+      "state": "CONFIRMED",
+      "totalPassengers": 30
     },
     {
       "id": 7,

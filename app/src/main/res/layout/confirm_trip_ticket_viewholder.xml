@@ -53,14 +53,14 @@
                 android:text="@string/departure_hour_colon"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textStyle="bold" />
-
+            app/src/client/java/com/unnamedgroup/tourapp/repository/Repository.kt
             <TextView
                 android:id="@+id/description_origin_stop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/description_time"
                 android:layout_marginTop="2dp"
-                android:text="@string/departure_stop"
+                android:text="@string/departure_stop_colon"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textStyle="bold" />
 

@@ -160,7 +160,6 @@ class Repository() {
 
             override fun onFailure(call: Call<TicketREST>, t: Throwable) {
                 presenter.onModifyTicketFailed(t.toString())
-
             }
         })
     }
@@ -211,7 +210,6 @@ class Repository() {
 
             override fun onFailure(call: Call<TicketREST>, t: Throwable) {
                 presenter.onModifyTicketFailed(t.toString())
-
             }
         })
     }
