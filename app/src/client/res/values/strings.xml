@@ -54,7 +54,7 @@
     <string name="modify_ticket_error">Error al guardar, intente de nuevo mas tarde</string>
     <string name="get_login_error">Error intentando loguear al usuario</string>
     <string name="get_user_error">Error obteniendo usuario</string>
-    <string name="not_last_trip_error">¡No tenes viajes para copiar!</string>
+    <string name="not_last_trip_error">No tenes viajes para copiar</string>
 
     <!--Nuevo viaje-->
     <string name="full_trip">Viaje completo</string>
