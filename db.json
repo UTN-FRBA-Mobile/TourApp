@@ -55,7 +55,7 @@
       "departureTime": "10:00",
       "origin": "Mercedes",
       "destination": "Capital Federal",
-      "passengersAmount": 30,
+      "passengersAmount": 5,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -85,7 +85,7 @@
       "departureTime": "15:00",
       "origin": "Mercedes",
       "destination": "Capital Federal",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -115,7 +115,7 @@
       "departureTime": "20:00",
       "origin": "Mercedes",
       "destination": "Capital Federal",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -145,7 +145,7 @@
       },
       "id": 5,
       "origin": "Capital Federal",
-      "passengersAmount": 28,
+      "passengersAmount": 0,
       "price": 800,
       "state": "CONFIRMED",
       "totalPassengers": 30
@@ -175,7 +175,7 @@
       "departureTime": "10:00",
       "origin": "Capital Federal",
       "destination": "Mercedes",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -205,7 +205,7 @@
       "departureTime": "15:00",
       "origin": "Capital Federal",
       "destination": "Mercedes",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -235,7 +235,7 @@
       "departureTime": "20:00",
       "origin": "Capital Federal",
       "destination": "Mercedes",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -264,7 +264,7 @@
       "departureTime": "6:00",
       "origin": "Capital Federal",
       "destination": "Navarro",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -293,7 +293,7 @@
       "departureTime": "12:00",
       "origin": "Capital Federal",
       "destination": "Navarro",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -322,7 +322,7 @@
       "departureTime": "6:00",
       "origin": "Navarro",
       "destination": "Capital Federal",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -351,7 +351,7 @@
       "departureTime": "12:00",
       "origin": "Navarro",
       "destination": "Capital Federal",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -381,7 +381,7 @@
       "departureTime": "05:00",
       "origin": "Mercedes",
       "destination": "Capital Federal",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -411,7 +411,7 @@
       "departureTime": "10:00",
       "origin": "Mercedes",
       "destination": "Capital Federal",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -441,7 +441,7 @@
       "departureTime": "15:00",
       "origin": "Mercedes",
       "destination": "Capital Federal",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -471,7 +471,7 @@
       "departureTime": "20:00",
       "origin": "Mercedes",
       "destination": "Capital Federal",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -501,7 +501,7 @@
       "departureTime": "05:00",
       "origin": "Capital Federal",
       "destination": "Mercedes",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -531,7 +531,7 @@
       "departureTime": "10:00",
       "origin": "Capital Federal",
       "destination": "Mercedes",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -561,7 +561,7 @@
       "departureTime": "15:00",
       "origin": "Capital Federal",
       "destination": "Mercedes",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -591,7 +591,7 @@
       "departureTime": "20:00",
       "origin": "Capital Federal",
       "destination": "Mercedes",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -620,7 +620,7 @@
       "departureTime": "6:00",
       "origin": "Capital Federal",
       "destination": "Navarro",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -649,7 +649,7 @@
       "departureTime": "12:00",
       "origin": "Capital Federal",
       "destination": "Navarro",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -678,7 +678,7 @@
       "departureTime": "6:00",
       "origin": "Navarro",
       "destination": "Capital Federal",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -707,7 +707,7 @@
       "departureTime": "12:00",
       "origin": "Navarro",
       "destination": "Capital Federal",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -737,7 +737,7 @@
       "departureTime": "05:00",
       "origin": "Mercedes",
       "destination": "Capital Federal",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -767,7 +767,7 @@
       "departureTime": "10:00",
       "origin": "Mercedes",
       "destination": "Capital Federal",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -797,7 +797,7 @@
       "departureTime": "15:00",
       "origin": "Mercedes",
       "destination": "Capital Federal",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -827,7 +827,7 @@
       "departureTime": "20:00",
       "origin": "Mercedes",
       "destination": "Capital Federal",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -857,7 +857,7 @@
       "departureTime": "05:00",
       "origin": "Capital Federal",
       "destination": "Mercedes",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -887,7 +887,7 @@
       "departureTime": "10:00",
       "origin": "Capital Federal",
       "destination": "Mercedes",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -917,7 +917,7 @@
       "departureTime": "15:00",
       "origin": "Capital Federal",
       "destination": "Mercedes",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -947,7 +947,7 @@
       "departureTime": "20:00",
       "origin": "Capital Federal",
       "destination": "Mercedes",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -976,7 +976,7 @@
       "departureTime": "6:00",
       "origin": "Capital Federal",
       "destination": "Navarro",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -1005,7 +1005,7 @@
       "departureTime": "12:00",
       "origin": "Capital Federal",
       "destination": "Navarro",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -1034,7 +1034,7 @@
       "departureTime": "6:00",
       "origin": "Navarro",
       "destination": "Capital Federal",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"
@@ -1063,7 +1063,7 @@
       "departureTime": "12:00",
       "origin": "Navarro",
       "destination": "Capital Federal",
-      "passengersAmount": 30,
+      "passengersAmount": 0,
       "totalPassengers": 30,
       "price": 800,
       "state": "CONFIRMED"

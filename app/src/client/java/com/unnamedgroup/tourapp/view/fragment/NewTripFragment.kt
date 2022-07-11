@@ -3,6 +3,8 @@ package com.unnamedgroup.tourapp.view.fragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -183,9 +185,9 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
     private fun setRemainingTickets(ticketPosition: Int) {
         val amount = searchedTrips[ticketPosition].passengersAmount
         binding.tripRemainingTicketsText.setText(amount.toString())
-        numberOfTicketsAdapter =
-            ArrayAdapter(requireContext(), R.layout.list_item, (1..amount).toList())
-        numberOfTicketsAdapter.notifyDataSetChanged()
+        numberOfTicketsAdapter?.clear()
+        numberOfTicketsAdapter?.addAll((1..amount).toList())
+        //numberOfTicketsAdapter?.notifyDataSetChanged()
     }
 
     override fun onDestroyView() {
@@ -339,6 +341,12 @@ class NewTripFragment : Fragment(), NewTripPresenterInt.View {
             trips.filter { t -> t.passengersAmount > passengersNeeded!! } as MutableList<Trip>
         } else {
             trips.filter { t -> t.passengersAmount > numberOfTickets } as MutableList<Trip>
+        }
+        if (filteredTrips.size == 0) {
+            binding.constraintLayout.visibility = GONE
+            binding.bNext.visibility = GONE
+            binding.noTripsLayout.visibility = VISIBLE
+            return
         }
         filteredTrips.let { trip = it[0] }
         departureTimesList = getTimesArray(filteredTrips)
